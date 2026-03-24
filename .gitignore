@@ -1,0 +1,45 @@
+# Dependencies
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.env
+.venv/
+
+# Database files (local)
+instance/
+*.db
+*.sqlite3
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets & deployment scripts
+push_repo.py
+render.yaml
+
+# Cache
+.mypy_cache/
+.cache/
+.pytest_cache/
+
+# Logs
+*.log

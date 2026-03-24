@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Startup Ecosystem Explorer</title>
+<meta name="description" content="Explore global startup opportunities across 100+ countries and 100+ industries. Grants, VCs, accelerators, and cloud perks — all in one place.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050505;
+  --surface: #111111;
+  --surface-2: #1a1a1a;
+  --surface-hover: #222222;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-glow: rgba(59, 130, 246, 0.15);
+  --accent-green: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ec4899;
+  --accent-cyan: #06b6d4;
+  --text: #f5f5f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border: #27272a;
+  --border-light: #3f3f46;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; line-height: 1.5; }
+a { color: var(--primary); text-decoration: none; }
+::selection { background: var(--primary); color: #fff; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Layout */
+.container { max-width: 1280px; margin: 0 auto; padding: 24px 32px; }
+
+/* Header */
+.header { 
+  padding: 24px 32px; 
+  background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border); 
+  display: flex; justify-content: space-between; align-items: center;
+}
+.header-left h1 { 
+  font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%); 
+  -webkit-background-clip: text; color: transparent; 
+}
+.header-left .sub { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-right .sync-info { font-size: 11px; color: var(--text-muted); text-align: right; }
+.btn { 
+  padding: 8px 16px; border: none; border-radius: var(--radius-xs); cursor: pointer; 
+  font-size: 12px; font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; 
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* Search & Filters */
+.controls { display: flex; gap: 12px; margin-bottom: 20px; align-items: stretch; flex-wrap: wrap; }
+.filter-group { display: flex; flex-direction: column; gap: 4px; }
+.filter-group label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+select, input[type="text"] { 
+  background: var(--surface); color: var(--text); border: 1px solid var(--border);
+  padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; font-family: inherit;
+  outline: none; transition: all 0.2s;
+}
+select:focus, input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+select { min-width: 160px; cursor: pointer; }
+.search-wrap { flex-grow: 1; min-width: 200px; }
+.search-wrap input { width: 100%; }
+
+/* Tabs */
+.tabs { display: flex; gap: 6px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; }
+.tab { 
+  padding: 7px 16px; border-radius: 20px; border: 1px solid var(--border); 
+  background: transparent; color: var(--text-muted); cursor: pointer; 
+  font-size: 12px; font-weight: 500; transition: all 0.2s; white-space: nowrap; font-family: inherit;
+}
+.tab:hover { background: var(--surface-hover); color: var(--text); border-color: var(--border-light); }
+.tab.active { background: #fff; color: #000; border-color: #fff; font-weight: 600; }
+
+/* Stats */
+.stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 28px; }
+.stat-card { 
+  background: var(--surface); padding: 18px 20px; border-radius: var(--radius); 
+  border: 1px solid var(--border); transition: border-color 0.2s; 
+}
+.stat-card:hover { border-color: var(--border-light); }
+.stat-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.stat-value { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+.stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* Top 10 */
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.section-header h3 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+.badge { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+.badge-outline { border: 1px solid var(--border); color: var(--text-muted); }
+.top-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 32px; }
+.top-card { 
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); 
+  padding: 16px; cursor: default; transition: all 0.25s; position: relative; overflow: hidden;
+}
+.top-card:hover { border-color: var(--primary); background: var(--surface-2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.top-rank { position: absolute; top: -8px; right: -4px; font-size: 52px; font-weight: 900; color: rgba(255,255,255,0.03); line-height: 1; }
+.top-title { font-size: 14px; font-weight: 600; line-height: 1.35; margin-bottom: 10px; padding-right: 20px; }
+.top-meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11px; }
+.top-desc { font-size: 11px; color: var(--text-muted); margin-top: 8px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Tags */
+.tag { 
+  display: inline-block; padding: 2px 8px; border-radius: 10px; 
+  font-size: 10px; font-weight: 600; white-space: nowrap; 
+}
+.tag-gov { background: rgba(16,185,129,0.12); color: var(--accent-green); }
+.tag-vc { background: rgba(245,158,11,0.12); color: var(--accent-amber); }
+.tag-corp { background: rgba(139,92,246,0.12); color: var(--accent-purple); }
+.tag-perk { background: rgba(236,72,153,0.12); color: var(--accent-pink); }
+.tag-reloc { background: rgba(6,182,212,0.12); color: var(--accent-cyan); }
+.score-badge { 
+  background: var(--primary-glow); color: var(--primary); 
+  padding: 2px 7px; border-radius: 4px; font-weight: 700; font-size: 11px; 
+}
+.country-tag { color: var(--text-secondary); font-size: 11px; }
+
+/* Table */
+.table-section { margin-bottom: 32px; }
+.table-container { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { 
+  padding: 12px 16px; color: var(--text-muted); font-size: 10px; font-weight: 700; 
+  text-transform: uppercase; letter-spacing: 0.08em; background: var(--surface-2); 
+  border-bottom: 1px solid var(--border); position: sticky; top: 0;
+}
+td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--surface-hover); }
+.td-title { font-weight: 500; max-width: 300px; }
+.td-country { color: var(--text-secondary); font-size: 12px; }
+
+/* Pagination */
+.pagination { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 20px; }
+.page-btn { 
+  padding: 6px 12px; border-radius: var(--radius-xs); border: 1px solid var(--border); 
+  background: var(--surface); color: var(--text-muted); cursor: pointer; font-size: 12px; font-family: inherit;
+  transition: all 0.2s;
+}
+.page-btn:hover { border-color: var(--primary); color: var(--text); }
+.page-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.page-info { font-size: 12px; color: var(--text-muted); }
+
+/* Footer */
+.footer { 
+  padding: 20px 32px; border-top: 1px solid var(--border); 
+  display: flex; justify-content: space-between; align-items: center; 
+  font-size: 11px; color: var(--text-muted); margin-top: 40px;
+}
+
+/* Loading */
+.loading-overlay { 
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+  background: rgba(5,5,5,0.7); backdrop-filter: blur(4px);
+  display: flex; justify-content: center; align-items: center; z-index: 1000;
+}
+.spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 48px 24px; color: var(--text-muted); }
+.empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+.empty-state p { font-size: 14px; }
+
+/* Animations */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp 0.35s ease forwards; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 16px; }
+  .header { flex-direction: column; gap: 12px; padding: 16px; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .controls { flex-direction: column; }
+  select { min-width: auto; width: 100%; }
+  .top-grid { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <h1>Global Startup Ecosystem Explorer</h1>
+    <div class="sub">100+ Countries · 100+ Industries · Real-Time Discovery</div>
+  </div>
+  <div class="header-right">
+    <div class="sync-info" id="syncInfo">Loading...</div>
+    <button class="btn btn-primary" id="btnRecrawl">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-1.63"/></svg>
+      Recrawl
+    </button>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Filters -->
+  <div class="controls">
+    <div class="filter-group">
+      <label>Country</label>
+      <select id="countrySel">
+        <option value="Global">🌍 All Countries</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Industry</label>
+      <select id="indSel">
+        <option value="All">All Industries</option>
+      </select>
+    </div>
+    <div class="filter-group search-wrap">
+      <label>Search</label>
+      <input type="text" id="searchInp" placeholder="Search by title, provider, keyword...">
+    </div>
+  </div>
+
+  <!-- Category Tabs -->
+  <div class="tabs" id="catTabs">
+    <button class="tab active" data-cat="All">All Categories</button>
+    <button class="tab" data-cat="Gov Grants">🏛 Gov Grants</button>
+    <button class="tab" data-cat="Corporate">🏢 Corporate OI</button>
+    <button class="tab" data-cat="VCs & Accelerators">🚀 VCs & Accelerators</button>
+    <button class="tab" data-cat="Perks">☁️ Cloud & Perks</button>
+    <button class="tab" data-cat="Relocation/Growth">🌏 Relocation</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card">
+      <div class="stat-label">Total Matches</div>
+      <div class="stat-value" id="sTotal">–</div>
+      <div class="stat-sub" id="sDbTotal"></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Gov Grants</div>
+      <div class="stat-value" id="sGov" style="color: var(--accent-green)">–</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">VCs & Accel</div>
+      <div class="stat-value" id="sVC" style="color: var(--accent-amber)">–</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Cloud & Perks</div>
+      <div class="stat-value" id="sPerk" style="color: var(--accent-pink)">–</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Countries</div>
+      <div class="stat-value" id="sCountries" style="color: var(--accent-cyan)">–</div>
+    </div>
+  </div>
+
+  <!-- Recommended -->
+  <div id="topSection">
+    <div class="section-header">
+      <h3>🏆 Recommended Opportunities</h3>
+      <span class="badge badge-outline">Ranked by Fit Score</span>
+    </div>
+    <div class="top-grid" id="topGrid"></div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="table-section">
+    <div class="section-header">
+      <h3>📋 Full Database</h3>
+      <span class="page-info" id="tableInfo"></span>
+    </div>
+    <div class="table-container">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Title</th>
+              <th>Country</th>
+              <th>Provider</th>
+              <th>Funding</th>
+              <th>Equity</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div>© 2026 Genox Holdings · Global Startup Ecosystem Explorer</div>
+  <div id="footerStats"></div>
+</footer>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loadingOverlay" style="display:none">
+  <div class="spinner"></div>
+</div>
+
+<script>
+// ============= State =============
+let currentCat = 'All';
+let currentPage = 1;
+const PAGE_SIZE = 50;
+let allRecords = [];
+let filteredRecords = [];
+let dropdownsPopulated = false;
+
+// ============= Tag Helpers =============
+const tagMap = {
+  'Gov Grants': 'tag-gov',
+  'Corporate': 'tag-corp',
+  'VCs & Accelerators': 'tag-vc',
+  'Perks': 'tag-perk',
+  'Relocation/Growth': 'tag-reloc'
+};
+
+function getTagClass(cat) { return tagMap[cat] || ''; }
+
+// ============= Count Animation =============
+function animateCount(el, target) {
+  const prev = parseInt(el.dataset?.val || '0') || 0;
+  if (prev === target) return;
+  el.dataset.val = target;
+  const duration = 600;
+  const start = performance.now();
+  const step = (now) => {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(prev + (target - prev) * ease).toLocaleString();
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// ============= Tab Events =============
+document.getElementById('catTabs').addEventListener('click', e => {
+  if (e.target.classList.contains('tab')) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    currentCat = e.target.dataset.cat;
+    currentPage = 1;
+    fetchData();
+  }
+});
+
+// ============= Filter Events =============
+['countrySel', 'indSel'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => { currentPage = 1; fetchData(); });
+});
+
+let searchTimeout;
+document.getElementById('searchInp').addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => { currentPage = 1; fetchData(); }, 300);
+});
+
+// ============= Recrawl =============
+document.getElementById('btnRecrawl').addEventListener('click', async () => {
+  const btn = document.getElementById('btnRecrawl');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="width:14px;height:14px;border-width:2px;"></div> Crawling...';
+  
+  try {
+    await fetch('/api/refresh', { method: 'POST' });
+    btn.innerHTML = '✓ Started';
+    setTimeout(() => {
+      fetchData();
+      btn.disabled = false;
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-1.63"/></svg> Recrawl`;
+    }, 20000);
+  } catch (e) {
+    btn.innerHTML = '✕ Error';
+    btn.disabled = false;
+  }
+});
+
+// ============= Populate Dropdowns from Data =============
+function populateDropdowns(stats) {
+  if (dropdownsPopulated) return;
+  
+  // Country dropdown — sorted alphabetically, from actual data
+  const countrySel = document.getElementById('countrySel');
+  const countries = Object.keys(stats.countries || {}).sort();
+  countries.forEach(c => {
+    if (c && c !== 'Global') {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = `${c} (${stats.countries[c]})`;
+      countrySel.appendChild(opt);
+    }
+  });
+
+  // Industry dropdown — sorted, from actual data
+  const indSel = document.getElementById('indSel');
+  const industries = Object.keys(stats.industries || {}).filter(i => i && i !== 'All').sort();
+  industries.forEach(ind => {
+    const opt = document.createElement('option');
+    opt.value = ind;
+    opt.textContent = `${ind} (${stats.industries[ind]})`;
+    indSel.appendChild(opt);
+  });
+
+  dropdownsPopulated = true;
+}
+
+// ============= Render Stats =============
+function renderStats(data) {
+  const total = data.total || 0;
+  const totalInDb = data.total_in_db || total;
+  const cats = data.stats?.categories || {};
+
+  animateCount(document.getElementById('sTotal'), total);
+  animateCount(document.getElementById('sGov'), cats['Gov Grants'] || 0);
+  animateCount(document.getElementById('sVC'), cats['VCs & Accelerators'] || 0);
+  animateCount(document.getElementById('sPerk'), (cats['Perks'] || 0) + (cats['Cloud & Perks'] || 0));
+  
+  const countryCount = Object.keys(data.stats?.countries || {}).length;
+  animateCount(document.getElementById('sCountries'), countryCount);
+  
+  document.getElementById('sDbTotal').textContent = total < totalInDb ? `of ${totalInDb.toLocaleString()} in DB` : '';
+}
+
+// ============= Render Top Cards =============
+function renderTopCards(records) {
+  const topSection = document.getElementById('topSection');
+  const topGrid = document.getElementById('topGrid');
+  const top = records.slice(0, 9);
+
+  if (top.length === 0) {
+    topSection.style.display = 'none';
+    return;
+  }
+  topSection.style.display = 'block';
+  topGrid.innerHTML = top.map((r, i) => `
+    <div class="top-card fade-up" style="animation-delay: ${i * 0.04}s">
+      <div class="top-rank">${i + 1}</div>
+      <div class="top-title">${escHtml(r.title)}</div>
+      <div class="top-meta">
+        <span class="score-badge">${r.fit_score}</span>
+        <span class="tag ${getTagClass(r.category)}">${r.category}</span>
+        <span class="country-tag">${r.country}</span>
+      </div>
+      <div class="top-desc">${escHtml(r.description || '')}</div>
+      ${r.funding ? `<div style="font-size:11px;color:var(--accent-green);margin-top:6px;font-weight:600;">${escHtml(r.funding)}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+// ============= Render Table with Pagination =============
+function renderTable(records) {
+  const tb = document.getElementById('tableBody');
+  const totalPages = Math.ceil(records.length / PAGE_SIZE);
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageRecords = records.slice(start, start + PAGE_SIZE);
+
+  document.getElementById('tableInfo').textContent = `${records.length.toLocaleString()} results · Page ${currentPage} of ${totalPages || 1}`;
+
+  if (pageRecords.length === 0) {
+    tb.innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="icon">🔍</div><p>No opportunities found for these filters.</p></div></td></tr>`;
+  } else {
+    tb.innerHTML = pageRecords.map(r => `
+      <tr>
+        <td><span class="tag ${getTagClass(r.category)}">${r.category}</span></td>
+        <td class="td-title">${escHtml(r.title)}</td>
+        <td class="td-country">${r.country}</td>
+        <td>${escHtml(r.provider || '')}</td>
+        <td>${escHtml(r.funding || '')}</td>
+        <td>${r.equity === 'No' ? '<span style="color:var(--accent-green)">None</span>' : escHtml(r.equity || '')}</td>
+        <td><span class="score-badge">${r.fit_score}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  // Pagination
+  renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+  const pag = document.getElementById('pagination');
+  if (totalPages <= 1) { pag.innerHTML = ''; return; }
+  
+  let html = `<button class="page-btn" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>`;
+  
+  const pages = [];
+  pages.push(1);
+  for (let i = Math.max(2, currentPage - 2); i <= Math.min(totalPages - 1, currentPage + 2); i++) pages.push(i);
+  if (totalPages > 1) pages.push(totalPages);
+  const unique = [...new Set(pages)];
+  
+  let prev = 0;
+  unique.forEach(p => {
+    if (p - prev > 1) html += `<span class="page-info">…</span>`;
+    html += `<button class="page-btn ${p === currentPage ? 'active' : ''}" onclick="goPage(${p})">${p}</button>`;
+    prev = p;
+  });
+  
+  html += `<button class="page-btn" onclick="goPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>`;
+  pag.innerHTML = html;
+}
+
+window.goPage = function(p) {
+  const totalPages = Math.ceil(filteredRecords.length / PAGE_SIZE);
+  if (p < 1 || p > totalPages) return;
+  currentPage = p;
+  renderTable(filteredRecords);
+  document.querySelector('.table-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+// ============= HTML Escape =============
+function escHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ============= Fetch Data =============
+async function fetchData() {
+  document.getElementById('loadingOverlay').style.display = 'flex';
+
+  const params = new URLSearchParams({
+    country: document.getElementById('countrySel').value,
+    industry: document.getElementById('indSel').value,
+    category: currentCat,
+    search: document.getElementById('searchInp').value
+  });
+
+  try {
+    const res = await fetch('/api/data?' + params.toString());
+    const data = await res.json();
+
+    // Update sync info
+    document.getElementById('syncInfo').textContent = 'Last synced: ' + (data.last_updated || 'Unknown');
+
+    // Populate dropdowns once from stats
+    populateDropdowns(data.stats || {});
+
+    // Store records
+    allRecords = data.records || [];
+    filteredRecords = allRecords;
+
+    // Render everything
+    renderStats(data);
+    renderTopCards(filteredRecords);
+    renderTable(filteredRecords);
+
+    // Footer
+    document.getElementById('footerStats').textContent = 
+      `DB: ${(data.total_in_db || data.total || 0).toLocaleString()} records · ${Object.keys(data.stats?.countries || {}).length} countries · ${Object.keys(data.stats?.industries || {}).length} industries`;
+
+  } catch (err) {
+    console.error('Fetch error:', err);
+    document.getElementById('tableBody').innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="icon">⚠️</div><p>Failed to load data. Please refresh.</p></div></td></tr>`;
+  } finally {
+    document.getElementById('loadingOverlay').style.display = 'none';
+  }
+}
+
+// ============= Init =============
+fetchData();
+</script>
+</body>
+</html>

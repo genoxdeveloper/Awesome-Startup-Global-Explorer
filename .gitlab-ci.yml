@@ -1,0 +1,23 @@
+image: python:3.11-slim
+
+stages:
+  - build
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+
+build:
+  stage: build
+  script:
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - python -m py_compile app.py
+    - python -m py_compile models.py
+    - python -m py_compile data_mock.py
+    - python -m py_compile startup_crawler_global.py
+    - echo "All modules compiled successfully"
+  tags: []

@@ -1,0 +1,7 @@
+flask
+pandas
+Flask-SQLAlchemy
+psycopg2-binary
+aiohttp
+gunicorn
+beautifulsoup4
