@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from datetime import datetime, timedelta
-
+import math
 import os
 import threading
 from models import db, GlobalOpportunity, init_db
@@ -96,98 +96,113 @@ def api_refresh():
 
 @app.route('/api/data')
 def api_data():
-    country = request.args.get('country', '')
-    industry = request.args.get('industry', '')
-    category = request.args.get('category', '')
-    search = request.args.get('search', '').lower()
-    page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 50, type=int)
-    per_page = min(per_page, 100)  # Safety cap
+    try:
+        country = request.args.get('country', '')
+        industry = request.args.get('industry', '')
+        category = request.args.get('category', '')
+        search = request.args.get('search', '').lower()
+        page = request.args.get('page', 1, type=int)
+        per_page = request.args.get('per_page', 50, type=int)
+        per_page = min(per_page, 100)  # Safety cap
 
-    query = GlobalOpportunity.query
+        query = GlobalOpportunity.query
 
-    if country and country != 'Global':
-        query = query.filter(db.or_(
-            GlobalOpportunity.country == country,
-            GlobalOpportunity.country == 'Global'
-        ))
-    if category and category != 'All':
-        query = query.filter(GlobalOpportunity.category == category)
-    if industry and industry != 'All':
-        query = query.filter(db.or_(
-            GlobalOpportunity.industries.ilike("%All%"),
-            GlobalOpportunity.industries.ilike(f"%{industry}%")
-        ))
-    if search:
-        query = query.filter(db.or_(
-            GlobalOpportunity.title.ilike(f"%{search}%"),
-            GlobalOpportunity.description.ilike(f"%{search}%"),
-            GlobalOpportunity.provider.ilike(f"%{search}%")
-        ))
+        if country and country != 'Global':
+            query = query.filter(db.or_(
+                GlobalOpportunity.country == country,
+                GlobalOpportunity.country == 'Global'
+            ))
+        if category and category != 'All':
+            query = query.filter(GlobalOpportunity.category == category)
+        if industry and industry != 'All':
+            query = query.filter(db.or_(
+                GlobalOpportunity.industries.ilike("%All%"),
+                GlobalOpportunity.industries.ilike(f"%{industry}%")
+            ))
+        if search:
+            query = query.filter(db.or_(
+                GlobalOpportunity.title.ilike(f"%{search}%"),
+                GlobalOpportunity.description.ilike(f"%{search}%"),
+                GlobalOpportunity.provider.ilike(f"%{search}%")
+            ))
 
-    # Server-side pagination: get total filtered count first (lightweight)
-    total_filtered = query.count()
+        # Server-side pagination: get total filtered count first (lightweight)
+        total_filtered = query.count()
 
-    # Paginated query - only fetch ONE page of results
-    results = query.order_by(GlobalOpportunity.fit_score.desc()) \
-                   .offset((page - 1) * per_page) \
-                   .limit(per_page) \
-                   .all()
+        # Paginated query - only fetch ONE page of results
+        results = query.order_by(GlobalOpportunity.fit_score.desc()) \
+                       .offset((page - 1) * per_page) \
+                       .limit(per_page) \
+                       .all()
 
-    filtered = []
-    for r in results:
-        filtered.append({
-            "title": r.title, "description": r.description,
-            "country": r.country, "category": r.category,
-            "industries": r.industries.split(',') if r.industries else [],
-            "status": r.status,
-            "funding": r.funding, "equity": r.equity,
-            "provider": r.provider, "fit_score": r.fit_score,
-            "created_at": r.created_at.strftime('%Y-%m-%d') if r.created_at else None
+        filtered = []
+        for r in results:
+            filtered.append({
+                "title": r.title, "description": r.description,
+                "country": r.country, "category": r.category,
+                "industries": r.industries.split(',') if r.industries else [],
+                "status": r.status,
+                "funding": r.funding, "equity": r.equity,
+                "provider": r.provider, "fit_score": r.fit_score,
+                "created_at": r.created_at.strftime('%Y-%m-%d') if r.created_at else None
+            })
+
+        # Lightweight stats using SQL aggregation (no full table load)
+        total_in_db = GlobalOpportunity.query.count()
+
+        # Build stats from lightweight queries instead of loading all records
+        stats = {'countries': {}, 'categories': {}, 'industries': {}}
+        cat_counts = db.session.query(
+            GlobalOpportunity.category, db.func.count(GlobalOpportunity.id)
+        ).group_by(GlobalOpportunity.category).all()
+        for cat_val, cnt in cat_counts:
+            if cat_val:
+                stats['categories'][cat_val] = cnt
+
+        country_counts = db.session.query(
+            GlobalOpportunity.country, db.func.count(GlobalOpportunity.id)
+        ).group_by(GlobalOpportunity.country).all()
+        for c_val, cnt in country_counts:
+            if c_val:
+                stats['countries'][c_val] = cnt
+
+        # Industries are comma-separated so we need a lightweight scan
+        # But limit the scan to avoid OOM
+        ind_rows = GlobalOpportunity.query.with_entities(
+            GlobalOpportunity.industries
+        ).filter(GlobalOpportunity.industries.isnot(None)).limit(5000).all()
+        for (ind_str,) in ind_rows:
+            if ind_str:
+                for ind in ind_str.split(','):
+                    ind = ind.strip()
+                    if ind:
+                        stats['industries'][ind] = stats['industries'].get(ind, 0) + 1
+
+        return jsonify({
+            'total': total_filtered,
+            'total_in_db': total_in_db,
+            'page': page,
+            'per_page': per_page,
+            'total_pages': math.ceil(total_filtered / per_page) if per_page > 0 else 1,
+            'stats': stats,
+            'records': filtered,
+            'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')
         })
-
-    # Lightweight stats using SQL aggregation (no full table load)
-    total_in_db = GlobalOpportunity.query.count()
-
-    # Build stats from lightweight queries instead of loading all records
-    stats = {'countries': {}, 'categories': {}, 'industries': {}}
-    cat_counts = db.session.query(
-        GlobalOpportunity.category, db.func.count(GlobalOpportunity.id)
-    ).group_by(GlobalOpportunity.category).all()
-    for cat_val, cnt in cat_counts:
-        if cat_val:
-            stats['categories'][cat_val] = cnt
-
-    country_counts = db.session.query(
-        GlobalOpportunity.country, db.func.count(GlobalOpportunity.id)
-    ).group_by(GlobalOpportunity.country).all()
-    for c_val, cnt in country_counts:
-        if c_val:
-            stats['countries'][c_val] = cnt
-
-    # Industries are comma-separated so we need a lightweight scan
-    # But limit the scan to avoid OOM
-    ind_rows = GlobalOpportunity.query.with_entities(
-        GlobalOpportunity.industries
-    ).filter(GlobalOpportunity.industries.isnot(None)).limit(5000).all()
-    for (ind_str,) in ind_rows:
-        if ind_str:
-            for ind in ind_str.split(','):
-                ind = ind.strip()
-                if ind:
-                    stats['industries'][ind] = stats['industries'].get(ind, 0) + 1
-
-    import math
-    return jsonify({
-        'total': total_filtered,
-        'total_in_db': total_in_db,
-        'page': page,
-        'per_page': per_page,
-        'total_pages': math.ceil(total_filtered / per_page) if per_page > 0 else 1,
-        'stats': stats,
-        'records': filtered,
-        'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')
-    })
+    except Exception as e:
+        # Graceful fallback during DB rebuild / cold boot
+        print(f"API Error (likely DB rebuilding): {e}")
+        return jsonify({
+            'total': 0,
+            'total_in_db': 0,
+            'page': 1,
+            'per_page': 50,
+            'total_pages': 0,
+            'stats': {'countries': {}, 'categories': {}, 'industries': {}},
+            'records': [],
+            'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC'),
+            'status': 'loading',
+            'message': 'Database is initializing. Please refresh in 1-2 minutes.'
+        })
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
