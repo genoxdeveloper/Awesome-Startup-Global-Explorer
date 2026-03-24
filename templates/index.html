@@ -164,6 +164,10 @@ th {
   text-transform: uppercase; letter-spacing: 0.08em; background: var(--surface-2); 
   border-bottom: 1px solid var(--border); position: sticky; top: 0;
 }
+th.sortable { cursor: pointer; -webkit-user-select: none; user-select: none; transition: color 0.2s; }
+th.sortable:hover { color: var(--text); }
+th.sortable .sort-arrow { font-size: 10px; opacity: 0.4; }
+th.sortable.sort-active .sort-arrow { opacity: 1; color: var(--primary); }
 td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--surface-hover); }
@@ -224,7 +228,7 @@ tr:hover td { background: var(--surface-hover); }
 <header class="header">
   <div class="header-left">
     <h1>Global Startup Ecosystem Explorer</h1>
-    <div class="sub">100+ Countries · 100+ Industries · Real-Time Discovery</div>
+    <div class="sub">190+ Countries · 32,500+ Opportunities · Real-Time Discovery</div>
   </div>
   <div class="header-right">
     <div class="sync-info" id="syncInfo">Loading...</div>
@@ -316,12 +320,12 @@ tr:hover td { background: var(--surface-hover); }
           <thead>
             <tr>
               <th>Category</th>
-              <th>Title</th>
-              <th>Country</th>
+              <th class="sortable" data-sort="title">Title <span class="sort-arrow"></span></th>
+              <th class="sortable" data-sort="country">Country <span class="sort-arrow"></span></th>
               <th>Provider</th>
               <th>Funding</th>
               <th>Equity</th>
-              <th>Score</th>
+              <th class="sortable" data-sort="fit_score">Score <span class="sort-arrow"></span></th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -348,8 +352,6 @@ let currentCat = 'All';
 let currentPage = 1;
 let totalServerPages = 1;
 const PAGE_SIZE = 50;
-let allRecords = [];
-let filteredRecords = [];
 let dropdownsPopulated = false;
 
 // ============= Tag Helpers =============
@@ -357,11 +359,16 @@ const tagMap = {
   'Gov Grants': 'tag-gov',
   'Corporate': 'tag-corp',
   'VCs & Accelerators': 'tag-vc',
+  'Cloud & Perks': 'tag-perk',
   'Perks': 'tag-perk',
   'Relocation/Growth': 'tag-reloc'
 };
 
 function getTagClass(cat) { return tagMap[cat] || ''; }
+
+// Sort state
+let currentSort = '';
+let sortAsc = true;
 
 // ============= Count Animation =============
 function animateCount(el, target) {
@@ -401,6 +408,19 @@ document.getElementById('searchInp').addEventListener('input', () => {
   searchTimeout = setTimeout(() => { currentPage = 1; fetchData(); }, 300);
 });
 
+// ============= Sortable Column Headers =============
+document.querySelectorAll('th.sortable').forEach(th => {
+  th.addEventListener('click', () => {
+    const field = th.dataset.sort;
+    if (currentSort === field) { sortAsc = !sortAsc; } else { currentSort = field; sortAsc = field === 'fit_score' ? false : true; }
+    document.querySelectorAll('th.sortable').forEach(h => { h.classList.remove('sort-active'); h.querySelector('.sort-arrow').textContent = ''; });
+    th.classList.add('sort-active');
+    th.querySelector('.sort-arrow').textContent = sortAsc ? ' ↑' : ' ↓';
+    currentPage = 1;
+    fetchData();
+  });
+});
+
 // ============= Recrawl =============
 document.getElementById('btnRecrawl').addEventListener('click', async () => {
   const btn = document.getElementById('btnRecrawl');
@@ -425,6 +445,7 @@ document.getElementById('btnRecrawl').addEventListener('click', async () => {
 document.getElementById('btnExport').addEventListener('click', () => {
   const params = new URLSearchParams({
     country: document.getElementById('countrySel').value,
+    industry: document.getElementById('indSel').value,
     category: currentCat,
     search: document.getElementById('searchInp').value
   });
@@ -469,7 +490,7 @@ function renderStats(data) {
   animateCount(document.getElementById('sTotal'), total);
   animateCount(document.getElementById('sGov'), cats['Gov Grants'] || 0);
   animateCount(document.getElementById('sVC'), cats['VCs & Accelerators'] || 0);
-  animateCount(document.getElementById('sPerk'), (cats['Perks'] || 0) + (cats['Cloud & Perks'] || 0));
+  animateCount(document.getElementById('sPerk'), cats['Cloud & Perks'] || 0);
   
   const countryCount = Object.keys(data.stats?.countries || {}).length;
   animateCount(document.getElementById('sCountries'), countryCount);
@@ -577,7 +598,9 @@ async function fetchData() {
     category: currentCat,
     search: document.getElementById('searchInp').value,
     page: currentPage,
-    per_page: PAGE_SIZE
+    per_page: PAGE_SIZE,
+    sort_by: currentSort || 'fit_score',
+    sort_dir: sortAsc ? 'asc' : 'desc'
   });
 
   try {
@@ -591,14 +614,19 @@ async function fetchData() {
     populateDropdowns(data.stats || {});
 
     // Store records (just the current page from server)
-    allRecords = data.records || [];
-    filteredRecords = allRecords;
+    const records = data.records || [];
     totalServerPages = data.total_pages || 1;
 
     // Render everything
     renderStats(data);
-    renderTopCards(filteredRecords);
-    renderTable(filteredRecords, data.total);
+    renderTopCards(records);
+    renderTable(records, data.total);
+
+    // Cold-boot loading state
+    if (data.status === 'loading') {
+      document.getElementById('tableBody').innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="icon">⏳</div><p>Database is initializing after cold boot. Auto-refreshing in 30 seconds...</p></div></td></tr>`;
+      setTimeout(() => fetchData(), 30000);
+    }
 
     // Footer
     document.getElementById('footerStats').textContent = 

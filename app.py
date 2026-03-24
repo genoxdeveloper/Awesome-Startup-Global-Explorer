@@ -115,6 +115,8 @@ def api_data():
         page = request.args.get('page', 1, type=int)
         per_page = request.args.get('per_page', 50, type=int)
         per_page = min(per_page, 100)  # Safety cap
+        sort_by = request.args.get('sort_by', 'fit_score')
+        sort_dir = request.args.get('sort_dir', 'desc')
 
         query = GlobalOpportunity.query
 
@@ -140,8 +142,17 @@ def api_data():
         # Server-side pagination: get total filtered count first (lightweight)
         total_filtered = query.count()
 
+        # Server-side sorting
+        sort_columns = {
+            'title': GlobalOpportunity.title,
+            'country': GlobalOpportunity.country,
+            'fit_score': GlobalOpportunity.fit_score,
+        }
+        sort_col = sort_columns.get(sort_by, GlobalOpportunity.fit_score)
+        order = sort_col.asc() if sort_dir == 'asc' else sort_col.desc()
+
         # Paginated query - only fetch ONE page of results
-        results = query.order_by(GlobalOpportunity.fit_score.desc()) \
+        results = query.order_by(order) \
                        .offset((page - 1) * per_page) \
                        .limit(per_page) \
                        .all()
@@ -221,6 +232,7 @@ def api_export():
     try:
         country = request.args.get('country', '')
         category = request.args.get('category', '')
+        industry = request.args.get('industry', '')
         search = request.args.get('search', '').lower()
 
         query = GlobalOpportunity.query
@@ -233,6 +245,11 @@ def api_export():
                 GlobalOpportunity.title.ilike(f"%{search}%"),
                 GlobalOpportunity.description.ilike(f"%{search}%"),
                 GlobalOpportunity.provider.ilike(f"%{search}%")
+            ))
+        if industry and industry != 'All':
+            query = query.filter(db.or_(
+                GlobalOpportunity.industries.ilike("%All%"),
+                GlobalOpportunity.industries.ilike(f"%{industry}%")
             ))
 
         results = query.order_by(GlobalOpportunity.fit_score.desc()).limit(5000).all()

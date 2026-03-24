@@ -5,6 +5,34 @@ All notable changes to the **Global Startup Explorer** are documented here.
 
 ---
 
+## [v2.4.0] - 2026-03-25
+
+### 🎯 Sortable Columns, Bug Fixes & UX / 정렬 기능, 버그 수정 & UX 개선
+
+**EN:**
+
+- **NEW**: Sortable table columns — click Title, Country, or Score headers to sort with ↑↓ indicators (server-side)
+- **BUG FIX**: `tagMap` was missing `Cloud & Perks` key — all Cloud/Perks badges rendered unstyled
+- **BUG FIX**: `renderStats` double-counted `Perks` + `Cloud & Perks` — now uses correct single key
+- **BUG FIX**: CSV Export now passes `industry` filter for full filter parity with the data API
+- **UX**: Cold-boot auto-refresh banner — shows ⏳ message and auto-retries every 30 seconds when DB is initializing
+- **UX**: Header subtitle updated to "190+ Countries · 32,500+ Opportunities"
+- **CLEANUP**: Removed unused `allRecords`/`filteredRecords` JS state variables (legacy from client-side pagination)
+- **CSS**: Added Safari `-webkit-user-select` prefix for sortable columns
+
+**KR:**
+
+- **신규**: 테이블 정렬 기능 — Title, Country, Score 헤더 클릭 시 ↑↓ 화살표와 함께 서버사이드 정렬
+- **버그 수정**: `tagMap`에 `Cloud & Perks` 키 누락 — 클라우드/퍼크 뱃지 스타일 미적용 수정
+- **버그 수정**: `renderStats`에서 Perks와 Cloud & Perks 이중 합산 수정
+- **버그 수정**: CSV 내보내기에 `industry` 필터 추가 — API와 동일한 필터 적용
+- **UX**: 콜드부트 자동 새로고침 배너 — DB 초기화 중 ⏳ 안내 메시지 + 30초마다 자동 재시도
+- **UX**: 헤더 타이틀 "190+ Countries · 32,500+ Opportunities"로 업데이트
+- **정리**: 미사용 JS 상태 변수 제거 (클라이언트 페이지네이션 레거시)
+- **CSS**: Safari `-webkit-user-select` 호환성 추가
+
+---
+
 ## [v2.3.0] - 2026-03-24
 
 ### ⚡ Performance, Export & Quality / 성능, 내보내기 & 품질 개선
