@@ -69,17 +69,25 @@ async def crawl_usa_and_canada(session):
                 provider=item.get('agency', 'US Gov'), fit_score=gen_rand_score(85)
             ))
             
-    # 1.2 Canada - NRC IRAP & Start-up Visa
+    # 1.2 Canada - NRC IRAP, Start-up Visa, CDAP, etc.
     canada_opps = [
         ("NRC IRAP (Industrial Research Assistance Program)", "Funding and advisory services for Canadian deep-tech SMEs.", "Canada", "Gov Grants", "DeepTech,Manufacturing", "Up to CAD 1M"),
         ("Canada Start-up Visa Program", "Permanent residency for immigrant entrepreneurs funding innovative tech.", "Canada", "Relocation/Growth", "SaaS,Fintech,AI", "PR Support"),
         ("SDTC Seed Fund", "Sustainable Development Technology Canada seed funding.", "Canada", "Gov Grants", "CleanTech,Energy", "CAD 50K - 100K"),
         ("BDC Capital Venture", "Venture capital backing for high-growth Canadian tech.", "Canada", "VCs & Accelerators", "B2B SaaS,HealthTech", "CAD 1M - 5M"),
-        ("Next 36", "Accelerator program for student and recent grad founders.", "Canada", "VCs & Accelerators", "All", "CAD 50K Seed")
+        ("Next 36", "Accelerator program for student and recent grad founders.", "Canada", "VCs & Accelerators", "All", "CAD 50K Seed"),
+        ("Canada Digital Adoption Program (CDAP)", "Grants and 0% loans to adopt digital technologies.", "Canada", "Gov Grants", "SaaS,E-commerce", "Up to CAD 100K"),
+        ("Creative Destruction Lab (CDL)", "Massively scalable science and tech objective-based program.", "Canada", "VCs & Accelerators", "Quantum,Space,AI", "Mentorship", "Yes (Variable)"),
+        ("TechAlliance Seed Fund", "Early-stage funding for Ontario-based startups.", "Canada", "Gov Grants", "All", "CAD 30K - 50K")
     ]
-    for t, d, c, cat, ind, f in canada_opps:
-        prov = {"NRC IRAP": "NRC", "Canada Start-up Visa": "IRCC", "SDTC": "SDTC", "BDC Capital": "BDC", "Next 36": "Next 36"}
-        res.append(GlobalOpportunity(title=t, description=d, country=c, category=cat, industries=ind, status="Rolling", funding=f, equity="Variable", provider=next((v for k, v in prov.items() if k in t), "Gov/Agency"), fit_score=gen_rand_score(88)))
+    for opp in canada_opps:
+        if len(opp) == 6:
+            t, d, c, cat, ind, f = opp
+            eq = "Variable"
+        else:
+            t, d, c, cat, ind, f, eq = opp
+        prov = {"NRC IRAP": "NRC", "Canada Start-up Visa": "IRCC", "SDTC": "SDTC", "BDC Capital": "BDC", "Next 36": "Next 36", "CDAP": "ISED", "Creative Destruction Lab": "CDL"}.get(t.split(" ")[0], "Gov/Agency")
+        res.append(GlobalOpportunity(title=t, description=d, country=c, category=cat, industries=ind, status="Rolling", funding=f, equity=eq, provider=prov, fit_score=gen_rand_score(88)))
         
     return res
 
@@ -106,22 +114,24 @@ async def crawl_europe(session):
             
     # 2.2 EU Horizon & EIC
     eu_opps = [
-        ("EIC Accelerator (Horizon Europe)", "Flagship program for deep-tech startups scaling in Europe.", "Germany,France,EU", "Gov Grants", "DeepTech,Quantum,BioTech", "€2.5M Grant + €15M Equity"),
+        ("EIC Accelerator (Horizon Europe)", "Flagship program for deep-tech startups scaling in Europe.", "EU", "Gov Grants", "DeepTech,Quantum,BioTech", "€2.5M Grant + €15M Equity"),
         ("EIC Pathfinder", "Grants for early-stage visionary research projects.", "EU", "Gov Grants", "Experimental,Science", "Up to €4M"),
         ("EIT Digital Venture Program", "Support for European early-stage digital deep tech startups.", "EU", "VCs & Accelerators", "SaaS,Digital,Web3", "€25K - €100K"),
+        ("EIT Urban Mobility Accelerator", "Scaling European mobility startups.", "EU", "VCs & Accelerators", "Mobility,CleanTech", "€50K - €500K"),
     ]
     
-    # 2.3 DACH & Nordics
+    # 2.3 DACH, Nordics & France
     dach_nordic_opps = [
         ("EXIST Business Start-up Grant", "Support for university tech spin-offs.", "Germany", "Gov Grants", "University Spin-offs", "€30K - €150K"),
         ("High-Tech Gründerfonds (HTGF)", "Seed investor for high-tech startups in Germany.", "Germany", "VCs & Accelerators", "DeepTech,SaaS", "€1M Seed"),
         ("Bpifrance French Tech Seed", "Co-investment matching for deep tech startups.", "France", "Gov Grants", "DeepTech,AI", "Up to €250K"),
+        ("French Tech Visa", "Fast-track tech visa for international founders.", "France", "Relocation/Growth", "All", "Visa Support"),
         ("Vinnova Innovative Startups", "Sweden's innovation agency grant for R&D.", "Sweden", "Gov Grants", "CleanTech,Mobility", "SEK 300K"),
         ("Business Finland Tempo", "Funding for international growth capabilities.", "Finland", "Gov Grants", "Software,Gaming", "€50K - €100K")
     ]
     
     for t, d, c, cat, ind, f in eu_opps + dach_nordic_opps:
-        prov = next((p for p in ["Innovate UK", "European Commission", "EIT", "BMWi", "HTGF", "Bpifrance", "Vinnova", "Business Finland"] if p.lower() in t.lower() or p.lower() in d.lower()), "EU Agency")
+        prov = next((p for p in ["Innovate UK", "European Commission", "EIT", "BMWi", "HTGF", "Bpifrance", "French Tech", "Vinnova", "Business Finland"] if p.lower() in t.lower() or p.lower() in d.lower()), "EU Agency")
         res.append(GlobalOpportunity(title=t, description=d, country=c, category=cat, industries=ind, status="Open", funding=f, equity="No", provider=prov, fit_score=gen_rand_score(90)))
         
     return res
@@ -149,10 +159,14 @@ async def crawl_asia_pacific(session):
         # South Korea (Global perspective)
         ("TIPS (Tech Incubator Program for Startup)", "Matching R&D funds after private investment.", "South Korea", "Gov Grants", "DeepTech,AI", "KRW 500M - 700M"),
         ("K-Startup Grand Challenge", "Inbound program for foreign startups to enter Korea.", "South Korea", "Relocation/Growth", "All", "$10K - $120K"),
+        # Taiwan & Hong Kong
+        ("Taiwan Employment Gold Card", "4-in-1 visa for global tech talent and founders.", "Taiwan", "Relocation/Growth", "AI,Semiconductors", "Visa + Tax Perks"),
+        ("HKSTP Incubation Program", "Hong Kong Science Park funding and office space.", "Hong Kong", "VCs & Accelerators", "Fintech,Biotech", "Up to HKD 1.29M"),
+        ("Cyberport Incubation Program", "Financial assistance for digital tech startups.", "Hong Kong", "VCs & Accelerators", "Digital,Web3", "Up to HKD 500K"),
     ]
     
     for t, d, c, cat, ind, f in ap_opps:
-        prov = next((p for p in ["Enterprise SG", "EDBI", "DPIIT", "MeitY", "Peak XV", "METI", "NEDO", "SoftBank", "MSS", "NIPA"] if p.lower() in t.lower() or p.lower() in d.lower()), "Gov Agency")
+        prov = next((p for p in ["Enterprise SG", "EDBI", "DPIIT", "MeitY", "Peak XV", "METI", "NEDO", "SoftBank", "MSS", "NIPA", "HKSTP", "Cyberport", "Taiwan NDC"] if p.lower() in t.lower() or p.lower() in d.lower()), "Gov Agency")
         res.append(GlobalOpportunity(title=t, description=d, country=c, category=cat, industries=ind, status="Rolling", funding=f, equity="Varies", provider=prov, fit_score=gen_rand_score(89)))
     return res
 
@@ -222,13 +236,26 @@ async def crawl_global_accelerators(session):
         ("Stripe Atlas Global", "Delaware incorporation, banking, tax tools for global startups.", "Global", "Perks", "Fintech,SaaS", "Incorporation Bundle", "No"),
     ]
     
+    # Corporate Open Innovation & Accelerators
+    corporate_templates = [
+        ("Samsung C-Lab Outside", "Samsung's startup acceleration program for external startups.", "Global", "Corporate", "AI,Digital Health,Metaverse", "KRW 100M", "No"),
+        ("Sony Innovation Fund", "Corporate venture capital for high-growth tech startups.", "Global", "Corporate", "AI,Robotics,Mobility", "$1M - 5M", "Yes"),
+        ("Intel Ignite", "Growth-stage deep tech accelerator by Intel.", "Global", "Corporate", "DeepTech,Semiconductors", "Mentorship", "No"),
+        ("Google for Startups Accelerator: AI First", "Equity-free program for AI startups.", "Global", "Corporate", "AI,Machine Learning", "Mentorship+Credits", "No"),
+        ("Cisco LaunchPad", "Corporate accelerator accelerating B2B startups.", "Global", "Corporate", "IoT,Cybersecurity,Telecom", "$50K", "No"),
+    ]
+    
+    # Generate corporate entries
+    for t, d, c, cat, ind, f, eq in corporate_templates:
+        res.append(GlobalOpportunity(title=t, description=d, country=c, category=cat, industries=ind, status="Rolling", funding=f, equity=eq, provider=t.split(" ")[0], fit_score=gen_rand_score(93)))
+        
     # Generate accelerator entries
     for t, d, c, cat, ind, f, eq in accel_templates:
-        res.append(GlobalOpportunity(title=t, description=d, country=c, category=cat, industries=ind, status="Rolling", funding=f, equity=eq, provider="Big Tech / Top Tier VC", fit_score=gen_rand_score(95)))
+        res.append(GlobalOpportunity(title=t, description=d, country=c, category=cat, industries=ind, status="Rolling", funding=f, equity=eq, provider="Top Tier VC", fit_score=gen_rand_score(95)))
         
         # Simulate local chapters
         if "Techstars" in t or "Plug and Play" in t or "Antler" in t or "500 Global" in t:
-            for loc in ["London (UK)", "Berlin (Germany)", "Paris (France)", "Tokyo (Japan)", "Seoul (South Korea)", "São Paulo (Brazil)", "Riyadh (Saudi Arabia)", "Sydney (Australia)", "Toronto (Canada)", "Tel Aviv (Israel)", "Singapore (Singapore)", "Bangalore (India)"]:
+            for loc in ["London (UK)", "Berlin (Germany)", "Paris (France)", "Tokyo (Japan)", "Seoul (South Korea)", "São Paulo (Brazil)", "Riyadh (Saudi Arabia)", "Sydney (Australia)", "Toronto (Canada)", "Tel Aviv (Israel)", "Singapore (Singapore)", "Bangalore (India)", "Taipei (Taiwan)", "Hong Kong (Hong Kong)"]:
                 res.append(GlobalOpportunity(
                     title=f"{t} - {loc}",
                     description=f"{d} Local ecosystem immersion in {loc}.",

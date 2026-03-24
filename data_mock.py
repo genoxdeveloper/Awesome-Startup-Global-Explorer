@@ -230,13 +230,18 @@ def generate_mock_data():
         (" {Country} Biotech Accelerator", "Health & Life Sciences", "Drug discovery and genomics innovation support.", "VCs & Accelerators", "BioTech,Pharma,Genomics"),
         (" {Country} EV & Mobility Fund", "Transportation & Mobility", "Electric vehicle and autonomous driving R&D.", "Gov Grants", "EV,Autonomous Vehicles"),
         (" {Country} Cybersecurity Shield", "Technology & Digital", "National cybersecurity innovation grants.", "Gov Grants", "Cybersecurity,AI"),
-        (" {Country} Women in Tech Grant", "General / All", "Funding and mentorship for women-led startups.", "Gov Grants", "All,Social Impact"),
-        (" {Country} Space Innovation Lab", "Transportation & Mobility", "Satellite, launch, and space-tech R&D.", "Gov Grants", "SpaceTech,Aerospace"),
-        (" {Country} Quantum Computing Grant", "Technology & Digital", "Quantum computing research and commercialization.", "Gov Grants", "Quantum Computing,DeepTech"),
+        (" {Country} Social Enterprise Fund", "Tourism & Social", "Impact investing for social good organizations.", "VCs & Accelerators", "Social Impact,Microfinance"),
+        (" {Country} EdTech Innovation Hub", "Education & Workforce", "Digital learning and skills development programs.", "Gov Grants", "EdTech,SkillsTech"),
+        (" {Country} Water & Sanitation Grant", "Energy & Sustainability", "Clean water access and sanitation technology.", "Gov Grants", "Water Tech,ESG"),
+        (" {Country} AI National Strategy", "Technology & Digital", "National AI development and talent grants.", "Gov Grants", "AI,DeepTech"),
+        (" {Country} Circular Economy Hub", "Energy & Sustainability", "Waste reduction and materials reuse innovation.", "VCs & Accelerators", "Circular Economy,Environment"),
         (" {Country} Mental Health Initiative", "Health & Life Sciences", "Mental healthcare and digital therapy innovation.", "Gov Grants", "Mental Health,Telemedicine"),
         (" {Country} Blockchain & DeFi Lab", "Finance & Insurance", "Distributed ledger and decentralized finance R&D.", "VCs & Accelerators", "Blockchain,DeFi"),
         (" {Country} Cloud Startup Credits", "Technology & Digital", "Cloud infrastructure credits and developer tools for startups.", "Perks", "Cloud,SaaS"),
         (" {Country} Developer Tools Program", "Technology & Digital", "Free or discounted SaaS tools and APIs for tech startups.", "Perks", "SaaS,All"),
+        (" {Country} DeepTech Commercialization", "Technology & Digital", "Funding for deep tech and hard science commercialization.", "Gov Grants", "DeepTech,Hardware"),
+        (" {Country} Robotics R&D Grant", "Manufacturing & Industry", "Advanced robotics and automation funding.", "Gov Grants", "Robotics,Manufacturing"),
+        (" {Country} Enterprise AI Catalyst", "Technology & Digital", "Acceleration for B2B AI and foundational model startups.", "VCs & Accelerators", "AI,B2B SaaS")
     ]
 
     # Major Accelerator Chapters
