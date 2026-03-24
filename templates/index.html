@@ -4,20 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global Startup Ecosystem Explorer</title>
-<meta name="description" content="Explore global startup opportunities across 100+ countries and 100+ industries. Grants, VCs, accelerators, and cloud perks — all in one place.">
+<meta name="description" content="Explore 32,500+ global startup opportunities across 190+ countries and 100+ industries. Grants, VCs, accelerators, and cloud perks — all in one place.">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://global-startup-explorerglobal-startup.onrender.com/">
 <meta property="og:title" content="Global Startup Ecosystem Explorer">
-<meta property="og:description" content="Discover startup funding, grants, accelerators & cloud perks across 100+ countries and 100+ industries.">
+<meta property="og:description" content="Discover 32,500+ startup funding, grants, accelerators & cloud perks across 190+ countries and 100+ industries.">
 <meta property="og:image" content="https://raw.githubusercontent.com/Genox-developer/global-startup-dashboard/main/.github/assets/social-preview.png">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://global-startup-explorerglobal-startup.onrender.com/">
 <meta property="twitter:title" content="Global Startup Ecosystem Explorer">
-<meta property="twitter:description" content="Discover startup funding, grants, accelerators & cloud perks across 100+ countries and 100+ industries.">
+<meta property="twitter:description" content="Discover 32,500+ startup funding, grants, accelerators & cloud perks across 190+ countries and 100+ industries.">
 <meta property="twitter:image" content="https://raw.githubusercontent.com/Genox-developer/global-startup-dashboard/main/.github/assets/social-preview.png">
 
 <!-- Favicon -->
@@ -84,6 +84,8 @@ a { color: var(--primary); text-decoration: none; }
 .btn-primary { background: var(--primary); color: #fff; }
 .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
 .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-export { background: var(--accent-green); color: #000; font-weight: 700; }
+.btn-export:hover { background: #0da770; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
 
 /* Search & Filters */
 .controls { display: flex; gap: 12px; margin-bottom: 20px; align-items: stretch; flex-wrap: wrap; }
@@ -229,6 +231,10 @@ tr:hover td { background: var(--surface-hover); }
     <button class="btn btn-primary" id="btnRecrawl">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-1.63"/></svg>
       Recrawl
+    </button>
+    <button class="btn btn-export" id="btnExport">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export CSV
     </button>
   </div>
 </header>
@@ -413,6 +419,16 @@ document.getElementById('btnRecrawl').addEventListener('click', async () => {
     btn.innerHTML = '✕ Error';
     btn.disabled = false;
   }
+});
+
+// ============= CSV Export =============
+document.getElementById('btnExport').addEventListener('click', () => {
+  const params = new URLSearchParams({
+    country: document.getElementById('countrySel').value,
+    category: currentCat,
+    search: document.getElementById('searchInp').value
+  });
+  window.location.href = '/api/export?' + params.toString();
 });
 
 // ============= Populate Dropdowns from Data =============

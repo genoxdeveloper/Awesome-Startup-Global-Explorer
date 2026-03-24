@@ -5,6 +5,32 @@ All notable changes to the **Global Startup Explorer** are documented here.
 
 ---
 
+## [v2.3.0] - 2026-03-24
+
+### ⚡ Performance, Export & Quality / 성능, 내보내기 & 품질 개선
+
+**EN:**
+
+- **BUG FIX**: Fixed critical SQLAlchemy cleanup bug — `is not None` was Python identity check (always True), changed to `.isnot(None)` for proper SQL `IS NOT NULL`
+- **NEW**: CSV Export endpoint (`/api/export`) — download up to 5,000 filtered results as CSV, respects country/category/search filters
+- **NEW**: Health check endpoint (`/api/health`) — returns DB record count and version for monitoring
+- **NEW**: Export CSV button in header with green accent styling and download icon
+- **PERF**: Added database indexes on `country`, `category`, `fit_score`, `created_at` columns for faster queries on 32,500+ records
+- **CLEANUP**: Removed unused `os` import from `models.py`
+- **SEO**: Updated all meta descriptions (HTML, Open Graph, Twitter) to reflect 190+ countries / 32,500+ records
+
+**KR:**
+
+- **버그 수정**: SQLAlchemy cleanup 치명적 버그 — Python `is not None`이 SQL 필터가 아닌 항등 비교로 작동, `.isnot(None)`으로 수정
+- **신규**: CSV 내보내기 엔드포인트 (`/api/export`) — 필터링된 결과를 최대 5,000개까지 CSV로 다운로드
+- **신규**: 헬스체크 엔드포인트 (`/api/health`) — DB 레코드 수와 버전 정보 반환
+- **신규**: 헤더에 CSV Export 버튼 추가 (녹색 액센트 디자인 + 다운로드 아이콘)
+- **성능**: `country`, `category`, `fit_score`, `created_at` 컬럼에 DB 인덱스 추가 — 32,500개 레코드 쿼리 속도 향상
+- **정리**: `models.py`에서 미사용 `os` import 제거
+- **SEO**: 모든 메타 태그 업데이트 (190개국 / 32,500개 레코드)
+
+---
+
 ## [v2.2.0] - 2026-03-24
 
 ### 🚀 Maximum Data Expansion / 최대 데이터 확장

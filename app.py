@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response
 from datetime import datetime, timedelta
 import math
+import csv
+import io
 import os
 import threading
 from models import db, GlobalOpportunity, init_db
@@ -24,12 +26,12 @@ def cleanup_old_records():
     with app.app_context():
         cutoff = datetime.utcnow() - timedelta(days=90)
         old_count = GlobalOpportunity.query.filter(
-            GlobalOpportunity.created_at is not None,
+            GlobalOpportunity.created_at.isnot(None),
             GlobalOpportunity.created_at < cutoff
         ).count()
         if old_count > 0:
             GlobalOpportunity.query.filter(
-                GlobalOpportunity.created_at is not None,
+                GlobalOpportunity.created_at.isnot(None),
                 GlobalOpportunity.created_at < cutoff
             ).delete(synchronize_session=False)
             db.session.commit()
@@ -86,6 +88,15 @@ print(f"🕐 Auto-crawl scheduler started (every {AUTO_CRAWL_INTERVAL // 3600} h
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/api/health')
+def api_health():
+    """Health check endpoint for monitoring."""
+    try:
+        count = GlobalOpportunity.query.count()
+        return jsonify({'status': 'ok', 'records': count, 'version': '2.3.0'})
+    except Exception:
+        return jsonify({'status': 'initializing', 'records': 0, 'version': '2.3.0'})
 
 @app.route('/api/refresh', methods=['POST'])
 def api_refresh():
@@ -203,6 +214,42 @@ def api_data():
             'status': 'loading',
             'message': 'Database is initializing. Please refresh in 1-2 minutes.'
         })
+
+@app.route('/api/export')
+def api_export():
+    """Export filtered results as CSV (max 5000 rows for safety)."""
+    try:
+        country = request.args.get('country', '')
+        category = request.args.get('category', '')
+        search = request.args.get('search', '').lower()
+
+        query = GlobalOpportunity.query
+        if country and country != 'Global':
+            query = query.filter(GlobalOpportunity.country == country)
+        if category and category != 'All':
+            query = query.filter(GlobalOpportunity.category == category)
+        if search:
+            query = query.filter(db.or_(
+                GlobalOpportunity.title.ilike(f"%{search}%"),
+                GlobalOpportunity.description.ilike(f"%{search}%"),
+                GlobalOpportunity.provider.ilike(f"%{search}%")
+            ))
+
+        results = query.order_by(GlobalOpportunity.fit_score.desc()).limit(5000).all()
+
+        output = io.StringIO()
+        writer = csv.writer(output)
+        writer.writerow(['Title', 'Category', 'Country', 'Provider', 'Funding', 'Equity', 'Industries', 'Fit Score', 'Status'])
+        for r in results:
+            writer.writerow([r.title, r.category, r.country, r.provider, r.funding, r.equity, r.industries, r.fit_score, r.status])
+
+        return Response(
+            output.getvalue(),
+            mimetype='text/csv',
+            headers={'Content-Disposition': f'attachment; filename=startup_opportunities_{datetime.now().strftime("%Y%m%d")}.csv'}
+        )
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
