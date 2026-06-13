@@ -8,78 +8,133 @@
 [![Flask](https://img.shields.io/badge/Flask-2.x-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=for-the-badge)](LICENSE)
-[![Genox Holdings](https://img.shields.io/badge/_Genox_Holdings-Official_Site-FF6F00?style=for-the-badge)](https://genoxholdings.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
 
 [**English**](README.md) | [**한국어**](README.ko.md) | [**中文**](README.zh_Hans.md) | [**Español**](README.es.md) | [**العربية**](README.ar.md)
 
 *Built for startups, by a startup in Seoul, South Korea*  
-*An open-source project by [Genox Holdings](https://genoxholdings.com)*
+*An open-source project by**[Genox](https://genoxholdings.com)**&**[Buygit.com](https://buygit.com)***
 
 </div>
 
 ---
 
-- **Backend:** Python (Flask, SQLAlchemy)
-- **Database:** SQLite (단일 트랜잭션 벌크 업데이트로 초고속 처리 보장)
-- **Frontend:** HTML5, CSS3 (글래스모피즘 UI), Vanilla JavaScript
-- **Translation:** Flask-Babel & `deep-translator` (Google Translate API)
-- **Data Engine:** 비동기 파이썬 크롤러(`aiohttp`, `asyncio`) 및 대규모 절차적 데이터 주입 생성기
+글로벌 스타트업 생태계를 탐색하기 위한 궁극적인 관문인**Awesome Startup Global Explorer**에 오신 것을 환영합니다. 초기 자금 조달을 원하는 초기 단계의 창업자이든, 정부 보조금 및 최고 수준의 VC를 찾고 있는 확장 기술 회사이든, 이 플랫폼은**188개 이상의 국가에서**35,000개 이상의 자금 조달 기회**를 중앙 집중화합니다.
 
-##  로컬에서 실행하는 방법
+![데모 대시보드](demo_en.png)
 
-1. **저장소 클론:**
-   ```bash
-   git clone https://github.com/genoxdeveloper/Startup-funding-database.git
-   cd Startup-funding-database
-   ```
+## 🏢 제녹스 소개
 
-2. **의존성 설치:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+**Genox**는 대한민국 서울에 본사를 둔 혁신적인 기술 벤처 기업입니다. 우리는 글로벌 스타트업에 힘을 실어주는 데이터 기반 솔루션과 플랫폼을 설계합니다. 우리는 기회에 대한 접근을 민주화하고, 경계를 허물고, 혁신을 가속화하는 것이 중요하다고 믿습니다.
 
-3. **초기화 및 실행:**
-   ```bash
-   python app.py
-   ```
-   *앱이 자동으로 데이터베이스를 초기화하고, 백그라운드에서 33,000개 이상의 레코드를 생성/수집한 후 `http://localhost:5000` 에서 서버를 시작합니다.*
+우리는 수십 개 국가의 정부 포털, VC 데이터베이스 및 액셀러레이터 사이트를 검색하는 데 셀 수 없이 많은 시간을 보냈습니다. 우리는 먼저 이 도구를 내부적으로 구축했으며 이제는 실리콘 밸리의 창업자뿐만 아니라**모든 창업자가 글로벌 기회에 접근할 자격이 있기 때문에**이제 오픈 소스화하고 있습니다.
+
+## 🚀 이 사이트에서 무엇을 할 수 있나요?
+
+적절한 자금이나 지원 프로그램을 찾는 것은 특히 국경을 넘어 살펴볼 때 부담스러울 수 있습니다. 이 애플리케이션은 다음과 같은 어려운 작업을 수행하여 이 문제를 해결합니다.
+
+### 1. 즉시 글로벌 펀딩을 알아보세요
+지속적으로 업데이트되는 대규모 데이터베이스를 살펴보세요.
+-**정부 보조금**(예: 미국의 SBIR, Innovate UK, 한국의 K-Startup, Horizon Europe)
+-**VC 및 액셀러레이터**(Y Combinator, Techstars, 500 Global 및 수천 개의 지역 마이크로 VC)
+-**기업 개방형 혁신(OI)**프로그램
+-**클라우드 크레딧 및 혜택**(AWS Activate, Google for Startups)
+-**이전 및 성장**이니셔티브(스타트업 비자, 기술 허브 레지던시)
+
+### 2. 기본 다국어 지원(국경 허물기)
+우리는 차세대 대형 유니콘이 어디에서나 나올 수 있다는 것을 알고 있습니다. 언어 장벽으로 인해 뒤처지는 창업자가 없도록 하기 위해 우리 플랫폼은 믿을 수 없을 정도로 강력한**네이티브 다국어 지원 시스템**을 갖추고 있습니다.
+
+상단 탐색 표시줄을 한 번만 클릭하면 전체 플랫폼과**35,000개 이상의 깊게 중첩된 프로그램 설명**을 모두 다음으로 원활하게 번역할 수 있습니다.
+-**영어**|**한국어(한국어)**|**중문(중국어)**|**스페인어(스페인어)**|**العربية(아랍어)**
+
+우리의 번역 파이프라인은 지능형 비동기 렌더링을 사용하여 UI와 기준을 원활하게 현지화하는 동시에 정확한 데이터 스키마를 보존합니다. 이는 보고타, 리야드 또는 서울의 창업자가 샌프란시스코의 창업자처럼 쉽게 모국어로 글로벌 VC 네트워크를 탐색할 수 있음을 의미합니다.
+
+![한국어 보기 데모](demo_ko.png)
+
+### 3. 스마트 '관련성 점수' 순위
+모든 프로그램이 동일하게 만들어지는 것은 아닙니다. 우리의 맞춤형 'fit_score' 알고리즘은 기회를 평가하고 자동으로 최상위 계층, 가장 활동적인 프로그램을 맨 위로 표시하므로 데드 링크를 스크롤하는 데 시간을 낭비하지 않습니다.
+
+### 4. 강력한 필터링 및 검색
+라틴 아메리카에서 FinTech 보조금이 필요하십니까? 아니면 아시아의 AI 가속기인가요? 직관적인 UI를 사용하여 국가/지역, 카테고리, 산업 및 마감일별로 필터링하세요.
+
+### 5. 직접 "적용" 포털
+완벽하게 일치하는 것을 찾으면 "적용"을 클릭하여 공식 지원 포털로 *직접* 이동하세요.
 
 ---
 
-##  프로젝트 후원하기
+## 💻 기술 스택 및 아키텍처
 
-이 프로젝트가 여러분이나 여러분의 스타트업에 도움이 되었다면 후원을 고려해 주세요! 여러분의 후원은 글로벌 스타트업 생태계를 위해 이 도구를 유지하고 개선하는 데 큰 힘이 됩니다.
+-**백엔드:**Python(Flask, SQLAlchemy)
+-**데이터베이스:**SQLite(초확장성 단일 트랜잭션 대량 업데이트)
+-**프런트엔드:**HTML5, CSS3(사용자 정의 바닐라 CSS, Glassmorphism UI), 바닐라 JavaScript
+-**번역:**실시간 비동기 번역을 위한 Flask-Babel 및 `deep-translator`(Google 번역 API)
+-**데이터 엔진:**대규모 하이퍼스케일 데이터 주입을 위해 절차적 생성을 활용하는 비동기 Python 크롤러(`aiohttp`, `asyncio`).
+
+## 🛠️ 로컬로 실행하는 방법
+
+1.**저장소 복제:**
+   ``배쉬
+   자식 클론 https://github.com/genoxdeveloper/Awesome-Startup-Global-Explorer.git
+   CD Awesome-스타트업-글로벌-탐색기
+   ````
+
+2.**설치 종속성:**
+   ``배쉬
+   pip 설치 -r 요구사항.txt
+   ````
+
+3.**초기화 및 실행:**
+   ``배쉬
+   파이썬 app.py
+   ````
+   *앱이 자동으로 데이터베이스를 초기화하고, 백그라운드 데이터 생성을 시작하고(35,000개 이상의 레코드 시드) `http://localhost:5000`에서 로컬 서버를 호스팅합니다.*
+
+## 📊 데이터베이스 보기
+원시 데이터를 선호하는 사용자를 위해 우리는 CRM 또는 추적 도구에 대한 직접 CSV 내보내기를 지원하는 초고속 DataTables 통합 기능을 갖춘 테이블 형식의**데이터베이스**모드를 제공합니다.
+
+![데이터베이스 보기](demo_db.png)
+
+---
+
+## 💖 이 프로젝트 및 파트너 지원
+
+이 프로젝트가 귀하 또는 귀하의 스타트업에 도움이 되었다면 지원해 보세요! 귀하의 지원은 글로벌 스타트업 커뮤니티를 위해 이 도구를 유지하고 개선하는 데 도움이 됩니다.
 
 <div align="center">
 
-| 플랫폼 | 링크 |
+| Platform | Link |
 |----------|------|
-|  **저장소 Star 누르기** | 완전 무료이며, 더 많은 사람들이 이 툴을 발견하게 도와줍니다! |
-|  **GitHub Sponsors** | [Sponsor Genox-developer](https://github.com/sponsors/genoxdeveloper) |
-|  **Ko-fi** | [ko-fi.com/genoxholdings](https://ko-fi.com/genoxholdings) |
-|  **USDT (TRC20)** | `TUmUVHfxsFLZQToE5j4oGaPCMRKBLRjEcv` |
+| ⭐**Star this repo**| It's free and helps others discover this tool! |
+| 🤝**Buygit.com**| Check out our partner [Buygit.com](https://buygit.com) |
+| 💼**GitHub Sponsors**| [Sponsor Genox-developer](https://github.com/sponsors/genoxdeveloper) |
+| ☕**Ko-fi**         | [ko-fi.com/genoxholdings](https://ko-fi.com/genoxholdings) |
+| 🪙**USDT (TRC20)**  | `TUmUVHfxsFLZQToE5j4oGaPCMRKBLRjEcv` |
 
 </div>
 
->  **커피 한 잔 후원하기** — 후원금은 새로운 데이터를 수집하는 서버 비용으로 쓰입니다!
->  **피자 후원하기** — 원하시는 국가의 스타트업 프로그램을 우선적으로 추가해 드립니다!
+>**커피 한 잔 사주세요**— 커피 한 잔은 데이터 소스를 하나 더 크롤링하는 데 도움이 됩니다!  
+>**우리에게 피자를 사주세요**— 그러면 다음으로 귀하 국가의 스타트업 프로그램을 추가해 드리겠습니다!
 
- 별점, 소셜 미디어 공유, 소액 후원 등 어떠한 방식의 지원이든 이 오픈소스 프로젝트를 모두에게 무료로 유지하는 데 큰 도움이 됩니다.
+스타, 소셜 미디어 공유, 소액 기부 등 여러분의 지원은 이 프로젝트를 모든 사람에게 무료로 유지하는 데 큰 도움이 됩니다.
 
 ---
 
-##  연락처
+## 🤝 기여하기
+우리는 전 세계 창립자와 개발자의 기여를 환영합니다! 목록에 없지만 해당 국가의 보조금, VC 또는 액셀러레이터를 알고 있는 경우 이슈를 열거나 Pull Request를 제출하세요.
 
-문의, 비즈니스 제휴, 파트너십 제안은 아래로 연락해 주세요:
- **이메일**: [developer@genox.one](mailto:developer@genox.one)  
- **웹사이트**: [genoxholdings.com](https://genoxholdings.com)
+## 📬연락처
+
+질문, 비즈니스 문의 또는 파트너십 제안의 경우:
+-**이메일**: [developer@genox.one](mailto:developer@genox.one)  
+-**웹사이트**: [genoxholdings.com](https://genoxholdings.com)
+-**파트너**: [buygit.com](https://buygit.com)
 
 ---
 
 <div align="center">
 
-**Built with  by [Genox Holdings](https://genoxholdings.com) · Seoul, South Korea **
+**[Genox](https://genoxholdings.com) 및 [Buygit.com](https://buygit.com) · 대한민국 서울의 ❤️으로 제작됨**
 
-*전 세계 스타트업이 기회를 발견하도록 돕습니다.*
+*한 번에 하나의 데이터 포인트로 스타트업이 전 세계에서 기회를 찾을 수 있도록 지원합니다.*
 
 </div>
