@@ -16,6 +16,8 @@ class GlobalOpportunity(db.Model):
     equity = db.Column(db.String(100))
     provider = db.Column(db.String(200))
     fit_score = db.Column(db.Integer, default=50, index=True)
+    deadline = db.Column(db.String(100))
+    url = db.Column(db.String(500))
     created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
 class CrawlerSource(db.Model):

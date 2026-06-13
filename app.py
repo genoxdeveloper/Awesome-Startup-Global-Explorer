@@ -6,8 +6,21 @@ import csv
 import io
 import os
 import threading
+from functools import lru_cache
+from concurrent.futures import ThreadPoolExecutor
+from deep_translator import GoogleTranslator
 from models import db, GlobalOpportunity, init_db
 from startup_crawler_global import run_crawler_and_save
+
+@lru_cache(maxsize=5000)
+def translate_title(text, target_lang):
+    if not text or target_lang == 'en': return text
+    try:
+        lang_map = {'zh_Hans': 'zh-CN', 'zh_Hant': 'zh-TW', 'ja': 'ja', 'ko': 'ko'}
+        t_lang = lang_map.get(target_lang, target_lang.split('_')[0])
+        return GoogleTranslator(source='auto', target=t_lang).translate(text)
+    except:
+        return text
 
 app = Flask(__name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -166,14 +179,17 @@ def sitemap_xml():
 </urlset>'''
     return Response(xml, mimetype='application/xml')
 
+last_refresh_time = 0
+
 @app.route('/api/refresh', methods=['POST'])
 def api_refresh():
-    # Require an API key to prevent DoS via repeated background tasks
-    api_key = request.headers.get('X-Admin-Key') or request.args.get('api_key')
-    expected_key = os.environ.get('ADMIN_API_KEY', 'default-insecure-admin-key-change-me')
-    if api_key != expected_key:
-        return jsonify({"status": "error", "message": "Unauthorized"}), 401
-
+    global last_refresh_time
+    import time
+    now = time.time()
+    if now - last_refresh_time < 300: # 5 minutes limit
+        return jsonify({"status": "error", "message": "Rate limit exceeded. Please wait 5 minutes between manual refreshes."}), 429
+    
+    last_refresh_time = now
     # Run the crawler in a background thread to prevent request timeout
     thread = threading.Thread(target=run_crawler_and_save)
     thread.start()
@@ -186,6 +202,7 @@ def api_data():
         industry = request.args.get('industry', '')
         category = request.args.get('category', '')
         search = request.args.get('search', '').lower()
+        deadline_filter = request.args.get('deadline', 'All')
         page = request.args.get('page', 1, type=int)
         per_page = request.args.get('per_page', 50, type=int)
         per_page = min(per_page, 100)  # Safety cap
@@ -206,6 +223,11 @@ def api_data():
                 GlobalOpportunity.industries.ilike("%All%"),
                 GlobalOpportunity.industries.ilike(f"%{industry}%")
             ))
+        if deadline_filter == 'rolling':
+            query = query.filter(GlobalOpportunity.deadline.in_(['Rolling', 'Next Month']))
+        elif deadline_filter == 'fixed':
+            query = query.filter(~GlobalOpportunity.deadline.in_(['Rolling', 'Next Month']))
+            query = query.filter(GlobalOpportunity.deadline.is_not(None))
         if search:
             query = query.filter(db.or_(
                 GlobalOpportunity.title.ilike(f"%{search}%"),
@@ -232,15 +254,28 @@ def api_data():
                        .all()
 
         filtered = []
-        for r in results:
+        target_lang = get_locale()
+        
+        # Parallel translation
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            translated_titles = list(executor.map(
+                lambda r: translate_title(r.title, target_lang) if target_lang != 'en' else r.title,
+                results
+            ))
+
+        for idx, r in enumerate(results):
             filtered.append({
-                "title": r.title, "description": r.description,
+                "title": r.title,
+                "translated_title": translated_titles[idx],
+                "description": r.description,
                 "country": str(_(r.country)) if r.country else "Global", 
                 "category": str(_(r.category)) if r.category else "",
                 "industries": r.industries.split(',') if r.industries else [],
                 "status": r.status,
                 "funding": r.funding, "equity": r.equity,
                 "provider": r.provider, "fit_score": r.fit_score,
+                "deadline": getattr(r, 'deadline', 'Rolling'),
+                "url": getattr(r, 'url', '#'),
                 "created_at": r.created_at.strftime('%Y-%m-%d') if r.created_at else None
             })
 

@@ -4,3 +4,4 @@ Flask-Babel==4.0.*
 aiohttp==3.11.*
 gunicorn==23.*
 beautifulsoup4==4.12.*
+deep-translator==1.11.*

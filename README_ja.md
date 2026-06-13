@@ -1,5 +1,7 @@
 # Startup-Global: グローバルスタートアップエコシステムエクスプローラー
 
+
+![Global Startup Ecosystem Explorer Demo](./demo.png)
 ![License](https://img.shields.io/github/license/Genox-developer/Startup-Global?color=blue)
 
 **190ヶ国、100以上の業界にわたる32,500以上のスタートアップ資金、助成金、アクセラレーター、クラウド特典を発見しましょう。**

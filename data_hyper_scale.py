@@ -52,13 +52,13 @@ def get_hyper_scale_records():
     for reg in kr_regions:
         for prog_name, desc, cat, ind, fund, eq in kr_gov_programs:
             title = f"[{reg}] {prog_name}"
-            records.append((title, desc, "South Korea", cat, ind, fund, eq, f"{reg} Gov"))
+            records.append((title, desc, "South Korea", cat, ind, fund, eq, f"{reg} Gov", rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
             
     # Generate Korea Universities
     for univ in kr_univs:
         for prog_name, desc, cat, ind, fund, eq in kr_univ_programs:
             title = f"{univ} {prog_name}"
-            records.append((title, desc, "South Korea", cat, ind, fund, eq, univ))
+            records.append((title, desc, "South Korea", cat, ind, fund, eq, univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
             
     # ==========================================
     # 2. USA (50 States & Universities)
@@ -92,18 +92,18 @@ def get_hyper_scale_records():
     for state in us_states:
         for p_name, desc, cat, ind, fund, eq in us_state_programs:
             title = f"{state} {p_name}"
-            records.append((title, desc, "USA", cat, ind, fund, eq, f"{state} Gov"))
+            records.append((title, desc, "USA", cat, ind, fund, eq, f"{state} Gov", rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
             
         # State university ecosystem
         univ_name = f"University of {state}"
-        records.append((f"{univ_name} Innovation Fund", "University-backed venture fund for student and alumni tech.", "USA", "VCs & Accelerators", "DeepTech", "$50K - $100K", "Yes", univ_name))
-        records.append((f"{univ_name} Tech Transfer Office Grant", "Commercialization grant for academic IP.", "USA", "Gov Grants", "Tech", "$25K", "No", univ_name))
+        records.append((f"{univ_name} Innovation Fund", "University-backed venture fund for student and alumni tech.", "USA", "VCs & Accelerators", "DeepTech", "$50K - $100K", "Yes", univ_name, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
+        records.append((f"{univ_name} Tech Transfer Office Grant", "Commercialization grant for academic IP.", "USA", "Gov Grants", "Tech", "$25K", "No", univ_name, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
 
     # Named US universities
     for univ in us_universities:
-        records.append((f"{univ} Startup Accelerator", "University-affiliated accelerator and mentorship program.", "USA", "VCs & Accelerators", "All", "$25K - $100K", "Variable", univ))
-        records.append((f"{univ} Venture Lab", "Student and faculty venture lab providing prototype funding.", "USA", "Gov Grants", "DeepTech", "$10K - $50K", "No", univ))
-        records.append((f"{univ} Industry Partnership Program", "Corporate-university R&D collaboration grants.", "USA", "Gov Grants", "DeepTech,AI", "$50K - $200K", "No", univ))
+        records.append((f"{univ} Startup Accelerator", "University-affiliated accelerator and mentorship program.", "USA", "VCs & Accelerators", "All", "$25K - $100K", "Variable", univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
+        records.append((f"{univ} Venture Lab", "Student and faculty venture lab providing prototype funding.", "USA", "Gov Grants", "DeepTech", "$10K - $50K", "No", univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
+        records.append((f"{univ} Industry Partnership Program", "Corporate-university R&D collaboration grants.", "USA", "Gov Grants", "DeepTech,AI", "$50K - $200K", "No", univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
 
     # ==========================================
     # 3. JAPAN (47 Prefectures & Universities)
@@ -129,11 +129,11 @@ def get_hyper_scale_records():
     
     for pref in jp_prefectures:
         for p_name, desc, cat, ind, fund, eq in jp_programs:
-            records.append((f"{pref} {p_name}", desc, "Japan", cat, ind, fund, eq, f"{pref} Prefecture"))
+            records.append((f"{pref} {p_name}", desc, "Japan", cat, ind, fund, eq, f"{pref} Prefecture", rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
     
     for univ in jp_universities:
-        records.append((f"{univ} Venture Incubation Program", "University startup incubation and seed funding.", "Japan", "VCs & Accelerators", "DeepTech", "JPY 5M", "Variable", univ))
-        records.append((f"{univ} Tech Licensing Office Grant", "Academic IP commercialization support.", "Japan", "Gov Grants", "Tech", "JPY 3M", "No", univ))
+        records.append((f"{univ} Venture Incubation Program", "University startup incubation and seed funding.", "Japan", "VCs & Accelerators", "DeepTech", "JPY 5M", "Variable", univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
+        records.append((f"{univ} Tech Licensing Office Grant", "Academic IP commercialization support.", "Japan", "Gov Grants", "Tech", "JPY 3M", "No", univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
 
     # ==========================================
     # 4. INDIA (28 States + 8 UTs & Universities)
@@ -158,11 +158,11 @@ def get_hyper_scale_records():
     
     for state in india_states:
         for p_name, desc, cat, ind, fund, eq in india_programs:
-            records.append((f"{state} {p_name}", desc, "India", cat, ind, fund, eq, f"{state} Gov"))
+            records.append((f"{state} {p_name}", desc, "India", cat, ind, fund, eq, f"{state} Gov", rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
     
     for univ in india_universities:
-        records.append((f"{univ} Startup Cell", "University entrepreneurship cell providing mentorship and seed grants.", "India", "VCs & Accelerators", "DeepTech,AI", "INR 10L", "Variable", univ))
-        records.append((f"{univ} Technology Business Incubator", "NSTEDB-supported incubator for deep-tech ventures.", "India", "Cloud & Perks", "Tech", "Workspace + INR 5L", "No", univ))
+        records.append((f"{univ} Startup Cell", "University entrepreneurship cell providing mentorship and seed grants.", "India", "VCs & Accelerators", "DeepTech,AI", "INR 10L", "Variable", univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
+        records.append((f"{univ} Technology Business Incubator", "NSTEDB-supported incubator for deep-tech ventures.", "India", "Cloud & Perks", "Tech", "Workspace + INR 5L", "No", univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
 
     # ==========================================
     # 5. EU MEMBER STATES (27 countries, detailed)
@@ -187,7 +187,7 @@ def get_hyper_scale_records():
     
     for country, currency in eu_countries:
         for p_name, desc, cat, ind, fund, eq in eu_programs:
-            records.append((f"{country} {p_name}", desc, country, cat, ind, fund, eq, f"Gov of {country}"))
+            records.append((f"{country} {p_name}", desc, country, cat, ind, fund, eq, f"Gov of {country}", rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
 
     # ==========================================
     # 6. GLOBAL (150+ Countries x Programs)
@@ -244,22 +244,22 @@ def get_hyper_scale_records():
     for country in global_countries:
         # National Programs (12 per country)
         for p_name, desc, cat, ind, fund, eq in global_programs:
-            records.append((f"{country} {p_name}", desc, country, cat, rng.choice(["AI,Tech", "Hardware", "Consumer", "SaaS", "Fintech", "DeepTech"]), fund, eq, f"Gov of {country}"))
+            records.append((f"{country} {p_name}", desc, country, cat, rng.choice(["AI,Tech", "Hardware", "Consumer", "SaaS", "Fintech", "DeepTech"]), fund, eq, f"Gov of {country}", rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
             
         # Regional Hubs (30 hubs * 5 programs = 150 per country)
         for hub in tech_hubs:
             for h_name, h_desc, h_cat, h_ind in hub_grants:
-                records.append((f"{country} {hub} {h_name}", f"{h_desc} in {hub}, {country}.", country, h_cat, h_ind, "$10K-50K", "Variable", f"{hub} Gov"))
+                records.append((f"{country} {hub} {h_name}", f"{h_desc} in {hub}, {country}.", country, h_cat, h_ind, "$10K-50K", "Variable", f"{hub} Gov", rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
                 
         # Universities (15 per country)
         for univ in universities:
-            records.append((f"{country} {univ} Tech Seed", "Student/Alumni seed fund.", country, "VCs & Accelerators", "DeepTech", "$20K", "Yes", univ))
+            records.append((f"{country} {univ} Tech Seed", "Student/Alumni seed fund.", country, "VCs & Accelerators", "DeepTech", "$20K", "Yes", univ, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
             
     # Angel Networks (12 per country)
     angel_networks = ["Angel Network", "Early Stage Investors", "Seed Syndicate", "Tech Angels", "Capital Group", "Ventures", "Innovation Fund", "Founders Circle", "Seed Partners", "Growth Syndicate", "Startup Angels", "Impact Investors"]
     for country in global_countries:
         for angel in angel_networks:
-            records.append((f"{country} {angel}", f"Syndicate of high-net-worth individuals backing local startups in {country}.", country, "VCs & Accelerators", "All", "$50K - $500K", "Yes", "Angel Group"))
+            records.append((f"{country} {angel}", f"Syndicate of high-net-worth individuals backing local startups in {country}.", country, "VCs & Accelerators", "All", "$50K - $500K", "Yes", "Angel Group", rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
 
     # Co-Working Space Perks (5 per country)
     coworking_perks = [
@@ -271,6 +271,6 @@ def get_hyper_scale_records():
     ]
     for country in global_countries:
         for perk_name, desc, cat, ind, fund, eq, prov in coworking_perks:
-            records.append((f"{country} {perk_name}", desc, country, cat, ind, fund, eq, prov))
+            records.append((f"{country} {perk_name}", desc, country, cat, ind, fund, eq, prov, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
 
     return records

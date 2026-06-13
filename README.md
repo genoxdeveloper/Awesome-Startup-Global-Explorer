@@ -13,6 +13,8 @@
   </p>
 </div>
 
+![Global Startup Ecosystem Explorer Demo](./demo.png)
+
 <details>
 <summary><b>🇰🇷 한국어로 읽기 (Click to read in Korean)</b></summary>
 <br>
@@ -21,6 +23,8 @@
   <h1>🌍 글로벌 스타트업 생태계 탐색기</h1>
   <p><strong>전 세계 190개국 100여 개 산업의 32,500개 이상 스타트업 지원 기회를 한곳에서 탐색하세요.</strong></p>
 </div>
+
+![Global Startup Ecosystem Explorer Demo](./demo.png)
 
 ---
 
@@ -91,8 +95,7 @@ pip install -r requirements.txt
 python app.py
 ```
 서버는 `http://127.0.0.1:5000` 에서 시작됩니다.
-- **메인 대시보드**: `http://127.0.0.1:5000/`
-- **관리자 패널**: `http://127.0.0.1:5000/admin` (API 키 헤더가 필요하거나, `?api_key=default-insecure-admin-key-change-me` 파라미터를 추가하세요)
+- **데이터 실시간 갱신**: 메인 창 상단의 **Recrawl** 버튼을 클릭하여 백그라운드에서 데이터를 최신으로 갱신할 수 있습니다.
 
 ---
 
@@ -114,7 +117,6 @@ python app.py
 - **🌐 17 Languages Supported**: Native UI and data translations for English, 한국어, 日本語, 简体中文, 繁體中文, Español, Français, Deutsch, Italiano, Português, العربية, हिन्दी, Русский, Türkçe, Bahasa Indonesia, Tiếng Việt, and ไทย.
 - **🚀 32,500+ Opportunities**: Automatically crawled database of Gov Grants, Corporate Accelerators, VCs, Cloud Perks, and Relocation programs.
 - **⚡ Async Crawling**: Real-time background data fetching from global sources without blocking the main thread.
-- **🔒 Admin Dashboard**: Manage crawler sources, test APIs, and review data securely.
 - **☁️ 1-Click Free Hosting Ready**: Out-of-the-box configurations for Vercel, Railway, and Render.
 - **📄 Export to CSV**: Download filtered datasets instantly for offline analysis.
 
@@ -177,8 +179,7 @@ python app.py
 ```
 The server will start at `http://127.0.0.1:5000`. 
 - **Main Dashboard**: `http://127.0.0.1:5000/`
-- **Admin Panel**: `http://127.0.0.1:5000/admin` (Requires API Key header or query parameter `?api_key=default-insecure-admin-key-change-me`)
-
+- **Recrawl Functionality**: Click the **Recrawl** button at the top of the main dashboard to run the background web crawler and refresh startup funding data.
 ---
 
 ## 🌎 Supported Translations

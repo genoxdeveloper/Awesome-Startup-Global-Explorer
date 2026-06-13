@@ -1,5 +1,7 @@
 # Startup-Global: 글로벌 스타트업 생태계 탐색기
 
+
+![Global Startup Ecosystem Explorer Demo](./demo.png)
 ![License](https://img.shields.io/github/license/Genox-developer/Startup-Global?color=blue)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 

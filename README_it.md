@@ -1,5 +1,7 @@
 # Startup-Global: Esploratore dell'Ecosistema Globale delle Startup
 
+
+![Global Startup Ecosystem Explorer Demo](./demo.png)
 ![License](https://img.shields.io/github/license/Genox-developer/Startup-Global?color=blue)
 
 **Scopri oltre 32.500 finanziamenti per startup, sovvenzioni, acceleratori e vantaggi cloud in oltre 190 paesi e 100 settori.**

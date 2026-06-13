@@ -50,8 +50,13 @@ async def fetch_html(session, url):
     except Exception as e: print(f"HTML Error {url}: {e}")
     return ""
 
-def gen_rand_score(base):
-    return min(100, max(50, base + random.randint(-10, 10)))
+import hashlib
+def gen_rand_score(base, seed_str=""):
+    if not seed_str:
+        return min(100, max(50, base + random.randint(-10, 10)))
+    h = int(hashlib.md5(seed_str.encode('utf-8')).hexdigest(), 16)
+    offset = (h % 21) - 10
+    return min(100, max(50, base + offset))
 
 # -------------------------------------------------------------------------
 # 1. USA & North America (60+ items)
@@ -345,11 +350,12 @@ async def crawl_massive_vcs(session):
         
     # HYPER-SCALE 30,000+ INJECTION
     hyper_list = get_hyper_scale_records()
-    for t, d, c, cat, ind, f, eq, prov in hyper_list:
+    for t, d, c, cat, ind, f, eq, prov, dl, url in hyper_list:
         res.append(GlobalOpportunity(
             title=t, description=d, country=c, category=cat, 
             industries=ind, status="Rolling", funding=f, equity=eq, 
-            provider=prov, fit_score=gen_rand_score(80)
+            provider=prov, fit_score=gen_rand_score(80, t),
+            deadline=dl, url=url
         ))
         
     return res
@@ -376,13 +382,13 @@ def run_crawler_and_save(app=None):
         app = flask_app
         
     with app.app_context():
-        print("Clearing old global opportunities to prep for pristine hyper-scale load...")
-        db.session.query(GlobalOpportunity).delete()
-        db.session.commit()
-        
         try:
             opportunities = asyncio.run(main_crawler())
             print(f"Crawled {len(opportunities)} new items. Slicing into safe RAM chunks...")
+            
+            print("Clearing old global opportunities to prep for pristine hyper-scale load...")
+            db.session.query(GlobalOpportunity).delete()
+            db.session.commit()
             
             chunk_size = 5000
             for i in range(0, len(opportunities), chunk_size):

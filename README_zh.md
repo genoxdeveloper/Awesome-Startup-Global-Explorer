@@ -1,5 +1,7 @@
 # Startup-Global: 全球初创企业生态系统探索器
 
+
+![Global Startup Ecosystem Explorer Demo](./demo.png)
 ![License](https://img.shields.io/github/license/Genox-developer/Startup-Global?color=blue)
 
 **发现涵盖 190 多个国家/地区和 100 多个行业的 32,500 多个初创企业资金、赠款、加速器和云端福利。**
