@@ -1,0 +1,196 @@
+# German translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-06-13 13:42+0900\n"
+"PO-Revision-Date: 2026-06-13 13:45+0900\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: templates/admin.html:25
+msgid "Crawler API System - Admin Dashboard"
+msgstr "Crawler-API-System – Admin-Dashboard"
+
+#: templates/admin.html:27
+msgid "Registered Crawler Sources"
+msgstr "Registrierte Crawler-Quellen"
+
+#: templates/admin.html:31
+msgid "ID"
+msgstr "AUSWEIS"
+
+#: templates/admin.html:32
+msgid "Name"
+msgstr "Name"
+
+#: templates/admin.html:33
+msgid "URL"
+msgstr "URL"
+
+#: templates/admin.html:34
+msgid "Method"
+msgstr "Verfahren"
+
+#: templates/admin.html:35
+msgid "Status"
+msgstr "Status"
+
+#: templates/admin.html:36
+msgid "Last Crawled"
+msgstr "Zuletzt gecrawlt"
+
+#: templates/admin.html:44
+msgid "Register New Source"
+msgstr "Neue Quelle registrieren"
+
+#: templates/admin.html:47
+msgid "Source Name"
+msgstr "Quellname"
+
+#: templates/admin.html:48
+msgid "e.g., YC Startup Directory"
+msgstr "z. B. YC-Startverzeichnis"
+
+#: templates/admin.html:51
+msgid "Endpoint URL"
+msgstr "Endpunkt-URL"
+
+#: templates/admin.html:52
+msgid "https://api.example.com/v1/startups"
+msgstr "https://api.example.com/v1/startups"
+
+#: templates/admin.html:55
+msgid "HTTP Method"
+msgstr "HTTP-Methode"
+
+#: templates/admin.html:58
+msgid "Register Source"
+msgstr "Quelle registrieren"
+
+#: templates/index.html:230 templates/index.html:347
+msgid "Global Startup Ecosystem Explorer"
+msgstr "Globaler Startup-Ökosystem-Explorer"
+
+#: templates/index.html:231
+msgid "190+ Countries · 32,500+ Opportunities · Real-Time Discovery"
+msgstr "Über 190 Länder · Über 32.500 Möglichkeiten · Echtzeit-Erkennung"
+
+#: templates/index.html:241
+msgid "Loading..."
+msgstr "Laden..."
+
+#: templates/index.html:244
+msgid "Recrawl"
+msgstr "Erneut crawlen"
+
+#: templates/index.html:248
+msgid "Export CSV"
+msgstr "CSV exportieren"
+
+#: templates/index.html:257 templates/index.html:331
+msgid "Country"
+msgstr "Land"
+
+#: templates/index.html:259
+msgid "All Countries"
+msgstr "Alle Länder"
+
+#: templates/index.html:263
+msgid "Industry"
+msgstr "Industrie"
+
+#: templates/index.html:265
+msgid "All Industries"
+msgstr "Alle Branchen"
+
+#: templates/index.html:269
+msgid "Search"
+msgstr "Suchen"
+
+#: templates/index.html:270
+msgid "Search by title, provider, keyword..."
+msgstr "Suche nach Titel, Anbieter, Stichwort..."
+
+#: templates/index.html:276
+msgid "All Categories"
+msgstr "Alle Kategorien"
+
+#: templates/index.html:277 templates/index.html:292
+msgid "Gov Grants"
+msgstr "Regierungszuschüsse"
+
+#: templates/index.html:278
+msgid "Corporate OI"
+msgstr "Unternehmens-OI"
+
+#: templates/index.html:279
+msgid "VCs & Accelerators"
+msgstr "VCs und Beschleuniger"
+
+#: templates/index.html:280 templates/index.html:300
+msgid "Cloud & Perks"
+msgstr "Cloud & Vergünstigungen"
+
+#: templates/index.html:281
+msgid "Relocation"
+msgstr "Verlegung"
+
+#: templates/index.html:287
+msgid "Total Matches"
+msgstr "Gesamtzahl der Übereinstimmungen"
+
+#: templates/index.html:296
+msgid "VCs & Accel"
+msgstr "VCs & Accel"
+
+#: templates/index.html:304
+msgid "Countries"
+msgstr "Länder"
+
+#: templates/index.html:312
+msgid "Recommended Opportunities"
+msgstr "Empfohlene Möglichkeiten"
+
+#: templates/index.html:313
+msgid "Ranked by Fit Score"
+msgstr "Geordnet nach Fit-Score"
+
+#: templates/index.html:321
+msgid "Full Database"
+msgstr "Vollständige Datenbank"
+
+#: templates/index.html:329
+msgid "Category"
+msgstr "Kategorie"
+
+#: templates/index.html:330
+msgid "Title"
+msgstr "Titel"
+
+#: templates/index.html:332
+msgid "Provider"
+msgstr "Anbieter"
+
+#: templates/index.html:333
+msgid "Funding"
+msgstr "Finanzierung"
+
+#: templates/index.html:334
+msgid "Equity"
+msgstr "Eigenkapital"
+
+#: templates/index.html:335
+msgid "Score"
+msgstr "Punktzahl"
+

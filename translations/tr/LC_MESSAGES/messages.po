@@ -1,0 +1,196 @@
+# Turkish translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-06-13 13:42+0900\n"
+"PO-Revision-Date: 2026-06-13 13:49+0900\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: tr\n"
+"Language-Team: tr <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: templates/admin.html:25
+msgid "Crawler API System - Admin Dashboard"
+msgstr "Tarayıcı API Sistemi - Yönetici Kontrol Paneli"
+
+#: templates/admin.html:27
+msgid "Registered Crawler Sources"
+msgstr "Kayıtlı Tarayıcı Kaynakları"
+
+#: templates/admin.html:31
+msgid "ID"
+msgstr "İD"
+
+#: templates/admin.html:32
+msgid "Name"
+msgstr "İsim"
+
+#: templates/admin.html:33
+msgid "URL"
+msgstr "URL'si"
+
+#: templates/admin.html:34
+msgid "Method"
+msgstr "Yöntem"
+
+#: templates/admin.html:35
+msgid "Status"
+msgstr "Durum"
+
+#: templates/admin.html:36
+msgid "Last Crawled"
+msgstr "Son Taranan"
+
+#: templates/admin.html:44
+msgid "Register New Source"
+msgstr "Yeni Kaynak Kaydet"
+
+#: templates/admin.html:47
+msgid "Source Name"
+msgstr "Kaynak Adı"
+
+#: templates/admin.html:48
+msgid "e.g., YC Startup Directory"
+msgstr "ör. YC Başlangıç ​​Dizini"
+
+#: templates/admin.html:51
+msgid "Endpoint URL"
+msgstr "Uç nokta URL'si"
+
+#: templates/admin.html:52
+msgid "https://api.example.com/v1/startups"
+msgstr "https://api.example.com/v1/startups"
+
+#: templates/admin.html:55
+msgid "HTTP Method"
+msgstr "HTTP Yöntemi"
+
+#: templates/admin.html:58
+msgid "Register Source"
+msgstr "Kaynağı Kaydet"
+
+#: templates/index.html:230 templates/index.html:347
+msgid "Global Startup Ecosystem Explorer"
+msgstr "Küresel Başlangıç ​​Ekosistemi Gezgini"
+
+#: templates/index.html:231
+msgid "190+ Countries · 32,500+ Opportunities · Real-Time Discovery"
+msgstr "190+ Ülke · 32.500+ Fırsat · Gerçek Zamanlı Keşif"
+
+#: templates/index.html:241
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: templates/index.html:244
+msgid "Recrawl"
+msgstr "Tekrar tara"
+
+#: templates/index.html:248
+msgid "Export CSV"
+msgstr "CSV'yi dışa aktar"
+
+#: templates/index.html:257 templates/index.html:331
+msgid "Country"
+msgstr "Ülke"
+
+#: templates/index.html:259
+msgid "All Countries"
+msgstr "Tüm Ülkeler"
+
+#: templates/index.html:263
+msgid "Industry"
+msgstr "Endüstri"
+
+#: templates/index.html:265
+msgid "All Industries"
+msgstr "Tüm Sektörler"
+
+#: templates/index.html:269
+msgid "Search"
+msgstr "Aramak"
+
+#: templates/index.html:270
+msgid "Search by title, provider, keyword..."
+msgstr "Başlığa, sağlayıcıya, anahtar kelimeye göre arayın..."
+
+#: templates/index.html:276
+msgid "All Categories"
+msgstr "Tüm Kategoriler"
+
+#: templates/index.html:277 templates/index.html:292
+msgid "Gov Grants"
+msgstr "Devlet Hibeleri"
+
+#: templates/index.html:278
+msgid "Corporate OI"
+msgstr "Kurumsal OI"
+
+#: templates/index.html:279
+msgid "VCs & Accelerators"
+msgstr "VC'ler ve Hızlandırıcılar"
+
+#: templates/index.html:280 templates/index.html:300
+msgid "Cloud & Perks"
+msgstr "Bulut ve Avantajlar"
+
+#: templates/index.html:281
+msgid "Relocation"
+msgstr "Yer değiştirme"
+
+#: templates/index.html:287
+msgid "Total Matches"
+msgstr "Toplam Eşleşmeler"
+
+#: templates/index.html:296
+msgid "VCs & Accel"
+msgstr "VC'ler ve Hızlanma"
+
+#: templates/index.html:304
+msgid "Countries"
+msgstr "Ülkeler"
+
+#: templates/index.html:312
+msgid "Recommended Opportunities"
+msgstr "Önerilen Fırsatlar"
+
+#: templates/index.html:313
+msgid "Ranked by Fit Score"
+msgstr "Uyum Puanına göre sıralanmıştır"
+
+#: templates/index.html:321
+msgid "Full Database"
+msgstr "Tam Veritabanı"
+
+#: templates/index.html:329
+msgid "Category"
+msgstr "Kategori"
+
+#: templates/index.html:330
+msgid "Title"
+msgstr "Başlık"
+
+#: templates/index.html:332
+msgid "Provider"
+msgstr "sağlayıcı"
+
+#: templates/index.html:333
+msgid "Funding"
+msgstr "Finansman"
+
+#: templates/index.html:334
+msgid "Equity"
+msgstr "özsermaye"
+
+#: templates/index.html:335
+msgid "Score"
+msgstr "Gol"
+

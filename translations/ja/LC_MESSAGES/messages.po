@@ -1,0 +1,196 @@
+# Japanese translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-06-13 13:42+0900\n"
+"PO-Revision-Date: 2026-06-13 13:42+0900\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: templates/admin.html:25
+msgid "Crawler API System - Admin Dashboard"
+msgstr "クローラー API システム - 管理者ダッシュボード"
+
+#: templates/admin.html:27
+msgid "Registered Crawler Sources"
+msgstr "登録されたクローラー ソース"
+
+#: templates/admin.html:31
+msgid "ID"
+msgstr "ID"
+
+#: templates/admin.html:32
+msgid "Name"
+msgstr "名前"
+
+#: templates/admin.html:33
+msgid "URL"
+msgstr "URL"
+
+#: templates/admin.html:34
+msgid "Method"
+msgstr "方法"
+
+#: templates/admin.html:35
+msgid "Status"
+msgstr "状態"
+
+#: templates/admin.html:36
+msgid "Last Crawled"
+msgstr "最後にクロールした"
+
+#: templates/admin.html:44
+msgid "Register New Source"
+msgstr "新しいソースを登録する"
+
+#: templates/admin.html:47
+msgid "Source Name"
+msgstr "ソース名"
+
+#: templates/admin.html:48
+msgid "e.g., YC Startup Directory"
+msgstr "例: YC スタートアップ ディレクトリ"
+
+#: templates/admin.html:51
+msgid "Endpoint URL"
+msgstr "エンドポイント URL"
+
+#: templates/admin.html:52
+msgid "https://api.example.com/v1/startups"
+msgstr "https://api.example.com/v1/startups"
+
+#: templates/admin.html:55
+msgid "HTTP Method"
+msgstr "HTTPメソッド"
+
+#: templates/admin.html:58
+msgid "Register Source"
+msgstr "レジスタソース"
+
+#: templates/index.html:230 templates/index.html:347
+msgid "Global Startup Ecosystem Explorer"
+msgstr "グローバル スタートアップ エコシステム エクスプローラー"
+
+#: templates/index.html:231
+msgid "190+ Countries · 32,500+ Opportunities · Real-Time Discovery"
+msgstr "190 か国以上 · 32,500 以上の機会 · リアルタイムの発見"
+
+#: templates/index.html:241
+msgid "Loading..."
+msgstr "読み込み中..."
+
+#: templates/index.html:244
+msgid "Recrawl"
+msgstr "再クロール"
+
+#: templates/index.html:248
+msgid "Export CSV"
+msgstr "CSVのエクスポート"
+
+#: templates/index.html:257 templates/index.html:331
+msgid "Country"
+msgstr "国"
+
+#: templates/index.html:259
+msgid "All Countries"
+msgstr "すべての国"
+
+#: templates/index.html:263
+msgid "Industry"
+msgstr "業界"
+
+#: templates/index.html:265
+msgid "All Industries"
+msgstr "すべての産業"
+
+#: templates/index.html:269
+msgid "Search"
+msgstr "検索"
+
+#: templates/index.html:270
+msgid "Search by title, provider, keyword..."
+msgstr "タイトル、プロバイダー、キーワードで検索..."
+
+#: templates/index.html:276
+msgid "All Categories"
+msgstr "すべてのカテゴリ"
+
+#: templates/index.html:277 templates/index.html:292
+msgid "Gov Grants"
+msgstr "政府補助金"
+
+#: templates/index.html:278
+msgid "Corporate OI"
+msgstr "コーポレートOI"
+
+#: templates/index.html:279
+msgid "VCs & Accelerators"
+msgstr "VC とアクセラレーター"
+
+#: templates/index.html:280 templates/index.html:300
+msgid "Cloud & Perks"
+msgstr "クラウドと特典"
+
+#: templates/index.html:281
+msgid "Relocation"
+msgstr "移転"
+
+#: templates/index.html:287
+msgid "Total Matches"
+msgstr "合計一致数"
+
+#: templates/index.html:296
+msgid "VCs & Accel"
+msgstr "VCとアクセル"
+
+#: templates/index.html:304
+msgid "Countries"
+msgstr "国"
+
+#: templates/index.html:312
+msgid "Recommended Opportunities"
+msgstr "推奨される機会"
+
+#: templates/index.html:313
+msgid "Ranked by Fit Score"
+msgstr "フィットスコアによるランク付け"
+
+#: templates/index.html:321
+msgid "Full Database"
+msgstr "完全なデータベース"
+
+#: templates/index.html:329
+msgid "Category"
+msgstr "カテゴリ"
+
+#: templates/index.html:330
+msgid "Title"
+msgstr "タイトル"
+
+#: templates/index.html:332
+msgid "Provider"
+msgstr "プロバイダー"
+
+#: templates/index.html:333
+msgid "Funding"
+msgstr "資金調達"
+
+#: templates/index.html:334
+msgid "Equity"
+msgstr "資本"
+
+#: templates/index.html:335
+msgid "Score"
+msgstr "スコア"
+

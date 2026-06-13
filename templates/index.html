@@ -241,11 +241,11 @@ tr:hover td { background: var(--surface-hover); }
     <div class="sync-info" id="syncInfo">{{ _('Loading...') }}</div>
     <button class="btn btn-primary" id="btnRecrawl">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-1.63"/></svg>
-      Recrawl
+      {{ _('Recrawl') }}
     </button>
     <button class="btn btn-export" id="btnExport">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Export CSV
+      {{ _('Export CSV') }}
     </button>
   </div>
 </header>
@@ -254,54 +254,54 @@ tr:hover td { background: var(--surface-hover); }
   <!-- Filters -->
   <div class="controls">
     <div class="filter-group">
-      <label>Country</label>
+      <label>{{ _('Country') }}</label>
       <select id="countrySel">
-        <option value="Global">🌍 All Countries</option>
+        <option value="Global">🌍 {{ _('All Countries') }}</option>
       </select>
     </div>
     <div class="filter-group">
-      <label>Industry</label>
+      <label>{{ _('Industry') }}</label>
       <select id="indSel">
-        <option value="All">All Industries</option>
+        <option value="All">{{ _('All Industries') }}</option>
       </select>
     </div>
     <div class="filter-group search-wrap">
-      <label>Search</label>
-      <input type="text" id="searchInp" placeholder="Search by title, provider, keyword...">
+      <label>{{ _('Search') }}</label>
+      <input type="text" id="searchInp" placeholder="{{ _('Search by title, provider, keyword...') }}">
     </div>
   </div>
 
   <!-- Category Tabs -->
   <div class="tabs" id="catTabs">
-    <button class="tab active" data-cat="All">All Categories</button>
-    <button class="tab" data-cat="Gov Grants">🏛 Gov Grants</button>
-    <button class="tab" data-cat="Corporate">🏢 Corporate OI</button>
-    <button class="tab" data-cat="VCs & Accelerators">🚀 VCs & Accelerators</button>
-    <button class="tab" data-cat="Cloud & Perks">☁️ Cloud & Perks</button>
-    <button class="tab" data-cat="Relocation/Growth">🌏 Relocation</button>
+    <button class="tab active" data-cat="All">{{ _('All Categories') }}</button>
+    <button class="tab" data-cat="Gov Grants">🏛 {{ _('Gov Grants') }}</button>
+    <button class="tab" data-cat="Corporate">🏢 {{ _('Corporate OI') }}</button>
+    <button class="tab" data-cat="VCs & Accelerators">🚀 {{ _('VCs & Accelerators') }}</button>
+    <button class="tab" data-cat="Cloud & Perks">☁️ {{ _('Cloud & Perks') }}</button>
+    <button class="tab" data-cat="Relocation/Growth">🌏 {{ _('Relocation') }}</button>
   </div>
 
   <!-- Stats -->
   <div class="stats-row" id="statsRow">
     <div class="stat-card">
-      <div class="stat-label">Total Matches</div>
+      <div class="stat-label">{{ _('Total Matches') }}</div>
       <div class="stat-value" id="sTotal">–</div>
       <div class="stat-sub" id="sDbTotal"></div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Gov Grants</div>
+      <div class="stat-label">{{ _('Gov Grants') }}</div>
       <div class="stat-value" id="sGov" style="color: var(--accent-green)">–</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">VCs & Accel</div>
+      <div class="stat-label">{{ _('VCs & Accel') }}</div>
       <div class="stat-value" id="sVC" style="color: var(--accent-amber)">–</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Cloud & Perks</div>
+      <div class="stat-label">{{ _('Cloud & Perks') }}</div>
       <div class="stat-value" id="sPerk" style="color: var(--accent-pink)">–</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Countries</div>
+      <div class="stat-label">{{ _('Countries') }}</div>
       <div class="stat-value" id="sCountries" style="color: var(--accent-cyan)">–</div>
     </div>
   </div>
@@ -309,8 +309,8 @@ tr:hover td { background: var(--surface-hover); }
   <!-- Recommended -->
   <div id="topSection">
     <div class="section-header">
-      <h3>🏆 Recommended Opportunities</h3>
-      <span class="badge badge-outline">Ranked by Fit Score</span>
+      <h3>🏆 {{ _('Recommended Opportunities') }}</h3>
+      <span class="badge badge-outline">{{ _('Ranked by Fit Score') }}</span>
     </div>
     <div class="top-grid" id="topGrid"></div>
   </div>
@@ -318,7 +318,7 @@ tr:hover td { background: var(--surface-hover); }
   <!-- Data Table -->
   <div class="table-section">
     <div class="section-header">
-      <h3>📋 Full Database</h3>
+      <h3>📋 {{ _('Full Database') }}</h3>
       <span class="page-info" id="tableInfo"></span>
     </div>
     <div class="table-container">
@@ -326,13 +326,13 @@ tr:hover td { background: var(--surface-hover); }
         <table>
           <thead>
             <tr>
-              <th>Category</th>
-              <th class="sortable" data-sort="title">Title <span class="sort-arrow"></span></th>
-              <th class="sortable" data-sort="country">Country <span class="sort-arrow"></span></th>
-              <th>Provider</th>
-              <th>Funding</th>
-              <th>Equity</th>
-              <th class="sortable" data-sort="fit_score">Score <span class="sort-arrow"></span></th>
+              <th>{{ _('Category') }}</th>
+              <th class="sortable" data-sort="title">{{ _('Title') }} <span class="sort-arrow"></span></th>
+              <th class="sortable" data-sort="country">{{ _('Country') }} <span class="sort-arrow"></span></th>
+              <th>{{ _('Provider') }}</th>
+              <th>{{ _('Funding') }}</th>
+              <th>{{ _('Equity') }}</th>
+              <th class="sortable" data-sort="fit_score">{{ _('Score') }} <span class="sort-arrow"></span></th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -344,7 +344,7 @@ tr:hover td { background: var(--surface-hover); }
 </div>
 
 <footer class="footer">
-  <div>© 2026 Genox Holdings · Global Startup Ecosystem Explorer</div>
+  <div>© 2026 Genox Holdings · {{ _('Global Startup Ecosystem Explorer') }}</div>
   <div id="footerStats"></div>
 </footer>
 

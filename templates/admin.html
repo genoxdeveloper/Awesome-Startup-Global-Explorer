@@ -22,18 +22,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>Crawler API System - Admin Dashboard</h1>
+        <h1>{{ _('Crawler API System - Admin Dashboard') }}</h1>
         
-        <h2>Registered Crawler Sources</h2>
+        <h2>{{ _('Registered Crawler Sources') }}</h2>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>URL</th>
-                    <th>Method</th>
-                    <th>Status</th>
-                    <th>Last Crawled</th>
+                    <th>{{ _('ID') }}</th>
+                    <th>{{ _('Name') }}</th>
+                    <th>{{ _('URL') }}</th>
+                    <th>{{ _('Method') }}</th>
+                    <th>{{ _('Status') }}</th>
+                    <th>{{ _('Last Crawled') }}</th>
                 </tr>
             </thead>
             <tbody id="sources-table-body">
@@ -41,21 +41,21 @@
             </tbody>
         </table>
 
-        <h2>Register New Source</h2>
+        <h2>{{ _('Register New Source') }}</h2>
         <form id="add-source-form">
             <div class="form-group">
-                <label for="name">Source Name</label>
-                <input type="text" id="name" required placeholder="e.g., YC Startup Directory">
+                <label for="name">{{ _('Source Name') }}</label>
+                <input type="text" id="name" required placeholder="{{ _('e.g., YC Startup Directory') }}">
             </div>
             <div class="form-group">
-                <label for="url">Endpoint URL</label>
-                <input type="url" id="url" required placeholder="https://api.example.com/v1/startups">
+                <label for="url">{{ _('Endpoint URL') }}</label>
+                <input type="url" id="url" required placeholder="{{ _('https://api.example.com/v1/startups') }}">
             </div>
             <div class="form-group">
-                <label for="method">HTTP Method</label>
+                <label for="method">{{ _('HTTP Method') }}</label>
                 <input type="text" id="method" value="GET" required>
             </div>
-            <button type="submit" class="btn">Register Source</button>
+            <button type="submit" class="btn">{{ _('Register Source') }}</button>
         </form>
     </div>
 

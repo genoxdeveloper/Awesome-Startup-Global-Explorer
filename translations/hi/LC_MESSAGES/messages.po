@@ -1,0 +1,196 @@
+# Hindi translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-06-13 13:42+0900\n"
+"PO-Revision-Date: 2026-06-13 13:48+0900\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: hi\n"
+"Language-Team: hi <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: templates/admin.html:25
+msgid "Crawler API System - Admin Dashboard"
+msgstr "क्रॉलर एपीआई सिस्टम - एडमिन डैशबोर्ड"
+
+#: templates/admin.html:27
+msgid "Registered Crawler Sources"
+msgstr "पंजीकृत क्रॉलर स्रोत"
+
+#: templates/admin.html:31
+msgid "ID"
+msgstr "पहचान"
+
+#: templates/admin.html:32
+msgid "Name"
+msgstr "नाम"
+
+#: templates/admin.html:33
+msgid "URL"
+msgstr "यूआरएल"
+
+#: templates/admin.html:34
+msgid "Method"
+msgstr "तरीका"
+
+#: templates/admin.html:35
+msgid "Status"
+msgstr "स्थिति"
+
+#: templates/admin.html:36
+msgid "Last Crawled"
+msgstr "अंतिम बार क्रॉल किया गया"
+
+#: templates/admin.html:44
+msgid "Register New Source"
+msgstr "नया स्रोत पंजीकृत करें"
+
+#: templates/admin.html:47
+msgid "Source Name"
+msgstr "स्रोत का नाम"
+
+#: templates/admin.html:48
+msgid "e.g., YC Startup Directory"
+msgstr "उदाहरण के लिए, YC स्टार्टअप निर्देशिका"
+
+#: templates/admin.html:51
+msgid "Endpoint URL"
+msgstr "समापन बिंदु यूआरएल"
+
+#: templates/admin.html:52
+msgid "https://api.example.com/v1/startups"
+msgstr "https://api.example.com/v1/startups"
+
+#: templates/admin.html:55
+msgid "HTTP Method"
+msgstr "HTTP विधि"
+
+#: templates/admin.html:58
+msgid "Register Source"
+msgstr "स्रोत पंजीकृत करें"
+
+#: templates/index.html:230 templates/index.html:347
+msgid "Global Startup Ecosystem Explorer"
+msgstr "ग्लोबल स्टार्टअप इकोसिस्टम एक्सप्लोरर"
+
+#: templates/index.html:231
+msgid "190+ Countries · 32,500+ Opportunities · Real-Time Discovery"
+msgstr "190+ देश · 32,500+ अवसर · वास्तविक समय की खोज"
+
+#: templates/index.html:241
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+#: templates/index.html:244
+msgid "Recrawl"
+msgstr "रीक्रॉल"
+
+#: templates/index.html:248
+msgid "Export CSV"
+msgstr "सीएसवी निर्यात करें"
+
+#: templates/index.html:257 templates/index.html:331
+msgid "Country"
+msgstr "देश"
+
+#: templates/index.html:259
+msgid "All Countries"
+msgstr "सभी देश"
+
+#: templates/index.html:263
+msgid "Industry"
+msgstr "उद्योग"
+
+#: templates/index.html:265
+msgid "All Industries"
+msgstr "सभी उद्योग"
+
+#: templates/index.html:269
+msgid "Search"
+msgstr "खोज"
+
+#: templates/index.html:270
+msgid "Search by title, provider, keyword..."
+msgstr "शीर्षक, प्रदाता, कीवर्ड के आधार पर खोजें..."
+
+#: templates/index.html:276
+msgid "All Categories"
+msgstr "सभी श्रेणियाँ"
+
+#: templates/index.html:277 templates/index.html:292
+msgid "Gov Grants"
+msgstr "सरकारी अनुदान"
+
+#: templates/index.html:278
+msgid "Corporate OI"
+msgstr "कॉर्पोरेट OI"
+
+#: templates/index.html:279
+msgid "VCs & Accelerators"
+msgstr "वीसी और त्वरक"
+
+#: templates/index.html:280 templates/index.html:300
+msgid "Cloud & Perks"
+msgstr "बादल और सुविधाएं"
+
+#: templates/index.html:281
+msgid "Relocation"
+msgstr "पुनर्वास"
+
+#: templates/index.html:287
+msgid "Total Matches"
+msgstr "कुल मिलान"
+
+#: templates/index.html:296
+msgid "VCs & Accel"
+msgstr "वीसी और एक्सेल"
+
+#: templates/index.html:304
+msgid "Countries"
+msgstr "देशों"
+
+#: templates/index.html:312
+msgid "Recommended Opportunities"
+msgstr "अनुशंसित अवसर"
+
+#: templates/index.html:313
+msgid "Ranked by Fit Score"
+msgstr "फिट स्कोर द्वारा रैंक किया गया"
+
+#: templates/index.html:321
+msgid "Full Database"
+msgstr "पूर्ण डेटाबेस"
+
+#: templates/index.html:329
+msgid "Category"
+msgstr "वर्ग"
+
+#: templates/index.html:330
+msgid "Title"
+msgstr "शीर्षक"
+
+#: templates/index.html:332
+msgid "Provider"
+msgstr "प्रदाता"
+
+#: templates/index.html:333
+msgid "Funding"
+msgstr "अनुदान"
+
+#: templates/index.html:334
+msgid "Equity"
+msgstr "हिस्सेदारी"
+
+#: templates/index.html:335
+msgid "Score"
+msgstr "अंक"
+

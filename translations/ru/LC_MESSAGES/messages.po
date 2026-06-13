@@ -1,0 +1,197 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-06-13 13:42+0900\n"
+"PO-Revision-Date: 2026-06-13 13:48+0900\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: templates/admin.html:25
+msgid "Crawler API System - Admin Dashboard"
+msgstr "Система API сканера — панель администратора"
+
+#: templates/admin.html:27
+msgid "Registered Crawler Sources"
+msgstr "Зарегистрированные источники сканеров"
+
+#: templates/admin.html:31
+msgid "ID"
+msgstr "ИДЕНТИФИКАТОР"
+
+#: templates/admin.html:32
+msgid "Name"
+msgstr "Имя"
+
+#: templates/admin.html:33
+msgid "URL"
+msgstr "URL-адрес"
+
+#: templates/admin.html:34
+msgid "Method"
+msgstr "Метод"
+
+#: templates/admin.html:35
+msgid "Status"
+msgstr "Статус"
+
+#: templates/admin.html:36
+msgid "Last Crawled"
+msgstr "Последнее сканирование"
+
+#: templates/admin.html:44
+msgid "Register New Source"
+msgstr "Зарегистрировать новый источник"
+
+#: templates/admin.html:47
+msgid "Source Name"
+msgstr "Имя источника"
+
+#: templates/admin.html:48
+msgid "e.g., YC Startup Directory"
+msgstr "например, каталог автозагрузки YC"
+
+#: templates/admin.html:51
+msgid "Endpoint URL"
+msgstr "URL-адрес конечной точки"
+
+#: templates/admin.html:52
+msgid "https://api.example.com/v1/startups"
+msgstr "https://api.example.com/v1/startups"
+
+#: templates/admin.html:55
+msgid "HTTP Method"
+msgstr "HTTP-метод"
+
+#: templates/admin.html:58
+msgid "Register Source"
+msgstr "Зарегистрировать источник"
+
+#: templates/index.html:230 templates/index.html:347
+msgid "Global Startup Ecosystem Explorer"
+msgstr "Глобальный исследователь экосистемы стартапов"
+
+#: templates/index.html:231
+msgid "190+ Countries · 32,500+ Opportunities · Real-Time Discovery"
+msgstr "190+ стран · 32 500+ возможностей · Открытия в реальном времени"
+
+#: templates/index.html:241
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: templates/index.html:244
+msgid "Recrawl"
+msgstr "Повторное сканирование"
+
+#: templates/index.html:248
+msgid "Export CSV"
+msgstr "Экспортировать CSV"
+
+#: templates/index.html:257 templates/index.html:331
+msgid "Country"
+msgstr "Страна"
+
+#: templates/index.html:259
+msgid "All Countries"
+msgstr "Все страны"
+
+#: templates/index.html:263
+msgid "Industry"
+msgstr "Промышленность"
+
+#: templates/index.html:265
+msgid "All Industries"
+msgstr "Все отрасли"
+
+#: templates/index.html:269
+msgid "Search"
+msgstr "Поиск"
+
+#: templates/index.html:270
+msgid "Search by title, provider, keyword..."
+msgstr "Поиск по названию, поставщику, ключевому слову..."
+
+#: templates/index.html:276
+msgid "All Categories"
+msgstr "Все категории"
+
+#: templates/index.html:277 templates/index.html:292
+msgid "Gov Grants"
+msgstr "Государственные гранты"
+
+#: templates/index.html:278
+msgid "Corporate OI"
+msgstr "Корпоративный ОИ"
+
+#: templates/index.html:279
+msgid "VCs & Accelerators"
+msgstr "Венчурные капиталисты и акселераторы"
+
+#: templates/index.html:280 templates/index.html:300
+msgid "Cloud & Perks"
+msgstr "Облако и льготы"
+
+#: templates/index.html:281
+msgid "Relocation"
+msgstr "Переезд"
+
+#: templates/index.html:287
+msgid "Total Matches"
+msgstr "Всего матчей"
+
+#: templates/index.html:296
+msgid "VCs & Accel"
+msgstr "Венчурные капиталисты и Accel"
+
+#: templates/index.html:304
+msgid "Countries"
+msgstr "Страны"
+
+#: templates/index.html:312
+msgid "Recommended Opportunities"
+msgstr "Рекомендуемые возможности"
+
+#: templates/index.html:313
+msgid "Ranked by Fit Score"
+msgstr "Рейтинг по Fit Score"
+
+#: templates/index.html:321
+msgid "Full Database"
+msgstr "Полная база данных"
+
+#: templates/index.html:329
+msgid "Category"
+msgstr "Категория"
+
+#: templates/index.html:330
+msgid "Title"
+msgstr "Заголовок"
+
+#: templates/index.html:332
+msgid "Provider"
+msgstr "Поставщик"
+
+#: templates/index.html:333
+msgid "Funding"
+msgstr "Финансирование"
+
+#: templates/index.html:334
+msgid "Equity"
+msgstr "Капитал"
+
+#: templates/index.html:335
+msgid "Score"
+msgstr "Счет"
+
