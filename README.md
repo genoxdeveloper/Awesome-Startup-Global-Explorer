@@ -12,7 +12,8 @@
 [**English**](README.md) | [**한국어**](README.ko.md) | [**中文 (简体)**](README.zh_Hans.md) | [**中文 (繁體)**](README.zh_Hant.md) | [**Español**](README.es.md) | [**العربية**](README.ar.md) | [**Deutsch**](README.de.md) | [**Français**](README.fr.md) | [**हिन्दी**](README.hi.md) | [**Bahasa Indonesia**](README.id.md) | [**Italiano**](README.it.md) | [**日本語**](README.ja.md) | [**Português**](README.pt.md) | [**Русский**](README.ru.md) | [**ไทย**](README.th.md) | [**Türkçe**](README.tr.md) | [**Tiếng Việt**](README.vi.md)
 
 *Built for startups, by a startup in Seoul, South Korea*  
-*An open-source project by **[Genox](https://genoxholdings.com)** & **[Buygit.com](https://buygit.com)***
+*An open-source project by
+**[Genox](https://genoxholdings.com)** & **[Buygit.com](https://buygit.com)***
 
 </div>
 
@@ -130,14 +131,10 @@ If this project has been helpful to you or your startup, consider supporting us!
 |----------|------|
 | ⭐ **Star this repo** | It's free and helps others discover this tool! |
 | 🤝 **Buygit.com** | Check out our partner [Buygit.com](https://buygit.com) |
-| 💼 **GitHub Sponsors**| [Sponsor Genox-developer](https://github.com/sponsors/genoxdeveloper) |
-| ☕ **Ko-fi**          | [ko-fi.com/genoxholdings](https://ko-fi.com/genoxholdings) |
+| 💼 **GitHub Sponsors**| [Sponsor Genox-developer](https://github.com/sponsors/genoxdeveloper) 
 | 🪙 **USDT (TRC20)**   | `TUmUVHfxsFLZQToE5j4oGaPCMRKBLRjEcv` |
 
 </div>
-
-> **Buy us a coffee** — every cup helps us crawl one more data source!  
-> **Buy us a pizza** — and we'll add your country's startup programs next!
 
 Your support, whether it's a star, a share on social media, or a small donation, goes a long way in keeping this project alive and free for everyone.
 
@@ -149,7 +146,7 @@ We welcome contributions from founders and developers worldwide! If you know of 
 ## 📬 Contact
 
 For questions, business inquiries, or partnership proposals:
-- **Email**: [developer@genox.one](mailto:developer@genox.one)  
+- **Email**: [admin@genox.one](mailto:admin@genox.one)  [support@buygit.com](mailto:support@buygit.com)
 - **Website**: [genoxholdings.com](https://genoxholdings.com)
 - **Partner**: [buygit.com](https://buygit.com)
 
