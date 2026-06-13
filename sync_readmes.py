@@ -6,7 +6,19 @@ langs = {
     'ko': 'ko',
     'es': 'es',
     'zh_Hans': 'zh-CN',
-    'ar': 'ar'
+    'zh_Hant': 'zh-TW',
+    'ar': 'ar',
+    'de': 'de',
+    'fr': 'fr',
+    'hi': 'hi',
+    'id': 'id',
+    'it': 'it',
+    'ja': 'ja',
+    'pt': 'pt',
+    'ru': 'ru',
+    'th': 'th',
+    'tr': 'tr',
+    'vi': 'vi'
 }
 
 def translate_markdown(text, target_lang):

@@ -112,7 +112,8 @@ def sync_real_data_to_db():
     thread = threading.Thread(target=_sync_real_data_blocking, daemon=True)
     thread.start()
 
-sync_real_data_to_db()
+if os.environ.get('VERCEL') != '1':
+    sync_real_data_to_db()
 
 # ---------------------------------------------------------------------------
 # Auto-crawl scheduler: runs every 6 hours in background
@@ -126,14 +127,16 @@ def auto_crawl_scheduler():
         _time.sleep(AUTO_CRAWL_INTERVAL)
         logging.info(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Auto-crawl starting (Global)...")
         try:
+            from startup_crawler_global import run_crawler_and_save
             run_crawler_and_save()
             logging.info("Auto-crawl (Global) complete.")
         except Exception as e:
             logging.error(f"Auto-crawl (Global) error: {e}", exc_info=True)
 
-_scheduler_thread = threading.Thread(target=auto_crawl_scheduler, daemon=True)
-_scheduler_thread.start()
-logging.info(f"Auto-crawl scheduler started (every {AUTO_CRAWL_INTERVAL // 3600} hours)")
+if os.environ.get('VERCEL') != '1':
+    _scheduler_thread = threading.Thread(target=auto_crawl_scheduler, daemon=True)
+    _scheduler_thread.start()
+    logging.info(f"Auto-crawl scheduler started (every {AUTO_CRAWL_INTERVAL // 3600} hours)")
 
 @app.route('/')
 def index():

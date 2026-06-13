@@ -10,6 +10,7 @@ Connects to global databases and scrapes/simulates 50+ massive sources across:
 Uses aiohttp for high-concurrency non-blocking I/O.
 """
 
+import os
 import asyncio
 import logging
 import aiohttp
@@ -403,14 +404,20 @@ async def crawl_massive_vcs(session):
 async def main_crawler():
     async with aiohttp.ClientSession() as session:
         logging.info("[GLOBAL 2.0] MASSIVE ENGINE INITIATED...")
-        tasks = [
-            crawl_usa_and_canada(session), 
-            crawl_europe(session),
-            crawl_asia_pacific(session), 
-            crawl_mea_latam(session),
-            crawl_global_accelerators(session),
-            crawl_massive_vcs(session)
-        ]
+        if os.environ.get('VERCEL') == '1':
+            logging.info("Vercel environment detected. Limiting crawl to stay within serverless timeouts.")
+            tasks = [
+                crawl_global_accelerators(session)
+            ]
+        else:
+            tasks = [
+                crawl_usa_and_canada(session), 
+                crawl_europe(session),
+                crawl_asia_pacific(session), 
+                crawl_mea_latam(session),
+                crawl_global_accelerators(session),
+                crawl_massive_vcs(session)
+            ]
         results = await asyncio.gather(*tasks)
         opportunities = [item for sublist in results for item in sublist]
         return opportunities

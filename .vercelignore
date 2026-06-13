@@ -15,11 +15,6 @@ env/
 .env
 .venv/
 
-# Database files (local)
-instance/
-*.db
-*.sqlite3
-
 # IDE / Editor
 .vscode/
 .idea/
@@ -47,4 +42,3 @@ render.yaml
 .claude/*.local.json
 .claude/*.secret.json
 .claude.json
-.vercel
