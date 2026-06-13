@@ -42,12 +42,22 @@ Explore una base de datos masiva y continuamente actualizada de:
 - Iniciativas de**reubicación y crecimiento**(visas de inicio, residencias en centros tecnológicos)
 
 ### 2. Soporte nativo en varios idiomas (rompiendo fronteras)
-Reconocemos que el próximo gran unicornio podría venir de cualquier parte. Para garantizar que ningún fundador se quede atrás debido a las barreras del idioma, nuestra plataforma cuenta con un**Sistema de soporte nativo multilingüe**increíblemente poderoso.
+Reconocemos que el próximo gran unicornio podría venir de cualquier parte. Sin embargo, el ecosistema global de startups ha estado históricamente limitado por una severa barrera lingüística: portales de financiación críticos, detalles de subvenciones y tesis de inversión de capital de riesgo a menudo enterrados en inglés o dialectos locales. Para garantizar que ningún fundador se quede atrás, nuestra plataforma cuenta con un**Sistema de soporte nativo multilingüe**increíblemente poderoso y líder en la industria.
 
-Con un solo clic en nuestra barra de navegación superior, puede traducir sin problemas toda la plataforma y todas las**35,000+ descripciones de programas profundamente anidadas**a:
--**Inglés**|**한국어 (coreano)**|**中文 (chino)**|**Español (Español)**|**العربية (árabe)**
+Con un solo clic en nuestra barra de navegación superior, puede traducir sin problemas toda la plataforma, incluidas las**más de 35 000 descripciones de programas, criterios y entradas dinámicas de bases de datos profundamente anidadas**, a:
+- 🇺🇸**Inglés**(predeterminado universal)
+- 🇰🇷**한국어 (coreano)**(centros de Asia y el Pacífico)
+- 🇨🇳**中文 (chino)**(ecosistemas de la Gran China y el MAR)
+- 🇪🇸**Español (Español)**(Mercados latinoamericanos e ibéricos en auge)
+- 🇦🇪**العربية (árabe)**(ecosistema de startups de MENA en rápido crecimiento)
+*(¡Y trabajamos continuamente para agregar más!)*
 
-Nuestro proceso de traducción utiliza representación asincrónica inteligente para preservar esquemas de datos exactos mientras localiza perfectamente la interfaz de usuario y los criterios. Esto significa que un fundador en Bogotá, Riad o Seúl puede navegar por las redes globales de capital de riesgo en su lengua materna con tanta facilidad como un fundador en San Francisco.
+**¿Por qué es esto revolucionario?**
+La mayoría de las bases de datos de inicio solo traducen su interfaz de usuario estática (botones, menús) y dejan los datos reales (lo que más importa) en su idioma original. Nuestra plataforma resuelve esto utilizando una**arquitectura de traducción de doble motor**:
+1.**Localización estática de la interfaz de usuario:**Desarrollado por `Flask-Babel`, lo que garantiza que todos los elementos estructurales, la navegación y la experiencia de usuario central estén perfectamente localizados con latencia cero utilizando catálogos de mensajes precompilados `.po` y `.mo`.
+2.**Traducción dinámica de datos:**Impulsada por una canalización asincrónica que utiliza un "traductor profundo". Cuando cambia de idioma, nuestro sistema recupera las descripciones de programas en vivo y no estructurados de nuestra base de datos SQLite y las traduce sobre la marcha, preservando esquemas de datos exactos, formato de rebajas y criterios de financiación críticos.
+
+Esto significa que un fundador en Bogotá, Riad o Seúl puede leer los complejos requisitos de cumplimiento de una subvención SBIR de EE. UU., o la tesis de inversión de una red de capital de riesgo con sede en Londres, en su lengua materna con tanta facilidad como un fundador en San Francisco. Elimina por completo la fricción de la recaudación de fondos transfronteriza.
 
 ![Ver demostración en coreano](demo_ko.png)
 
