@@ -4,7 +4,9 @@
 
 **Discover startup funding, grants, accelerators & cloud perks across 188+ countries and 100+ industries.**
 
-### 🚀 Live Explorer: [https://startup-global.vercel.app/](https://startup-global.vercel.app/)
+### 🚀 Live Explorer: 
+
+[https://startup-global.vercel.app/](https://startup-global.vercel.app/)
 
 <br>
 
