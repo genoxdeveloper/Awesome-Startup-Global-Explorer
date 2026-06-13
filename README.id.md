@@ -22,9 +22,11 @@ Selamat datang di**Awesome Startup Global Explorer**, gerbang utama Anda untuk m
 
 ![Dasbor Demo](demo_en.png)
 
-## 🏢 Tentang Genox
+## 🏢 Tentang Genox & Mitra
 
 **Genox**adalah perusahaan teknologi inovatif yang berbasis di Seoul, Korea Selatan. Kami merancang solusi dan platform berbasis data yang memberdayakan startup global. Kami percaya pada demokratisasi akses terhadap peluang, mendobrak batasan, dan mempercepat inovasi.
+
+Proyek sumber terbuka ini dengan bangga didukung dan dikembangkan bersama dalam kemitraan dengan**[Buygit.com](https://buygit.com)**, sebuah platform utama yang didedikasikan untuk memberdayakan pengembang dan pembuat konten di seluruh dunia. Bersama-sama, Genox dan Buygit.com berkomitmen untuk menyediakan alat dan data yang dibutuhkan para pendiri untuk membangun startup unicorn generasi berikutnya.
 
 Kami menghabiskan waktu berjam-jam menjelajahi portal pemerintah, database VC, dan situs akselerator di banyak negara. Kami pertama-tama membuat alat ini secara internal, dan sekarang kami menjadikannya sebagai sumber terbuka karena**setiap pendiri berhak mendapatkan akses terhadap peluang global**, bukan hanya mereka yang ada di Silicon Valley.
 
@@ -41,9 +43,11 @@ Jelajahi database besar yang terus diperbarui:
 - Inisiatif**Relokasi & Pertumbuhan**(Visa Startup, Residensi Tech Hub)
 
 ### 2. Dukungan Multi-Bahasa Asli (Mendobrak Batasan)
-Kami menyadari bahwa unicorn besar berikutnya bisa datang dari mana saja. Namun, ekosistem startup global secara historis terkendala oleh kendala bahasa yang parah—di mana portal pendanaan penting, rincian hibah, dan tesis investasi VC sering kali terkubur dalam bahasa Inggris atau dialek lokal. Untuk memastikan tidak ada pendiri yang tertinggal, platform kami menghadirkan**Sistem Dukungan Multi-Bahasa Asli**yang sangat kuat dan terdepan di industri.
+Kami menyadari bahwa unicorn besar berikutnya bisa datang dari mana saja. Namun, ekosistem startup global secara historis terkendala oleh kendala bahasa yang parah. Portal pendanaan penting, rincian kepatuhan hibah yang rumit, dan tesis investasi VC yang rumit sering kali terkubur seluruhnya dalam bahasa Inggris atau dialek lokal. Hal ini menciptakan keuntungan yang tidak adil hanya berdasarkan geografi dan bahasa ibu.
 
-Dengan satu klik pada bilah navigasi atas kami, Anda dapat dengan mudah menerjemahkan seluruh platform—termasuk**35.000+ deskripsi program, kriteria, dan entri database dinamis**—menjadi:
+Untuk memastikan tidak ada pendiri yang tertinggal, platform kami menghadirkan**Sistem Dukungan Multi-Bahasa Asli**yang sangat kuat dan terdepan di industri. Ini bukan sekadar terjemahan UI sederhana—ini adalah alur pelokalan data mendalam yang komprehensif.
+
+Dengan satu klik pada bilah navigasi atas kami, Anda dapat menerjemahkan seluruh platform dengan lancar. Artinya,**35.000+ deskripsi program, kriteria evaluasi, fokus industri, dan entri database dinamis yang sangat mendalam**langsung dilokalkan ke:
 - 🇮🇩**Bahasa Inggris**(Default Universal)
 - Korea Selatan**한국어 (Korea)**
 - CNY**中文 (Tionghoa Sederhana)**& 🇹🇼**繁體中文 (Tionghoa Tradisional)**

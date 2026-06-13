@@ -22,9 +22,11 @@ Chào mừng bạn đến với**Awesome Startup Global Explorer**, cửa ngõ c
 
 ![Trang tổng quan demo](demo_en.png)
 
-## 🏢 Giới thiệu về Genox
+## 🏢 Giới thiệu về Genox & Đối tác
 
 **Genox**là một liên doanh công nghệ tiên tiến có trụ sở tại Seoul, Hàn Quốc. Chúng tôi kiến ​​trúc các giải pháp và nền tảng dựa trên dữ liệu để hỗ trợ các công ty khởi nghiệp toàn cầu. Chúng tôi tin vào việc dân chủ hóa khả năng tiếp cận các cơ hội, phá bỏ biên giới và thúc đẩy đổi mới.
+
+Dự án nguồn mở này tự hào được hỗ trợ và đồng phát triển với sự hợp tác của**[Buygit.com](https://buygit.com)**, một nền tảng hàng đầu dành riêng cho việc trao quyền cho các nhà phát triển và người sáng tạo trên toàn thế giới. Cùng nhau, Genox và Buygit.com cam kết cung cấp cho người sáng lập các công cụ và dữ liệu họ cần để xây dựng thế hệ khởi nghiệp kỳ lân tiếp theo.
 
 Chúng tôi đã dành vô số thời gian để tìm kiếm các cổng thông tin chính phủ, cơ sở dữ liệu VC và các trang web tăng tốc ở hàng chục quốc gia. Đầu tiên, chúng tôi xây dựng công cụ này trong nội bộ và hiện đang cung cấp nguồn mở cho nó vì**mọi nhà sáng lập đều xứng đáng được tiếp cận các cơ hội toàn cầu**, không chỉ những cơ hội ở Thung lũng Silicon.
 
@@ -41,9 +43,11 @@ Khám phá cơ sở dữ liệu khổng lồ, được cập nhật liên tục 
 - Sáng kiến**Tái định cư & Tăng trưởng**(Thị thực khởi nghiệp, Cư trú tại Tech Hub)
 
 ### 2. Hỗ trợ đa ngôn ngữ bản địa (Phá vỡ ranh giới)
-Chúng tôi nhận ra rằng con kỳ lân lớn tiếp theo có thể đến từ bất cứ đâu. Tuy nhiên, hệ sinh thái khởi nghiệp toàn cầu trong lịch sử đã bị rào cản ngôn ngữ nghiêm trọng — với các cổng tài trợ quan trọng, chi tiết tài trợ và các luận điểm đầu tư VC thường được chôn vùi bằng tiếng Anh hoặc phương ngữ địa phương. Để đảm bảo tuyệt đối không có người sáng lập nào bị bỏ lại phía sau, nền tảng của chúng tôi có**Hệ thống hỗ trợ đa ngôn ngữ bản địa**cực kỳ mạnh mẽ, dẫn đầu ngành.
+Chúng tôi nhận ra rằng con kỳ lân lớn tiếp theo có thể đến từ bất cứ đâu. Tuy nhiên, hệ sinh thái khởi nghiệp toàn cầu trong lịch sử luôn bị rào cản ngôn ngữ nghiêm trọng. Các cổng tài trợ quan trọng, chi tiết tuân thủ tài trợ phức tạp và các luận điểm đầu tư VC phức tạp thường được chôn hoàn toàn bằng tiếng Anh hoặc phương ngữ địa phương. Điều này tạo ra lợi thế không công bằng chỉ dựa vào vị trí địa lý và tiếng mẹ đẻ.
 
-Chỉ với một cú nhấp chuột vào thanh điều hướng trên cùng của chúng tôi, bạn có thể dịch liền mạch toàn bộ nền tảng—bao gồm tất cả**35.000+ mô tả, tiêu chí và mục nhập cơ sở dữ liệu động**—vào:
+Để đảm bảo tuyệt đối không có người sáng lập nào bị bỏ lại phía sau, nền tảng của chúng tôi có**Hệ thống hỗ trợ đa ngôn ngữ bản địa**cực kỳ mạnh mẽ, dẫn đầu ngành. Đây không chỉ là một bản dịch giao diện người dùng đơn giản—nó là một quy trình bản địa hóa dữ liệu sâu, toàn diện.
+
+Chỉ với một cú nhấp chuột vào thanh điều hướng trên cùng của chúng tôi, bạn có thể dịch liền mạch toàn bộ nền tảng. Điều này có nghĩa là tất cả**35.000+ mô tả chương trình được lồng sâu, tiêu chí đánh giá, trọng tâm ngành và mục nhập cơ sở dữ liệu động**ngay lập tức được bản địa hóa thành:
 - 🇺🇸**Tiếng Anh**(Mặc định chung)
 - 🇰🇷**한국어 (tiếng Hàn)**
 - 🇨🇳**中文 (Tiếng Trung giản thể)**& 🇹🇼**繁體中文 (Tiếng Trung phồn thể)**

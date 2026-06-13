@@ -22,9 +22,11 @@ Küresel startup ekosisteminde gezinmeye açılan en önemli kapınız olan**Awe
 
 ![Demo Kontrol Paneli](demo_en.png)
 
-## 🏢 Genox Hakkında
+## 🏢 Genox ve Ortakları Hakkında
 
 **Genox**Güney Kore'nin Seul şehrinde bulunan yenilikçi bir teknoloji girişimidir. Küresel girişimleri güçlendiren veri odaklı çözümler ve platformlar tasarlıyoruz. Fırsatlara erişimi demokratikleştirmeye, sınırları ortadan kaldırmaya ve inovasyonu hızlandırmaya inanıyoruz.
+
+Bu açık kaynaklı proje, dünya çapındaki geliştiricileri ve yaratıcıları güçlendirmeye adanmış önde gelen bir platform olan**[Buygit.com](https://buygit.com)**ile ortaklaşa geliştirilmekte ve gururla desteklenmektedir. Genox ve Buygit.com birlikte, kuruculara yeni nesil tek boynuzlu at girişimlerini kurmak için ihtiyaç duydukları araçları ve verileri sağlamaya kararlıdır.
 
 Düzinelerce ülkedeki hükümet portallarını, VC veritabanlarını ve hızlandırıcı sitelerini taramak için sayısız saatler harcadık. Bu aracı öncelikle kendi bünyemizde geliştirdik ve şimdi açık kaynak olarak kullanıyoruz çünkü**sadece Silikon Vadisi'ndekiler değil,**her kurucu küresel fırsatlara erişmeyi hak eder**.
 
@@ -41,9 +43,11 @@ Aşağıdakilerden oluşan devasa, sürekli güncellenen veritabanını keşfedi
 -**Yer Değiştirme ve Büyüme**girişimleri (Başlangıç Vizeleri, Teknoloji Merkezi İkametleri)
 
 ### 2. Yerel Çoklu Dil Desteği (Sınırları Aşmak)
-Bir sonraki büyük tek boynuzlu atın herhangi bir yerden gelebileceğini biliyoruz. Bununla birlikte, küresel girişim ekosistemi, tarihsel olarak ciddi bir dil engeli tarafından engellendi; kritik finansman portalları, hibe ayrıntıları ve genellikle İngilizce veya yerel lehçelerde gömülü olan risk sermayesi yatırım tezleri. Kesinlikle hiçbir kurucunun geride kalmamasını sağlamak için platformumuzda inanılmaz derecede güçlü, sektör lideri**Yerel Çoklu Dil Destek Sistemi**bulunmaktadır.
+Bir sonraki büyük tek boynuzlu atın herhangi bir yerden gelebileceğini biliyoruz. Bununla birlikte, küresel girişim ekosistemi tarihsel olarak ciddi bir dil engeli tarafından engellenmiştir. Kritik finansman portalları, karmaşık hibe uyumluluk ayrıntıları ve karmaşık VC yatırım tezleri genellikle tamamen İngilizce veya yerel lehçelerde gömülü kalır. Bu sadece coğrafyaya ve anadile dayalı haksız bir avantaj yaratıyor.
 
-Üstteki gezinme çubuğumuza tek bir tıklamayla,**35.000'den fazla derinlemesine yuvalanmış program açıklamaları, kriterleri ve dinamik veritabanı girişleri**dahil olmak üzere tüm platformu sorunsuz bir şekilde aşağıdakilere çevirebilirsiniz:
+Kesinlikle hiçbir kurucunun geride kalmamasını sağlamak için platformumuzda inanılmaz derecede güçlü, sektör lideri**Yerel Çoklu Dil Destek Sistemi**bulunmaktadır. Bu yalnızca basit bir kullanıcı arayüzü çevirisi değil; kapsamlı, derin veri yerelleştirme hattıdır.
+
+Üstteki gezinme çubuğumuza tek bir tıklamayla tüm platformu sorunsuz bir şekilde çevirebilirsiniz. Bu,**35.000'den fazla derinlemesine yuvalanmış program açıklamasının, değerlendirme kriterlerinin, sektör odaklarının ve dinamik veritabanı girişlerinin**anında şu şekilde yerelleştirildiği anlamına gelir:
 - 🇺🇸**İngilizce**(Evrensel Varsayılan)
 - 🇰🇷**한국어 (Korece)**
 - 🇨🇳**中文 (Basitleştirilmiş Çince)**& 🇹🇼**繁體中文 (Geleneksel Çince)**

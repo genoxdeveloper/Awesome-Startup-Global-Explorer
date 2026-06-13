@@ -22,9 +22,11 @@ Benvenuto in**Awesome Startup Global Explorer**, il tuo gateway definitivo per n
 
 ![Dashboard dimostrativo](demo_en.png)
 
-## 🏢 A proposito di Genox
+## 🏢 Informazioni su Genox & Partners
 
 **Genox**è un'impresa tecnologica innovativa con sede a Seoul, Corea del Sud. Progettiamo soluzioni e piattaforme basate sui dati che potenziano le startup globali. Crediamo nella democratizzazione dell’accesso alle opportunità, nell’abbattimento dei confini e nell’accelerazione dell’innovazione.
+
+Questo progetto open source è orgogliosamente supportato e co-sviluppato in collaborazione con**[Buygit.com](https://buygit.com)**, una piattaforma leader dedicata a dare potere a sviluppatori e creatori in tutto il mondo. Insieme, Genox e Buygit.com si impegnano a fornire ai fondatori gli strumenti e i dati di cui hanno bisogno per costruire la prossima generazione di startup unicorno.
 
 Abbiamo trascorso innumerevoli ore a esplorare portali governativi, database di VC e siti di acceleratori in decine di paesi. Abbiamo prima creato questo strumento internamente e ora lo stiamo rendendo open source perché**ogni fondatore merita di accedere a opportunità globali**, non solo a quelle della Silicon Valley.
 
@@ -41,9 +43,11 @@ Esplora un enorme database continuamente aggiornato di:
 - Iniziative di**Rilocalizzazione e Crescita**(Visti Startup, Residenze Tech Hub)
 
 ### 2. Supporto multilingue nativo (abbattimento dei confini)
-Riconosciamo che il prossimo grande unicorno potrebbe provenire da qualsiasi luogo. Tuttavia, l’ecosistema globale delle startup è stato storicamente protetto da una grave barriera linguistica, con portali di finanziamento critici, dettagli sulle sovvenzioni e tesi di investimento in capitale di rischio spesso sepolti nell’inglese o nei dialetti locali. Per garantire che nessun fondatore venga lasciato indietro, la nostra piattaforma è dotata di un**Sistema di supporto multilingue nativo**incredibilmente potente e leader del settore.
+Riconosciamo che il prossimo grande unicorno potrebbe provenire da qualsiasi luogo. Tuttavia, l’ecosistema globale delle startup è stato storicamente protetto da una grave barriera linguistica. Portali di finanziamento critici, dettagli complessi sulla conformità delle sovvenzioni e intricate tesi di investimento in capitale di rischio sono spesso sepolti interamente in inglese o dialetti localizzati. Ciò crea un vantaggio ingiusto basato esclusivamente sulla geografia e sulla lingua madre.
 
-Con un solo clic sulla nostra barra di navigazione superiore, puoi tradurre senza problemi l'intera piattaforma, inclusi tutti i**oltre 35.000 descrizioni di programmi, criteri e voci di database dinamici profondamente annidati**, in:
+Per garantire che nessun fondatore venga lasciato indietro, la nostra piattaforma è dotata di un**Sistema di supporto multilingue nativo**incredibilmente potente e leader del settore. Non si tratta semplicemente di una semplice traduzione dell'interfaccia utente: si tratta di una pipeline di localizzazione completa e approfondita dei dati.
+
+Con un solo clic sulla nostra barra di navigazione superiore, puoi tradurre senza problemi l'intera piattaforma. Ciò significa che tutte le**oltre 35.000 descrizioni di programmi, criteri di valutazione, focus di settore e voci di database dinamici profondamente annidate**vengono immediatamente localizzate in:
 - 🇺🇸**Inglese**(predefinito universale)
 - 🇰🇷**한국어 (coreano)**
 - 🇨🇳**中文 (cinese semplificato)**e 🇹🇼**繁體中文 (cinese tradizionale)**
