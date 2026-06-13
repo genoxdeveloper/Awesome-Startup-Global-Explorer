@@ -25,6 +25,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
+  color-scheme: dark;
   --bg: #050505;
   --surface: #111111;
   --surface-2: #1a1a1a;
@@ -76,8 +77,8 @@ a { color: var(--primary); text-decoration: none; }
 .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; color: var(--text); }
 .logo-icon { 
   width: 32px; height: 32px; border-radius: 50%; 
-  background: linear-gradient(135deg, var(--primary), var(--accent-purple));
-  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff;
+  background: #ffffff; color: var(--background);
+  display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; font-family: monospace;
 }
 .logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--text-muted); }
 
@@ -278,7 +279,7 @@ tr:hover td { background: var(--surface-hover); }
 <nav class="navbar">
   <div class="nav-left">
     <a href="/" class="logo">
-      <div class="logo-icon">GSE</div>
+      <div class="logo-icon">&lt;/&gt;</div>
       <div class="logo-text">
         Startup Explorer
         <span>Global Ecosystem Explorer</span>
@@ -287,8 +288,6 @@ tr:hover td { background: var(--surface-hover); }
     <div class="nav-links">
       <a href="/dashboard" class="nav-link">Explore</a>
       <a href="/" class="nav-link active">Database</a>
-      <a href="#" class="nav-link">Analytics</a>
-      <a href="#" class="nav-link">Network</a>
     </div>
   </div>
   <div class="nav-right">
@@ -329,7 +328,7 @@ tr:hover td { background: var(--surface-hover); }
     <div class="filter-group">
       <label>{{ _('Country') }}</label>
       <select id="countrySel">
-        <option value="Global">🌍 {{ _('All Countries') }}</option>
+        <option value="Global">{{ _('All Countries') }}</option>
       </select>
     </div>
     <div class="filter-group">
@@ -355,11 +354,11 @@ tr:hover td { background: var(--surface-hover); }
   <!-- Category Tabs -->
   <div class="tabs" id="catTabs">
     <button class="tab active" data-cat="All">{{ _('All Categories') }}</button>
-    <button class="tab" data-cat="Gov Grants">🏛 {{ _('Gov Grants') }}</button>
-    <button class="tab" data-cat="Corporate">🏢 {{ _('Corporate OI') }}</button>
-    <button class="tab" data-cat="VCs & Accelerators">🚀 {{ _('VCs & Accelerators') }}</button>
-    <button class="tab" data-cat="Cloud & Perks">☁️ {{ _('Cloud & Perks') }}</button>
-    <button class="tab" data-cat="Relocation/Growth">🌏 {{ _('Relocation') }}</button>
+    <button class="tab" data-cat="Gov Grants">{{ _('Gov Grants') }}</button>
+    <button class="tab" data-cat="Corporate">{{ _('Corporate OI') }}</button>
+    <button class="tab" data-cat="VCs &amp; Accelerators">{{ _('VCs &amp; Accelerators') }}</button>
+    <button class="tab" data-cat="Cloud &amp; Perks">{{ _('Cloud &amp; Perks') }}</button>
+    <button class="tab" data-cat="Relocation/Growth">{{ _('Relocation') }}</button>
   </div>
 
   <!-- Stats -->
@@ -390,7 +389,7 @@ tr:hover td { background: var(--surface-hover); }
   <!-- Recommended -->
   <div id="topSection">
     <div class="section-header">
-      <h3>🏆 {{ _('Recommended Opportunities') }}</h3>
+      <h3>{{ _('Recommended Opportunities') }}</h3>
       <span class="badge badge-outline">{{ _('Ranked by Fit Score') }}</span>
     </div>
     <div class="top-grid" id="topGrid"></div>
@@ -399,7 +398,7 @@ tr:hover td { background: var(--surface-hover); }
   <!-- Data Table -->
   <div class="table-section">
     <div class="section-header">
-      <h3>📋 {{ _('Full Database') }}</h3>
+      <h3>{{ _('Full Database') }}</h3>
       <span class="page-info" id="tableInfo"></span>
     </div>
     <div class="table-container">
@@ -430,7 +429,7 @@ tr:hover td { background: var(--surface-hover); }
 </div>
 
 <footer class="footer" style="flex-direction: column; gap: 8px; text-align: center;">
-  <div><strong>Built with ❤️ by the Genox Holdings Team for the Global Founder Community.</strong></div>
+  <div><strong>Built by the Genox Holdings Team for the Global Founder Community.</strong></div>
   <div>© 2026 Genox 제녹스 · {{ _('Global Startup Ecosystem Explorer') }}</div>
   <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
     <a href="https://buygit.com" target="_blank" style="color: var(--text-muted); text-decoration: underline;">buygit.com</a>
@@ -621,7 +620,7 @@ function renderTopCards(records) {
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
         <div style="font-size:11px;color:var(--text-muted);">
           ${r.funding ? `<strong style="color:var(--accent-green)">${escHtml(r.funding)}</strong>` : ''}
-          <br>📅 ${escHtml(r.deadline || 'Rolling')}
+          <br>${escHtml(r.deadline || 'Rolling')}
         </div>
         <a href="${escHtml(r.url || '#')}" target="_blank" class="btn-apply">Apply</a>
       </div>
@@ -637,7 +636,7 @@ function renderTable(records, totalFiltered) {
   document.getElementById('tableInfo').textContent = `${(totalFiltered || 0).toLocaleString()} results · Page ${currentPage} of ${totalPages || 1}`;
 
   if (records.length === 0) {
-    tb.innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="icon">🔍</div><p>No opportunities found for these filters.</p></div></td></tr>`;
+    tb.innerHTML = `<tr><td colspan="7"><div class="empty-state"><p>No opportunities found for these filters.</p></div></td></tr>`;
   } else {
     tb.innerHTML = records.map(r => `
       <tr>
@@ -701,6 +700,7 @@ function escHtml(str) {
 async function fetchData() {
   document.getElementById('loadingOverlay').style.display = 'flex';
 
+  const lang = new URLSearchParams(window.location.search).get('lang') || 'en';
   const params = new URLSearchParams({
     country: document.getElementById('countrySel').value,
     industry: document.getElementById('indSel').value,
@@ -709,8 +709,9 @@ async function fetchData() {
     search: document.getElementById('searchInp').value,
     page: currentPage,
     per_page: PAGE_SIZE,
-    sort_by: currentSort || 'fit_score',
-    sort_dir: sortAsc ? 'asc' : 'desc'
+    sort_by: currentSort || 'created_at',
+    sort_dir: sortAsc ? 'asc' : 'desc',
+    lang: lang
   });
 
   try {
@@ -734,7 +735,7 @@ async function fetchData() {
 
     // Cold-boot loading state
     if (data.status === 'loading') {
-      document.getElementById('tableBody').innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="icon">⏳</div><p>Database is initializing after cold boot. Auto-refreshing in 30 seconds...</p></div></td></tr>`;
+      document.getElementById('tableBody').innerHTML = `<tr><td colspan="7"><div class="empty-state"><p>Database is initializing after cold boot. Refreshing in 30 seconds...</p></div></td></tr>`;
       setTimeout(() => fetchData(), 30000);
     }
 
@@ -744,7 +745,7 @@ async function fetchData() {
 
   } catch (err) {
     console.error('Fetch error:', err);
-    document.getElementById('tableBody').innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="icon">⚠️</div><p>Failed to load data. Please refresh.</p></div></td></tr>`;
+    document.getElementById('tableBody').innerHTML = `<tr><td colspan="7"><div class="empty-state"><p>Failed to load data. Please refresh.</p></div></td></tr>`;
   } finally {
     document.getElementById('loadingOverlay').style.display = 'none';
   }

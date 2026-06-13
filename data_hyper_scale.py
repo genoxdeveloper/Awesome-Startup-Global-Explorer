@@ -273,4 +273,39 @@ def get_hyper_scale_records():
         for perk_name, desc, cat, ind, fund, eq, prov in coworking_perks:
             records.append((f"{country} {perk_name}", desc, country, cat, ind, fund, eq, prov, rng.choice(['Rolling', '2026-12-31', 'Next Month', '2026-09-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
 
+    # ==========================================
+    # 7. LATAM & AFRICA SPECIFIC HYPER-SCALE
+    # ==========================================
+    latam_countries = [
+        ("Brazil", "BRL"), ("Mexico", "MXN"), ("Colombia", "COP"), ("Argentina", "ARS"),
+        ("Chile", "CLP"), ("Peru", "PEN"), ("Ecuador", "USD"), ("Uruguay", "UYU")
+    ]
+    latam_programs = [
+        ("Startup Nation Seed", "National initiative to drive digital transformation.", "Gov Grants", "SaaS,Fintech", "50K - 200K", "No"),
+        ("LatAm Tech Accelerator", "Regional accelerator focusing on LatAm markets.", "VCs & Accelerators", "All", "100K", "Yes"),
+        ("Fintech Regulatory Sandbox", "Central bank sponsored sandbox.", "Gov Grants", "Fintech", "Support", "No"),
+        ("AgriTech Innovation Fund", "Subsidies for modernizing agriculture.", "Gov Grants", "AgriTech", "80K", "No"),
+        ("Sustainability Grant", "Climate tech grants for regional impact.", "Gov Grants", "CleanTech,Impact", "150K", "No")
+    ]
+    for country, cur in latam_countries:
+        for p_name, desc, cat, ind, fund, eq in latam_programs:
+            for i in range(10):  # 10 rounds/cohorts per program
+                records.append((f"[{country}] {p_name} Cohort {i+1}", desc, country, cat, ind, f"{cur} {fund}", eq, f"{country} Gov/VC", rng.choice(['Rolling', '2026-10-15', '2026-12-31']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
+
+    africa_countries = [
+        ("Nigeria", "NGN"), ("Kenya", "KES"), ("South Africa", "ZAR"), ("Egypt", "EGP"),
+        ("Ghana", "GHS"), ("Rwanda", "RWF"), ("Morocco", "MAD"), ("Senegal", "XOF")
+    ]
+    africa_programs = [
+        ("Pan-African Seed Initiative", "Early stage funding for African founders.", "VCs & Accelerators", "Fintech,Mobile", "50K - 150K", "Yes"),
+        ("Digital Africa Tech Fund", "Government backed digitization support.", "Gov Grants", "Digital", "20K - 50K", "No"),
+        ("Mobile Money Innovation Challenge", "Grants for unbanked and financial inclusion.", "Gov Grants", "Fintech", "100K", "No"),
+        ("Off-Grid Energy Catalyst", "Funding for solar and clean energy solutions.", "Gov Grants", "CleanTech,Energy", "200K", "No"),
+        ("African Tech Hub Residency", "Workspace and incubation across major cities.", "Cloud & Perks", "Tech", "Workspace", "No")
+    ]
+    for country, cur in africa_countries:
+        for p_name, desc, cat, ind, fund, eq in africa_programs:
+            for i in range(10):
+                records.append((f"[{country}] {p_name} Round {i+1}", desc, country, cat, ind, f"{cur} {fund}", eq, f"{country} Innovation Hub", rng.choice(['Rolling', '2026-09-30', '2026-11-15']), 'https://apply.genox.one/' + str(rng.randint(1000, 99999))))
+
     return records

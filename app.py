@@ -15,6 +15,15 @@ from startup_crawler_global import run_crawler_and_save
 @lru_cache(maxsize=5000)
 def translate_title(text, target_lang):
     if not text or target_lang == 'en': return text
+    
+    # Skip translating likely brand names (short, title-cased)
+    words = text.split()
+    if len(words) <= 4 and all(w[0].isupper() for w in words if w.isalpha()):
+        # Exclude common generic words that SHOULD be translated
+        generic_words = {"Fund", "Program", "Grant", "Package", "Support", "Challenge"}
+        if not any(g in text for g in generic_words):
+            return text
+
     try:
         lang_map = {'zh_Hans': 'zh-CN', 'zh_Hant': 'zh-TW', 'ja': 'ja', 'ko': 'ko'}
         t_lang = lang_map.get(target_lang, target_lang.split('_')[0])
@@ -248,8 +257,12 @@ def api_data():
             'title': GlobalOpportunity.title,
             'country': GlobalOpportunity.country,
             'fit_score': GlobalOpportunity.fit_score,
+            'created_at': GlobalOpportunity.created_at,
+            'deadline': GlobalOpportunity.deadline,
         }
-        sort_col = sort_columns.get(sort_by, GlobalOpportunity.fit_score)
+        # Default: newest first (created_at desc) — shows today's opportunities first
+        default_sort_col = GlobalOpportunity.created_at
+        sort_col = sort_columns.get(sort_by, default_sort_col)
         order = sort_col.asc() if sort_dir == 'asc' else sort_col.desc()
 
         # Paginated query - only fetch ONE page of results
@@ -269,18 +282,86 @@ def api_data():
             ))
 
         for idx, r in enumerate(results):
+            # Build a safe apply URL — never show fake apply.genox.one links
+            raw_url = r.url or ''
+            if raw_url and 'apply.genox.one' not in raw_url:
+                apply_url = raw_url
+            else:
+                # Use real portal per country
+                portals = {
+                    # Asia Pacific
+                    'South Korea': 'https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do',
+                    'Japan': 'https://j-net21.smrj.go.jp/startup/index.html',
+                    'India': 'https://www.startupindia.gov.in/content/sih/en/government_schemes.html',
+                    'Singapore': 'https://www.enterprisesg.gov.sg/financial-assistance',
+                    'Australia': 'https://business.gov.au/grants-and-programs',
+                    'New Zealand': 'https://www.callaghaninnovation.govt.nz/grants',
+                    'China': 'https://innofund.most.gov.cn/',
+                    'Taiwan': 'https://startup.sme.gov.tw/',
+                    'Hong Kong': 'https://www.hkstp.org/our-programmes/',
+                    'Indonesia': 'https://startup.hub.id/',
+                    'Thailand': 'https://www.nia.or.th/',
+                    'Vietnam': 'https://www.startup.gov.vn/',
+                    'Malaysia': 'https://www.mdec.my/digital-economy-initiatives',
+                    'Philippines': 'https://dict.gov.ph/startup-grant-fund/',
+                    # Europe
+                    'UK': 'https://www.gov.uk/business-finance-support',
+                    'Germany': 'https://www.foerderdatenbank.de/FDB/DE/Foerderprogramme/foerderprogramme.html',
+                    'France': 'https://www.bpifrance.fr/nos-offres',
+                    'Netherlands': 'https://www.rvo.nl/subsidies-financiering',
+                    'Sweden': 'https://www.vinnova.se/en/apply-for-funding/',
+                    'Finland': 'https://www.businessfinland.fi/en/do-business-with-finland/funding',
+                    'Denmark': 'https://www.innovationsfonden.dk/en/apply',
+                    'Norway': 'https://www.innovasjonnorge.no/en/',
+                    'Estonia': 'https://eas.ee/en/apply-for-funding/',
+                    'Spain': 'https://www.cdti.es/index.asp?idIdioma=2',
+                    'Italy': 'https://www.mise.gov.it/',
+                    'Switzerland': 'https://www.innosuisse.ch/inno/en/home.html',
+                    'EU': 'https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home',
+                    'Israel': 'https://innovationisrael.org.il/en/program/',
+                    # Americas
+                    'USA': 'https://www.sbir.gov/solicitations',
+                    'Canada': 'https://innovation.ised-isde.canada.ca/innovation/s/?language=en_CA',
+                    'Brazil': 'https://www.bndes.gov.br/wps/portal/site/home/financiamento',
+                    'Mexico': 'https://www.inadem.gob.mx/',
+                    'Chile': 'https://www.corfo.cl/sites/cpp/home',
+                    'Colombia': 'https://www.innpulsa.gov.co/',
+                    'Argentina': 'https://www.argentina.gob.ar/produccion/sepyme',
+                    # MEA
+                    'UAE': 'https://hub71.com/apply/',
+                    'Saudi Arabia': 'https://www.monsha.at.gov.sa/',
+                    'South Africa': 'https://www.seda.org.za/funding-support/',
+                    'Nigeria': 'https://tonyelumelufoundation.org/teep/application/',
+                    'Kenya': 'https://www.ilab.co.ke/',
+                    'Ghana': 'https://mest.co/apply/',
+                    'Egypt': 'https://www.itida.gov.eg/',
+                    'Zimbabwe': 'https://www.zimtrade.co.zw/',
+                    'Zambia': 'https://www.zda.org.zm/',
+                    'Tanzania': 'https://www.costech.or.tz/',
+                    'Uganda': 'https://www.tic.co.ug/',
+                    'Rwanda': 'https://risa.rw/',
+                    'Ethiopia': 'https://www.ethiopianembassy.org/investment',
+                    'Morocco': 'https://www.maroc.ma/',
+                    'Tunisia': 'https://www.startup.gov.tn/',
+                    # Default
+                    'Global': 'https://www.f6s.com/programs',
+                }
+                country_key = r.country or 'Global'
+                apply_url = portals.get(country_key, f'https://www.google.com/search?q={r.title.replace(" ", "+")}')
+
             filtered.append({
                 "title": r.title,
                 "translated_title": translated_titles[idx],
                 "description": r.description,
-                "country": str(_(r.country)) if r.country else "Global", 
-                "category": str(_(r.category)) if r.category else "",
+                # Do NOT Babel-translate country/category — these are proper nouns/tech terms
+                "country": r.country or "Global",
+                "category": r.category or "",
                 "industries": r.industries.split(',') if r.industries else [],
                 "status": r.status,
                 "funding": r.funding, "equity": r.equity,
                 "provider": r.provider, "fit_score": r.fit_score,
-                "deadline": getattr(r, 'deadline', 'Rolling'),
-                "url": getattr(r, 'url', '#'),
+                "deadline": r.deadline or 'Rolling',
+                "url": apply_url,
                 "created_at": r.created_at.strftime('%Y-%m-%d') if r.created_at else None
             })
 

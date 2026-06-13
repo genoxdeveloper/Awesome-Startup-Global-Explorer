@@ -3,207 +3,370 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - Startup Explorer</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
+<title>Explore - Startup Explorer | Global Funding Opportunities</title>
+<meta name="description" content="Discover 32,500+ global grants, accelerators, and VC funds. Filter by country, industry, and deadline.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80' font-family='monospace'>&lt;/&gt;</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ================================================================
+   DESIGN SYSTEM
+================================================================ */
 :root {
+  color-scheme: dark; /* forces native elements (select, input) to use dark OS theme */
   --bg: #090a0f;
   --surface: #12141d;
-  --surface-hover: #1a1d27;
+  --surface-2: #1a1d2a;
+  --surface-hover: #1e2132;
   --primary: #3b82f6;
   --accent-cyan: #06b6d4;
   --accent-purple: #8b5cf6;
-  --text: #ffffff;
-  --text-muted: #94a3b8;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.15);
-  --radius: 16px;
+  --accent-green: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  --text: #f1f5f9;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-light: rgba(255, 255, 255, 0.14);
+  --radius: 14px;
   --radius-sm: 8px;
+  --radius-xs: 5px;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { 
-  background: var(--bg); 
-  color: var(--text); 
-  font-family: 'Inter', -apple-system, sans-serif; 
-  font-size: 13px; 
-  line-height: 1.5;
-  background-image: radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.08), transparent 25%),
-                    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
-  min-height: 100vh;
-}
-a { color: var(--text); text-decoration: none; }
-
-/* Top Navigation */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 32px;
-  background: rgba(18, 20, 29, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-left { display: flex; align-items: center; gap: 40px; }
-.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; }
-.logo-icon { 
-  width: 32px; height: 32px; border-radius: 50%; 
-  background: linear-gradient(135deg, var(--primary), var(--accent-purple));
-  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;
-}
-.logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--text-muted); }
-
-.nav-links { display: flex; gap: 24px; }
-.nav-link { 
-  color: var(--text-muted); font-weight: 500; font-size: 14px; 
-  padding-bottom: 4px; position: relative; transition: color 0.2s;
-}
-.nav-link:hover { color: var(--text); }
-.nav-link.active { color: var(--text); }
-.nav-link.active::after {
-  content: ''; position: absolute; bottom: -20px; left: 0; right: 0;
-  height: 2px; background: var(--primary);
-}
-
-.nav-right { display: flex; align-items: center; gap: 20px; }
-.search-bar {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 8px 16px;
-  display: flex; align-items: center; gap: 8px;
-  width: 260px;
-}
-.search-bar input {
-  background: transparent; border: none; color: var(--text); outline: none; width: 100%; font-size: 13px;
-}
-.search-bar input::placeholder { color: var(--text-muted); }
-.user-profile { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-.user-avatar { width: 28px; height: 28px; border-radius: 50%; background: #475569; }
-.user-name { font-weight: 500; font-size: 13px; }
-.icon-btn { background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; }
-.icon-btn:hover { color: var(--text); }
-
-/* Main Layout */
-.container { max-width: 1400px; margin: 0 auto; padding: 40px 32px; }
-
-/* Page Header */
-.page-header { margin-bottom: 32px; }
-.page-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; margin-bottom: 8px; }
-.page-header p { color: var(--text-muted); font-size: 13px; }
-
-/* Filters */
-.filters-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; gap: 16px; flex-wrap: wrap; }
-.filters-left { display: flex; gap: 16px; flex-wrap: wrap; }
-.filter-group { display: flex; flex-direction: column; gap: 6px; }
-.filter-group label { font-size: 11px; font-weight: 600; color: var(--text-muted); }
-.select-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
+body {
+  background: var(--bg);
   color: var(--text);
-  padding: 10px 16px;
-  border-radius: var(--radius-sm);
+  font-family: 'Inter', -apple-system, sans-serif;
   font-size: 13px;
-  outline: none;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  line-height: 1.5;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 10% 40%, rgba(6, 182, 212, 0.07) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 20%, rgba(139, 92, 246, 0.07) 0%, transparent 40%);
+}
+a { color: inherit; text-decoration: none; }
+
+/* ================================================================
+   NAVBAR
+================================================================ */
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 56px;
+  background: rgba(9, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-left { display: flex; align-items: center; gap: 32px; }
+.logo { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.logo-icon {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: #fff; color: #090a0f;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900; font-family: monospace; letter-spacing: -1px;
+  flex-shrink: 0;
+}
+.logo-text { font-weight: 700; font-size: 14px; line-height: 1.2; }
+.logo-text span { display: block; font-size: 10px; font-weight: 400; color: var(--text-muted); }
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  color: var(--text-muted); font-weight: 500; font-size: 13px;
+  padding: 6px 12px; border-radius: var(--radius-xs);
+  transition: all 0.15s;
+}
+.nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.nav-link.active { color: var(--text); background: rgba(59,130,246,0.12); }
+
+.nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.lang-links { display: flex; gap: 4px; font-size: 11px; align-items: center; }
+.lang-links a { color: var(--text-muted); padding: 4px 6px; border-radius: var(--radius-xs); transition: all 0.15s; text-decoration: none; }
+.lang-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.lang-links a.active { color: var(--text); background: rgba(59,130,246,0.12); font-weight: 500; }
+
+/* ================================================================
+   HERO / SEARCH HEADER
+================================================================ */
+.hero {
+  background: linear-gradient(180deg, rgba(18,20,29,0.8) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 32px 24px;
+}
+.hero-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+.hero h1 {
+  font-size: 26px; font-weight: 800; letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.hero h1 span { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
+.hero-stats { display: flex; gap: 24px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+.hero-stat { font-size: 12px; color: var(--text-muted); }
+.hero-stat strong { color: var(--text); font-weight: 700; }
+
+/* Central Search */
+.search-center {
+  position: relative; max-width: 560px; margin: 0 auto;
+}
+.search-center svg {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted); pointer-events: none;
+}
+.search-center input {
+  width: 100%; padding: 12px 48px; border-radius: 28px;
+  border: 1px solid var(--border-light);
+  background: rgba(255,255,255,0.04);
+  color: var(--text); font-size: 14px; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-center input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+.search-center input::placeholder { color: var(--text-muted); }
+
+/* ================================================================
+   FILTERS BAR
+================================================================ */
+.filters-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 16px 32px; border-bottom: 1px solid var(--border);
+  background: rgba(18,20,29,0.6);
+}
+.filter-group { display: flex; flex-direction: column; gap: 4px; }
+.filter-group label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.select-box {
+  padding: 8px 36px 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 12px; outline: none; cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
-  padding-right: 40px;
-  min-width: 160px;
+  background-position: right 10px center;
+  background-size: 14px;
+  min-width: 150px;
+  transition: border-color 0.15s;
 }
 .select-box:focus { border-color: var(--primary); }
+.select-box option { background: #1a1d2a; color: #f1f5f9; }
 
-.filters-right { display: flex; gap: 12px; align-items: flex-end; }
-.view-toggle { display: flex; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
-.view-btn { background: rgba(255,255,255,0.03); border: none; padding: 10px 12px; color: var(--text-muted); cursor: pointer; }
-.view-btn.active { background: rgba(255,255,255,0.1); color: var(--text); }
+.filters-right { margin-left: auto; display: flex; align-items: flex-end; gap: 10px; }
+.results-count { font-size: 12px; color: var(--text-muted); white-space: nowrap; align-self: flex-end; padding-bottom: 8px; }
+.results-count strong { color: var(--text); }
+.view-toggle { display: flex; border: 1px solid var(--border); border-radius: var(--radius-xs); overflow: hidden; align-self: flex-end; }
+.view-btn { background: transparent; border: none; padding: 9px 10px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; line-height: 0; }
+.view-btn.active { background: rgba(255,255,255,0.08); color: var(--text); }
+.view-btn:hover:not(.active) { background: rgba(255,255,255,0.04); }
 
-/* Card Grid */
+/* ================================================================
+   INDUSTRY EXPERTISE TAGS
+================================================================ */
+.ind-tag {
+  display: inline-block; padding: 2px 8px; border-radius: 100px;
+  font-size: 10px; font-weight: 600; white-space: nowrap;
+  border: 1px solid;
+}
+.ind-fintech   { color: #06b6d4; border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.08); }
+.ind-ai        { color: #8b5cf6; border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.08); }
+.ind-saas      { color: #3b82f6; border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.08); }
+.ind-health    { color: #10b981; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08); }
+.ind-deeptech  { color: #f59e0b; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
+.ind-cleantech { color: #34d399; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.08); }
+.ind-web3      { color: #a78bfa; border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08); }
+.ind-hardware  { color: #fb923c; border-color: rgba(251,146,60,0.3); background: rgba(251,146,60,0.08); }
+.ind-default   { color: var(--text-muted); border-color: var(--border); background: rgba(255,255,255,0.04); }
+
+/* ================================================================
+   CARD GRID
+================================================================ */
+.container { max-width: 1440px; margin: 0 auto; padding: 28px 32px 60px; }
+
 .opportunities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px; margin-bottom: 40px;
 }
 
 .opp-card {
-  background: linear-gradient(180deg, rgba(30,32,44,0.6) 0%, rgba(18,20,29,0.9) 100%);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  flex-direction: column;
+  padding: 22px;
+  position: relative; overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), border-color 0.25s, box-shadow 0.25s;
+  display: flex; flex-direction: column;
+  cursor: default;
 }
 .opp-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  content: ''; position: absolute; inset: 0; top: auto; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  top: 0;
 }
-/* Subtle color glows based on category */
-.opp-card.gov { box-shadow: inset 0 20px 40px -20px rgba(16, 185, 129, 0.1); }
-.opp-card.vc { box-shadow: inset 0 20px 40px -20px rgba(139, 92, 246, 0.15); }
-.opp-card.perk { box-shadow: inset 0 20px 40px -20px rgba(6, 182, 212, 0.15); }
-.opp-card:hover { transform: translateY(-4px); border-color: var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.opp-card.gov   { border-top: 2px solid rgba(16,185,129,0.5); }
+.opp-card.vc    { border-top: 2px solid rgba(139,92,246,0.5); }
+.opp-card.perk  { border-top: 2px solid rgba(6,182,212,0.5); }
+.opp-card.corp  { border-top: 2px solid rgba(245,158,11,0.5); }
+.opp-card:hover { transform: translateY(-3px); border-color: var(--border-light); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
 
-.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-.funding-source { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-.funding-source strong { display: block; color: var(--accent-cyan); font-size: 12px; font-weight: 600; margin-top: 2px; }
-.opp-card.vc .funding-source strong { color: var(--accent-purple); }
-.opp-card.gov .funding-source strong { color: #10b981; }
-
-.card-icon { 
-  width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.05);
-  display: flex; align-items: center; justify-content: center; font-size: 14px;
+/* Card top row */
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+.card-type-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px;
 }
+.card-type-badge.gov  { background: rgba(16,185,129,0.12); color: #10b981; }
+.card-type-badge.vc   { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+.card-type-badge.perk { background: rgba(6,182,212,0.12); color: #06b6d4; }
+.card-type-badge.corp { background: rgba(245,158,11,0.12); color: #f59e0b; }
 
-.provider { font-size: 18px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-.card-title { font-size: 15px; font-weight: 600; margin-bottom: 16px; line-height: 1.4; color: var(--text); }
+/* Score badge */
+.score-badge {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+}
+.score-ring {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 800;
+}
+.score-high  { border-color: #10b981; color: #10b981; }
+.score-mid   { border-color: #f59e0b; color: #f59e0b; }
+.score-low   { border-color: #64748b; color: #64748b; }
 
-.funding-amount { margin-bottom: 16px; }
-.funding-amount span { font-size: 11px; color: var(--text-muted); display: block; }
-.funding-amount strong { font-size: 16px; font-weight: 700; }
+/* Provider + location */
+.card-provider { font-size: 16px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.card-country-tag {
+  font-size: 10px; color: var(--text-muted); white-space: nowrap;
+  background: rgba(255,255,255,0.05); border-radius: 4px; padding: 2px 6px;
+  flex-shrink: 0;
+}
+.card-title { font-size: 13px; font-weight: 500; color: var(--text-dim); margin-bottom: 14px; line-height: 1.45; }
 
-.card-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; flex-grow: 1; }
-.meta-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--text-muted); }
-.meta-item svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.7; margin-top: 2px; }
+/* Industry expertise pills */
+.expertise-row { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 14px; }
 
-.card-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--border); }
-.deadline { font-size: 11px; color: var(--text-muted); }
-.deadline strong { display: block; color: var(--text); font-size: 12px; margin-top: 2px; }
+/* Funding */
+.card-funding { margin-bottom: 16px; }
+.card-funding span { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.card-funding strong { display: block; font-size: 15px; font-weight: 700; color: var(--text); margin-top: 2px; }
+
+/* Description */
+.card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; flex-grow: 1; }
+
+/* Card bottom */
+.card-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--border); margin-top: auto; }
+.deadline-info { }
+.deadline-info span { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.deadline-info strong { display: block; font-size: 12px; font-weight: 600; color: var(--text); margin-top: 2px; }
+.deadline-info.urgent strong { color: var(--accent-amber); }
 
 .btn-apply {
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 14px;
   border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.2s;
-  text-decoration: none;
+  font-size: 11px; font-weight: 700;
+  color: #fff; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  white-space: nowrap;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
 }
-.btn-apply:hover { opacity: 0.9; }
+.btn-apply:hover { opacity: 0.88; transform: scale(0.98); }
 
-/* Loading & Pagination */
-.loading-indicator { text-align: center; padding: 40px; color: var(--text-muted); display: none; }
-.pagination { display: flex; justify-content: center; gap: 8px; }
-.page-btn { 
-  background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text); 
-  padding: 8px 12px; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s;
+/* ================================================================
+   SKELETON LOADER
+================================================================ */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px; margin-bottom: 40px;
 }
-.page-btn:hover { background: rgba(255,255,255,0.1); }
-.page-btn.active { background: var(--primary); border-color: var(--primary); }
+.skeleton-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.skel { background: rgba(255,255,255,0.06); border-radius: 4px; }
+.skel-sm { height: 10px; width: 60%; margin-bottom: 10px; }
+.skel-lg { height: 18px; width: 80%; margin-bottom: 10px; }
+.skel-full { height: 10px; width: 100%; margin-bottom: 6px; }
+.skel-btn { height: 28px; width: 80px; border-radius: 20px; margin-top: 14px; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* Empty State */
+.empty-state {
+  grid-column: 1/-1; text-align: center; padding: 60px 20px;
+  color: var(--text-muted);
+}
+.empty-state h3 { color: var(--text); margin-bottom: 8px; font-size: 16px; }
+
+/* ================================================================
+   PAGINATION
+================================================================ */
+.pagination { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.page-btn {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text-dim); padding: 7px 12px;
+  border-radius: var(--radius-xs); cursor: pointer; font-size: 12px; font-weight: 500;
+  transition: all 0.15s;
+}
+.page-btn:hover { background: var(--surface-hover); border-color: var(--border-light); color: var(--text); }
+.page-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.page-btn:disabled { opacity: 0.4; pointer-events: none; }
+
+/* ================================================================
+   FOOTER
+================================================================ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 32px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex; flex-direction: column; gap: 8px; align-items: center;
+}
+footer strong { color: var(--text); }
+footer a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+footer a:hover { color: var(--text); }
+.footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ================================================================
+   LIST VIEW
+================================================================ */
+.opp-list { display: none; flex-direction: column; gap: 8px; margin-bottom: 40px; }
+.opp-list.active { display: flex; }
+.opportunities-grid.list-hidden { display: none; }
+
+.list-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 16px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.list-item:hover { border-color: var(--border-light); background: var(--surface-hover); }
+.list-badge { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+.list-title { flex: 1; font-weight: 600; font-size: 13px; }
+.list-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.list-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.list-funding { font-size: 13px; font-weight: 700; white-space: nowrap; }
+.list-deadline { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; }
+  .hero { padding: 24px 16px; }
+  .filters-bar { padding: 12px 16px; }
+  .container { padding: 20px 16px 40px; }
+  .hero h1 { font-size: 20px; }
+  .logo-text, .nav-links { display: none; }
+}
 </style>
 </head>
 <body>
@@ -212,7 +375,7 @@ a { color: var(--text); text-decoration: none; }
 <nav class="navbar">
   <div class="nav-left">
     <a href="/" class="logo">
-      <div class="logo-icon">GSE</div>
+      <div class="logo-icon">&lt;/&gt;</div>
       <div class="logo-text">
         Startup Explorer
         <span>Global Ecosystem Explorer</span>
@@ -221,235 +384,436 @@ a { color: var(--text); text-decoration: none; }
     <div class="nav-links">
       <a href="/dashboard" class="nav-link active">Explore</a>
       <a href="/" class="nav-link">Database</a>
-      <a href="#" class="nav-link">Analytics</a>
-      <a href="#" class="nav-link">Network</a>
     </div>
   </div>
   <div class="nav-right">
-    <div class="search-bar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="searchInp" placeholder="Search Startups, Regions, Funding...">
-    </div>
-    <div class="user-profile">
-      <div class="user-avatar"></div>
-      <span class="user-name">Sarah Jenkins</span>
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="lang-links">
+      <a href="javascript:void(0)" onclick="changeLang('en')" class="{% if request.args.get('lang','en') == 'en' %}active{% endif %}">English</a>
+      <a href="javascript:void(0)" onclick="changeLang('ko')" class="{% if request.args.get('lang') == 'ko' %}active{% endif %}">한국어</a>
+      <a href="javascript:void(0)" onclick="changeLang('zh_Hans')" class="{% if request.args.get('lang') == 'zh_Hans' %}active{% endif %}">中文</a>
+      <a href="javascript:void(0)" onclick="changeLang('es')" class="{% if request.args.get('lang') == 'es' %}active{% endif %}">Español</a>
+      <a href="javascript:void(0)" onclick="changeLang('ar')" class="{% if request.args.get('lang') == 'ar' %}active{% endif %}">العربية</a>
     </div>
   </div>
 </nav>
 
+<!-- Hero / Central Search -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Global <span>Startup Funding</span> Opportunities</h1>
+    <p class="hero-sub">Discover grants, accelerators, and VC funds across 188+ countries — updated daily.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong id="statTotal">32,500+</strong> Opportunities</div>
+      <div class="hero-stat"><strong id="statCountries">188</strong> Countries</div>
+      <div class="hero-stat"><strong id="statGov">—</strong> Gov Grants</div>
+      <div class="hero-stat"><strong id="statVC">—</strong> VCs / Accelerators</div>
+    </div>
+    <div class="search-center">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInp" placeholder="Search by program, provider, region, industry...">
+    </div>
+  </div>
+</section>
+
+<!-- Filters Bar -->
+<div class="filters-bar">
+  <div class="filter-group">
+    <label>Category</label>
+    <select class="select-box" id="catSel">
+      <option value="All">All Categories</option>
+      <option value="Gov Grants">Government Grants</option>
+      <option value="VCs &amp; Accelerators">VCs &amp; Accelerators</option>
+      <option value="Corporate">Corporate OI</option>
+      <option value="Cloud &amp; Perks">Cloud &amp; Perks</option>
+      <option value="Relocation/Growth">Relocation / Growth</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label>Industry / Expertise</label>
+    <select class="select-box" id="indSel">
+      <option value="All">All Industries</option>
+      <option value="AI">AI / ML</option>
+      <option value="SaaS">SaaS</option>
+      <option value="FinTech">FinTech</option>
+      <option value="HealthTech">HealthTech</option>
+      <option value="DeepTech">DeepTech</option>
+      <option value="CleanTech">CleanTech</option>
+      <option value="Web3">Web3 / Blockchain</option>
+      <option value="Hardware">Hardware</option>
+      <option value="AgriTech">AgriTech</option>
+      <option value="EdTech">EdTech</option>
+      <option value="Manufacturing">Manufacturing</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label>Country</label>
+    <select class="select-box" id="countrySel">
+      <option value="Global">All Countries</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label>Deadline</label>
+    <select class="select-box" id="deadlineSel">
+      <option value="All">Any Time</option>
+      <option value="rolling">Rolling / Ongoing</option>
+      <option value="fixed">Fixed Deadline</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label>Sort By</label>
+    <select class="select-box" id="sortSel">
+      <option value="fit_score">Relevance Score</option>
+      <option value="created_at">Newest First</option>
+      <option value="title">Title (A-Z)</option>
+      <option value="deadline">Deadline</option>
+    </select>
+  </div>
+  <div class="filters-right">
+    <div class="results-count">Showing <strong id="resultCount">—</strong> results</div>
+    <div class="view-toggle">
+      <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid View">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </button>
+      <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="List View">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
 <div class="container">
-  <div class="page-header">
-    <h1>Startup Funding Opportunities</h1>
-    <p>Discover 32,500+ global grants, accelerators, and VC funds.</p>
-  </div>
-
-  <!-- Filters -->
-  <div class="filters-row">
-    <div class="filters-left">
-      <div class="filter-group">
-        <label>Category</label>
-        <select class="select-box" id="catSel">
-          <option value="All">All Opportunities</option>
-          <option value="Gov Grants">Government Grants</option>
-          <option value="VCs & Accelerators">VCs & Accelerators</option>
-          <option value="Corporate">Corporate OI</option>
-          <option value="Cloud & Perks">Cloud & Perks</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label>Industry</label>
-        <select class="select-box" id="indSel">
-          <option value="All">All Industries</option>
-          <option value="FinTech">FinTech</option>
-          <option value="SaaS">SaaS</option>
-          <option value="AI">AI/ML</option>
-          <option value="HealthTech">HealthTech</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label>Deadline</label>
-        <select class="select-box" id="deadlineSel">
-          <option value="All">Any Time</option>
-          <option value="rolling">Next 30 Days / Rolling</option>
-          <option value="fixed">Fixed Deadlines</option>
-        </select>
-      </div>
-    </div>
-    <div class="filters-right">
-      <div class="filter-group">
-        <label>Sort By</label>
-        <select class="select-box" id="sortSel">
-          <option value="fit_score">Relevance</option>
-          <option value="funding_amount">Funding Amount</option>
-          <option value="title">Title (A-Z)</option>
-        </select>
-      </div>
-      <div class="view-toggle">
-        <button class="view-btn active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></button>
-        <button class="view-btn" onclick="window.location.href='/'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
-      </div>
-    </div>
-  </div>
-
-  <div class="opportunities-grid" id="mainGrid">
-    <!-- Cards will be rendered here via JS -->
-  </div>
-
-  <div class="loading-indicator" id="loadingIndicator">
-    Loading opportunities...
-  </div>
-  
+  <div class="opportunities-grid" id="mainGrid"></div>
+  <div class="opp-list" id="listView"></div>
   <div class="pagination" id="pagination"></div>
 </div>
 
+<!-- Footer -->
+<footer>
+  <div><strong>Built by the Genox Holdings Team for the Global Founder Community.</strong></div>
+  <div>© 2026 Genox 제녹스 · Global Startup Ecosystem Explorer</div>
+  <div class="footer-links">
+    <a href="https://buygit.com" target="_blank">buygit.com</a>
+    <a href="https://genoxholdings.com" target="_blank">genoxholdings.com</a>
+    <span>admin@genox.one</span>
+    <span>Seoul, South Korea</span>
+  </div>
+  <div id="footerStats"></div>
+</footer>
+
 <script>
+// ================================================================
+// STATE
+// ================================================================
 let currentPage = 1;
-const perPage = 20;
-
-function getCardClass(category) {
-    if(category.includes('Gov')) return 'gov';
-    if(category.includes('VC') || category.includes('Accel')) return 'vc';
-    if(category.includes('Cloud') || category.includes('Perk')) return 'perk';
-    return '';
-}
-
-function getIcon(category) {
-    if(category.includes('Gov')) return '🏛';
-    if(category.includes('VC')) return '🚀';
-    if(category.includes('Corporate')) return '🏢';
-    if(category.includes('Cloud')) return '☁️';
-    return '💡';
-}
-
-async function fetchData() {
-    document.getElementById('loadingIndicator').style.display = 'block';
-    document.getElementById('mainGrid').innerHTML = '';
-    
-    const params = new URLSearchParams({
-        country: 'Global',
-        category: document.getElementById('catSel').value,
-        industry: document.getElementById('indSel').value,
-        deadline: document.getElementById('deadlineSel').value,
-        search: document.getElementById('searchInp').value,
-        sort_by: document.getElementById('sortSel').value,
-        sort_dir: 'desc',
-        page: currentPage,
-        per_page: perPage
-    });
-
-    try {
-        const res = await fetch(`/api/data?${params.toString()}`);
-        const data = await res.json();
-        renderGrid(data.records);
-        renderPagination(data.total_pages);
-    } catch (e) {
-        console.error(e);
-        document.getElementById('mainGrid').innerHTML = '<div style="grid-column: 1/-1; text-align: center;">Error loading data.</div>';
-    } finally {
-        document.getElementById('loadingIndicator').style.display = 'none';
-    }
-}
-
-function renderGrid(records) {
-    const grid = document.getElementById('mainGrid');
-    if (!records.length) {
-        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">No opportunities found matching your criteria.</div>';
-        return;
-    }
-    
-    grid.innerHTML = records.map(r => `
-        <div class="opp-card ${getCardClass(r.category)}">
-            <div class="card-top">
-                <div class="funding-source">
-                    Funding Source
-                    <strong>${r.category.toUpperCase()}</strong>
-                </div>
-                <div class="card-icon">${getIcon(r.category)}</div>
-            </div>
-            
-            <div class="provider">
-                ${r.provider || 'Ecosystem Partner'}
-            </div>
-            
-            <div class="card-title">
-                ${r.title}
-            </div>
-            
-            <div class="funding-amount">
-                <span>Funding Amount</span>
-                <strong>${r.funding || 'Undisclosed'}</strong>
-            </div>
-            
-            <div class="card-meta">
-                <div class="meta-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    Focus: ${r.industries ? r.industries.split(',')[0] : 'General'}
-                </div>
-                <div class="meta-item">
-                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Location: ${r.country}
-                </div>
-            </div>
-            
-            <div class="card-bottom">
-                <div class="deadline">
-                    Deadline
-                    <strong>${r.deadline || 'Rolling'}</strong>
-                </div>
-                <a href="${r.link}" target="_blank" class="btn-apply">Apply Now</a>
-            </div>
-        </div>
-    `).join('');
-}
-
-function renderPagination(totalPages) {
-    const pContainer = document.getElementById('pagination');
-    pContainer.innerHTML = '';
-    if (totalPages <= 1) return;
-    
-    let html = '';
-    const maxVisible = 5;
-    let start = Math.max(1, currentPage - 2);
-    let end = Math.min(totalPages, start + maxVisible - 1);
-    
-    if (end - start < maxVisible - 1) {
-        start = Math.max(1, end - maxVisible + 1);
-    }
-    
-    if (currentPage > 1) {
-        html += `<button class="page-btn" onclick="changePage(${currentPage - 1})">Prev</button>`;
-    }
-    
-    for (let i = start; i <= end; i++) {
-        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
-    }
-    
-    if (currentPage < totalPages) {
-        html += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next</button>`;
-    }
-    
-    pContainer.innerHTML = html;
-}
-
-function changePage(p) {
-    currentPage = p;
-    fetchData();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Event Listeners
-['catSel', 'indSel', 'deadlineSel', 'sortSel'].forEach(id => {
-    document.getElementById(id).addEventListener('change', () => { currentPage = 1; fetchData(); });
-});
-
+let totalServerPages = 1;
+const PER_PAGE = 20;
+let currentView = 'grid';
 let debounceTimer;
-document.getElementById('searchInp').addEventListener('input', () => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => { currentPage = 1; fetchData(); }, 400);
+let countriesPopulated = false;
+
+// Get lang from URL
+function getLang() {
+  return new URLSearchParams(window.location.search).get('lang') || 'en';
+}
+
+function changeLang(lang) {
+  const params = new URLSearchParams(window.location.search);
+  params.set('lang', lang);
+  window.location.search = params.toString();
+}
+
+// ================================================================
+// INDUSTRY TAG STYLING
+// ================================================================
+const IND_COLORS = {
+  'fintech': 'ind-fintech', 'finance': 'ind-fintech',
+  'ai': 'ind-ai', 'ml': 'ind-ai', 'artificial intelligence': 'ind-ai',
+  'saas': 'ind-saas', 'software': 'ind-saas', 'cloud': 'ind-saas',
+  'health': 'ind-health', 'bio': 'ind-health', 'medical': 'ind-health',
+  'deeptech': 'ind-deeptech', 'deep tech': 'ind-deeptech', 'tech': 'ind-deeptech', 'defense': 'ind-deeptech',
+  'cleantech': 'ind-cleantech', 'clean': 'ind-cleantech', 'energy': 'ind-cleantech', 'green': 'ind-cleantech', 'agri': 'ind-cleantech',
+  'web3': 'ind-web3', 'blockchain': 'ind-web3', 'crypto': 'ind-web3',
+  'hardware': 'ind-hardware', 'manufacturing': 'ind-hardware', 'iot': 'ind-hardware',
+};
+
+function getIndClass(tag) {
+  const lower = (tag || '').toLowerCase();
+  for (const [key, cls] of Object.entries(IND_COLORS)) {
+    if (lower.includes(key)) return cls;
+  }
+  return 'ind-default';
+}
+
+function getCardClass(cat) {
+  if (!cat) return '';
+  if (cat.includes('Gov')) return 'gov';
+  if (cat.includes('VC') || cat.includes('Accel')) return 'vc';
+  if (cat.includes('Cloud') || cat.includes('Perk')) return 'perk';
+  if (cat.includes('Corp')) return 'corp';
+  return '';
+}
+
+function getScoreClass(score) {
+  if (score >= 85) return 'score-high';
+  if (score >= 70) return 'score-mid';
+  return 'score-low';
+}
+
+function isUrgent(deadline) {
+  if (!deadline || deadline === 'Rolling' || deadline === 'Next Month') return false;
+  try {
+    const d = new Date(deadline);
+    const diff = (d - new Date()) / (1000 * 60 * 60 * 24);
+    return diff > 0 && diff < 30;
+  } catch(e) { return false; }
+}
+
+function formatDeadline(dl) {
+  if (!dl || dl === 'Rolling') return 'Rolling';
+  if (dl === 'Next Month') return 'Next Month';
+  try {
+    return new Date(dl).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  } catch(e) { return dl; }
+}
+
+function renderIndustryTags(industries, max) {
+  max = max || 3;
+  const tags = Array.isArray(industries)
+    ? industries.filter(t => t && t.trim() !== 'All')
+    : (industries || '').split(',').map(t => t.trim()).filter(t => t && t !== 'All');
+  return tags.slice(0, max).map(t =>
+    `<span class="ind-tag ${getIndClass(t)}">${t}</span>`
+  ).join('');
+}
+
+function escHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = String(str || '');
+  return d.innerHTML;
+}
+
+// ================================================================
+// SKELETON LOADER
+// ================================================================
+function showSkeleton() {
+  const grid = document.getElementById('mainGrid');
+  grid.innerHTML = Array(8).fill('').map(() => `
+    <div class="skeleton-card">
+      <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+        <div class="skel skel-sm" style="width:70px;height:18px;border-radius:4px"></div>
+        <div class="skel" style="width:32px;height:32px;border-radius:50%"></div>
+      </div>
+      <div class="skel skel-lg"></div>
+      <div class="skel skel-sm" style="width:90%;margin-top:4px"></div>
+      <div class="skel skel-full" style="margin-top:14px"></div>
+      <div class="skel skel-full"></div>
+      <div style="display:flex;gap:5px;margin-top:10px">
+        <div class="skel" style="height:18px;width:50px;border-radius:100px"></div>
+        <div class="skel" style="height:18px;width:40px;border-radius:100px"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.05)">
+        <div class="skel" style="height:12px;width:80px"></div>
+        <div class="skel skel-btn"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ================================================================
+// RENDER GRID
+// ================================================================
+function renderGrid(records) {
+  const grid = document.getElementById('mainGrid');
+  if (!records || !records.length) {
+    grid.innerHTML = `<div class="empty-state"><h3>No opportunities found</h3><p>Try adjusting your filters or search terms.</p></div>`;
+    return;
+  }
+  grid.innerHTML = records.map(r => {
+    const cc = getCardClass(r.category);
+    const urgent = isUrgent(r.deadline);
+    const title = r.translated_title || r.title;
+    const industries = Array.isArray(r.industries) ? r.industries : (r.industries || '').split(',').map(t => t.trim());
+    return `
+      <div class="opp-card ${cc}">
+        <div class="card-top">
+          <span class="card-type-badge ${cc}">${escHtml(r.category)}</span>
+          <div class="score-badge">
+            <div class="score-ring ${getScoreClass(r.fit_score)}">${r.fit_score || '—'}</div>
+          </div>
+        </div>
+
+        <div class="card-provider">
+          <span>${escHtml(r.provider || 'Ecosystem Partner')}</span>
+          <span class="card-country-tag">${escHtml(r.country)}</span>
+        </div>
+        <div class="card-title">${escHtml(title)}</div>
+
+        <div class="expertise-row">
+          ${renderIndustryTags(industries, 4)}
+        </div>
+
+        <div class="card-funding">
+          <span>Funding Amount</span>
+          <strong>${escHtml(r.funding || 'Undisclosed')}</strong>
+        </div>
+
+        ${r.description ? `<div class="card-desc">${escHtml((r.description || '').substring(0, 90))}${(r.description || '').length > 90 ? '…' : ''}</div>` : ''}
+
+        <div class="card-bottom">
+          <div class="deadline-info ${urgent ? 'urgent' : ''}">
+            <span>Deadline</span>
+            <strong>${escHtml(formatDeadline(r.deadline))}</strong>
+          </div>
+          <a href="${escHtml(r.url || '#')}" target="_blank" rel="noopener" class="btn-apply">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+            Apply Now
+          </a>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ================================================================
+// RENDER LIST VIEW
+// ================================================================
+function renderList(records) {
+  const list = document.getElementById('listView');
+  if (!records || !records.length) { list.innerHTML = ''; return; }
+  const cc_map = r => getCardClass(r.category);
+  list.innerHTML = records.map(r => {
+    const cc = cc_map(r);
+    const title = r.translated_title || r.title;
+    const industries = Array.isArray(r.industries) ? r.industries : (r.industries || '').split(',').map(t => t.trim());
+    return `
+      <div class="list-item">
+        <span class="list-badge card-type-badge ${cc}">${escHtml(r.category)}</span>
+        <div style="flex:1;min-width:0">
+          <div class="list-title">${escHtml(title)}</div>
+          <div class="list-sub">${escHtml(r.provider || '')} · ${escHtml(r.country)}</div>
+        </div>
+        <div style="display:flex;gap:5px">${renderIndustryTags(industries, 2)}</div>
+        <div class="list-funding" style="color:var(--accent-green)">${escHtml(r.funding || '—')}</div>
+        <div class="list-deadline">${escHtml(formatDeadline(r.deadline))}</div>
+        <div class="score-ring ${getScoreClass(r.fit_score)}" style="width:26px;height:26px;font-size:9px">${r.fit_score || '—'}</div>
+        <a href="${escHtml(r.url || '#')}" target="_blank" rel="noopener" class="btn-apply" style="font-size:11px;padding:6px 12px">Apply</a>
+      </div>
+    `;
+  }).join('');
+}
+
+// ================================================================
+// VIEW TOGGLE
+// ================================================================
+function setView(v) {
+  currentView = v;
+  document.getElementById('mainGrid').classList.toggle('list-hidden', v === 'list');
+  document.getElementById('listView').classList.toggle('active', v === 'list');
+  document.getElementById('gridViewBtn').classList.toggle('active', v === 'grid');
+  document.getElementById('listViewBtn').classList.toggle('active', v === 'list');
+}
+
+// ================================================================
+// POPULATE COUNTRIES
+// ================================================================
+function populateCountries(countries) {
+  if (countriesPopulated) return;
+  const sel = document.getElementById('countrySel');
+  const sorted = Object.keys(countries).sort();
+  sorted.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+  countriesPopulated = true;
+}
+
+// ================================================================
+// FETCH DATA
+// ================================================================
+async function fetchData() {
+  if (currentPage === 1) showSkeleton();
+  const lang = getLang();
+  const params = new URLSearchParams({
+    country: document.getElementById('countrySel').value || 'Global',
+    category: document.getElementById('catSel').value,
+    industry: document.getElementById('indSel').value,
+    deadline: document.getElementById('deadlineSel').value,
+    search: document.getElementById('searchInp').value,
+    sort_by: document.getElementById('sortSel').value,
+    sort_dir: 'desc',
+    page: currentPage,
+    per_page: PER_PAGE,
+    lang: lang,
+  });
+
+  try {
+    const res = await fetch(`/api/data?${params.toString()}`);
+    const data = await res.json();
+    const records = data.records || [];
+    totalServerPages = data.total_pages || 1;
+
+    // Update stats
+    document.getElementById('statTotal').textContent = (data.total_in_db || data.total || 0).toLocaleString();
+    document.getElementById('statCountries').textContent = Object.keys(data.stats?.countries || {}).length;
+    document.getElementById('statGov').textContent = (data.stats?.categories?.['Gov Grants'] || 0).toLocaleString();
+    document.getElementById('statVC').textContent = (data.stats?.categories?.['VCs & Accelerators'] || 0).toLocaleString();
+    document.getElementById('resultCount').textContent = (data.total || 0).toLocaleString();
+    document.getElementById('footerStats').textContent = `${(data.total_in_db || 0).toLocaleString()} records · ${Object.keys(data.stats?.countries || {}).length} countries`;
+
+    // Populate countries
+    if (data.stats?.countries) populateCountries(data.stats.countries);
+
+    renderGrid(records);
+    renderList(records);
+    renderPagination(totalServerPages);
+  } catch (e) {
+    console.error(e);
+    document.getElementById('mainGrid').innerHTML = `<div class="empty-state"><h3>Connection Error</h3><p>Could not load data. Please refresh the page.</p></div>`;
+  }
+}
+
+// ================================================================
+// PAGINATION
+// ================================================================
+function renderPagination(totalPages) {
+  const pc = document.getElementById('pagination');
+  if (totalPages <= 1) { pc.innerHTML = ''; return; }
+  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>Prev</button>`;
+  const pages = new Set([1]);
+  for (let i = Math.max(2, currentPage-2); i <= Math.min(totalPages-1, currentPage+2); i++) pages.add(i);
+  pages.add(totalPages);
+  let prev = 0;
+  [...pages].sort((a,b)=>a-b).forEach(p => {
+    if (p - prev > 1) html += `<button class="page-btn" disabled>…</button>`;
+    html += `<button class="page-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
+    prev = p;
+  });
+  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>Next</button>`;
+  pc.innerHTML = html;
+}
+
+function goPage(p) {
+  if (p < 1 || p > totalServerPages) return;
+  currentPage = p;
+  fetchData();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ================================================================
+// EVENT LISTENERS
+// ================================================================
+['catSel', 'indSel', 'countrySel', 'deadlineSel', 'sortSel'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => { currentPage = 1; fetchData(); });
 });
 
-// Initial load
+document.getElementById('searchInp').addEventListener('input', () => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => { currentPage = 1; fetchData(); }, 380);
+});
+
+// Init
 fetchData();
 </script>
 </body>
