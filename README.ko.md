@@ -17,7 +17,6 @@
     <a href="https://github.com/genoxdeveloper/Startup-funding-database/blob/main/LICENSE"><img src="https://img.shields.io/github/license/genoxdeveloper/Startup-funding-database?style=for-the-badge&color=10b981" alt="License"/></a>
     <br>
     <a href="https://github.com/sponsors/genoxdeveloper"><img src="https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?style=for-the-badge&logo=github" alt="GitHub Sponsor"/></a>
-    <a href="https://www.buymeacoffee.com/genoxdeveloper"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee"/></a>
   </p>
 </div>
 
@@ -104,6 +103,17 @@ python app.py
 3. 변경 사항을 Commit 합니다. (`git commit -m 'Add some AmazingFeature'`)
 4. 브랜치에 Push 합니다. (`git push origin feature/AmazingFeature`)
 5. Pull Request를 열어주세요!
+
+---
+
+## 🍕 개발자 야식 후원하기 (Crypto Donations)
+
+☕ 커피 한 잔도 좋지만, 크립토는 잠들지 않죠! 이 프로젝트가 여러분의 다음 투자처를 찾는데 도움이 되었거나, 수십 시간의 노가다를 줄여주었다면 저희의 새벽 코딩에 작은 활력을 불어넣어 주세요. 보내주신 소중한 후원금은 서버 유지비와 카페인 수혈, 그리고 가끔씩 먹는 야식 피자 값으로 감사히 쓰겠습니다. 여러분의 따뜻한 마음에 진심으로 감사드립니다! 🍕
+
+- **USDT (TRC20)**: `TFbyQEUbVJxRocXNb2jrGoJkp5SQHJ8qPv`
+- **USDT (BEP20 / BSC)**: `0xB8c48E65D440fe7Ee0025ebD88Da3094272977F4`
+- **BTC**: `bc1qf93535l4jqwj4gmyp8wzgdk498jndzklckgnrf`
+- **ETH (ERC20)**: `0xB8c48E65D440fe7Ee0025ebD88Da3094272977F4`
 
 ---
 

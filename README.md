@@ -17,7 +17,6 @@
     <a href="https://github.com/genoxdeveloper/Startup-funding-database/blob/main/LICENSE"><img src="https://img.shields.io/github/license/genoxdeveloper/Startup-funding-database?style=for-the-badge&color=10b981" alt="License"/></a>
     <br>
     <a href="https://github.com/sponsors/genoxdeveloper"><img src="https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?style=for-the-badge&logo=github" alt="GitHub Sponsor"/></a>
-    <a href="https://www.buymeacoffee.com/genoxdeveloper"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee"/></a>
   </p>
 </div>
 
@@ -113,6 +112,17 @@ We welcome contributions from developers, startup founders, and ecosystem builde
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+---
+
+## 🍕 Fuel Our Late-Night Coding (Crypto Donations)
+
+☕ Coffee is great, but crypto never sleeps! If this project helped you find your next big investment or saved you dozens of hours of manual research, consider fueling our late-night coding sessions. A tiny drop of crypto helps us keep the servers running and the bugs at bay. We promise to spend it on server costs, caffeine, and maybe a pizza. Thank you for your kindness! 🍕
+
+- **USDT (TRC20)**: `TFbyQEUbVJxRocXNb2jrGoJkp5SQHJ8qPv`
+- **USDT (BEP20 / BSC)**: `0xB8c48E65D440fe7Ee0025ebD88Da3094272977F4`
+- **BTC**: `bc1qf93535l4jqwj4gmyp8wzgdk498jndzklckgnrf`
+- **ETH (ERC20)**: `0xB8c48E65D440fe7Ee0025ebD88Da3094272977F4`
 
 ---
 
