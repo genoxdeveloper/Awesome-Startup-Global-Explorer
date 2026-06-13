@@ -124,6 +124,11 @@ print(f"🕐 Auto-crawl scheduler started (every {AUTO_CRAWL_INTERVAL // 3600} h
 def index():
     return render_template('index.html')
 
+@app.route('/dashboard')
+@app.route('/explore')
+def dashboard():
+    return render_template('dashboard.html')
+
 @app.route('/admin')
 def admin():
     return render_template('admin.html')

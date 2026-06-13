@@ -59,7 +59,43 @@ a { color: var(--primary); text-decoration: none; }
 ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* Layout */
+/* Top Navigation */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(17, 17, 17, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-left { display: flex; align-items: center; gap: 40px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; color: var(--text); }
+.logo-icon { 
+  width: 32px; height: 32px; border-radius: 50%; 
+  background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff;
+}
+.logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--text-muted); }
+
+.nav-links { display: flex; gap: 24px; }
+.nav-link { 
+  color: var(--text-muted); font-weight: 500; font-size: 14px; 
+  padding-bottom: 4px; position: relative; transition: color 0.2s;
+}
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--text); }
+.nav-link.active::after {
+  content: ''; position: absolute; bottom: -20px; left: 0; right: 0;
+  height: 2px; background: var(--primary);
+}
+
+.nav-right { display: flex; align-items: center; gap: 16px; }
+
+/* Search & Filters */
 .container { max-width: 1280px; margin: 0 auto; padding: 24px 32px; }
 
 /* Header */
@@ -238,13 +274,25 @@ tr:hover td { background: var(--surface-hover); }
 </head>
 <body>
 
-<header class="header">
-  <div class="header-left">
-    <h1>{{ _('Global Startup Ecosystem Explorer') }}</h1>
-    <div class="sub">{{ _('190+ Countries · 32,500+ Opportunities · Real-Time Discovery') }}</div>
+<!-- Top Navigation -->
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/" class="logo">
+      <div class="logo-icon">GSE</div>
+      <div class="logo-text">
+        Startup Explorer
+        <span>Global Ecosystem Explorer</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="/dashboard" class="nav-link">Explore</a>
+      <a href="/" class="nav-link active">Database</a>
+      <a href="#" class="nav-link">Analytics</a>
+      <a href="#" class="nav-link">Network</a>
+    </div>
   </div>
-  <div class="header-right">
-    <select id="langSel" onchange="window.location.href='/?lang='+this.value" style="padding: 4px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 11px;">
+  <div class="nav-right">
+    <select id="langSel" onchange="window.location.href='/?lang='+this.value" style="padding: 4px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 11px; outline: none;">
       <option value="en" {% if request.args.get('lang') == 'en' %}selected{% endif %}>English</option>
       <option value="ko" {% if request.args.get('lang') == 'ko' %}selected{% endif %}>한국어</option>
       <option value="ja" {% if request.args.get('lang') == 'ja' %}selected{% endif %}>日本語</option>
@@ -263,7 +311,7 @@ tr:hover td { background: var(--surface-hover); }
       <option value="vi" {% if request.args.get('lang') == 'vi' %}selected{% endif %}>Tiếng Việt</option>
       <option value="th" {% if request.args.get('lang') == 'th' %}selected{% endif %}>ไทย</option>
     </select>
-    <div class="sync-info" id="syncInfo">{{ _('Loading...') }}</div>
+    <div class="sync-info" id="syncInfo" style="display:none;">{{ _('Loading...') }}</div>
     <button class="btn btn-primary" id="btnRecrawl">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-1.63"/></svg>
       {{ _('Recrawl') }}
@@ -273,7 +321,7 @@ tr:hover td { background: var(--surface-hover); }
       {{ _('Export CSV') }}
     </button>
   </div>
-</header>
+</nav>
 
 <div class="container">
   <!-- Filters -->
