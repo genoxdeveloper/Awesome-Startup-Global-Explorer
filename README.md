@@ -1,13 +1,8 @@
 <div align="center">
-  <p>
-    <a href="README.md">🇺🇸 English</a> • 
-    <a href="README.ko.md">🇰🇷 한국어</a>
-  </p>
-</div>
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/genoxdeveloper/Startup-funding-database/main/.github/assets/logo.png" alt="Genox Logo" width="120" />
-  <h1>🌍 Global Startup Ecosystem Explorer</h1>
+[🇺🇸 English](README.md) &nbsp;&bull;&nbsp; [🇰🇷 한국어](README.ko.md)
+
+<h1>🌍 Global Startup Ecosystem Explorer</h1>
   <p><strong>A comprehensive database of 32,500+ global startup opportunities across 190+ countries and 100+ industries.</strong></p>
 
   <p>

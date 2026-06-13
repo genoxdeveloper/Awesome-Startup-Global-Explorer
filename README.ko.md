@@ -1,13 +1,8 @@
 <div align="center">
-  <p>
-    <a href="README.md">🇺🇸 English</a> • 
-    <a href="README.ko.md">🇰🇷 한국어</a>
-  </p>
-</div>
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/genoxdeveloper/Startup-funding-database/main/.github/assets/logo.png" alt="Genox Logo" width="120" />
-  <h1>🌍 글로벌 스타트업 생태계 탐색기</h1>
+[🇺🇸 English](README.md) &nbsp;&bull;&nbsp; [🇰🇷 한국어](README.ko.md)
+
+<h1>🌍 글로벌 스타트업 생태계 탐색기</h1>
   <p><strong>전 세계 190개국 100여 개 산업의 32,500개 이상 스타트업 지원 기회를 한곳에서 탐색하세요.</strong></p>
 
   <p>
