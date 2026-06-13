@@ -41,7 +41,8 @@ app = Flask(__name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 INSTANCE_PATH = os.path.join(BASE_DIR, 'instance')
 if not os.path.exists(INSTANCE_PATH):
-    os.makedirs(INSTANCE_PATH)
+    if os.environ.get('VERCEL') != '1':
+        os.makedirs(INSTANCE_PATH)
 
 if os.environ.get('VERCEL') == '1':
     import shutil

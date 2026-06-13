@@ -17,7 +17,9 @@ env/
 
 # Database files (local)
 instance/
+!instance/global_data.db
 *.db
+!global_data.db
 *.sqlite3
 
 # IDE / Editor
