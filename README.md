@@ -90,9 +90,9 @@ pip install -r requirements.txt
 ```bash
 python app.py
 ```
-서버는 `http://127.0.0.1:8000` 에서 시작됩니다.
-- **메인 대시보드**: `http://127.0.0.1:8000/`
-- **관리자 패널**: `http://127.0.0.1:8000/admin` (API 키 헤더가 필요하거나, `?api_key=default-insecure-admin-key-change-me` 파라미터를 추가하세요)
+서버는 `http://127.0.0.1:5000` 에서 시작됩니다.
+- **메인 대시보드**: `http://127.0.0.1:5000/`
+- **관리자 패널**: `http://127.0.0.1:5000/admin` (API 키 헤더가 필요하거나, `?api_key=default-insecure-admin-key-change-me` 파라미터를 추가하세요)
 
 ---
 
@@ -175,9 +175,9 @@ pip install -r requirements.txt
 ```bash
 python app.py
 ```
-The server will start at `http://127.0.0.1:8000`. 
-- **Main Dashboard**: `http://127.0.0.1:8000/`
-- **Admin Panel**: `http://127.0.0.1:8000/admin` (Requires API Key header or query parameter `?api_key=default-insecure-admin-key-change-me`)
+The server will start at `http://127.0.0.1:5000`. 
+- **Main Dashboard**: `http://127.0.0.1:5000/`
+- **Admin Panel**: `http://127.0.0.1:5000/admin` (Requires API Key header or query parameter `?api_key=default-insecure-admin-key-change-me`)
 
 ---
 
