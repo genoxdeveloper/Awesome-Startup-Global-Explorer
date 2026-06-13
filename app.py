@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, jsonify, Response
+from flask import Flask, render_template, request, jsonify, Response, session
+from flask_babel import Babel, _
 from datetime import datetime, timedelta
 import math
 import csv
@@ -16,6 +17,15 @@ if not os.path.exists(INSTANCE_PATH):
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', f'sqlite:///{os.path.join(INSTANCE_PATH, "global_data.db")}')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'ko', 'ja', 'zh_Hans', 'zh_Hant', 'es', 'fr', 'de', 'it', 'pt', 'ar', 'hi', 'ru', 'tr', 'id', 'vi', 'th']
+app.secret_key = os.environ.get('SECRET_KEY', 'default-insecure-secret-key')
+
+def get_locale():
+    return request.args.get('lang') or session.get('lang') or request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
+
+babel = Babel(app, locale_selector=get_locale)
+
 init_db(app)
 
 # ---------------------------------------------------------------------------
@@ -101,7 +111,37 @@ print(f"🕐 Auto-crawl scheduler started (every {AUTO_CRAWL_INTERVAL // 3600} h
 def index():
     return render_template('index.html')
 
-@app.route('/api/health')
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+def require_admin_key():
+    api_key = request.headers.get('X-Admin-Key') or request.args.get('api_key')
+    expected_key = os.environ.get('ADMIN_API_KEY', 'default-insecure-admin-key-change-me')
+    return api_key == expected_key
+
+@app.route('/api/admin/sources', methods=['GET', 'POST'])
+def admin_sources():
+    if not require_admin_key():
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+        
+    from models import CrawlerSource
+    if request.method == 'GET':
+        sources = CrawlerSource.query.all()
+        return jsonify([{
+            "id": s.id, "name": s.name, "url": s.url, 
+            "method": s.method, "status": s.status, 
+            "last_crawled_at": s.last_crawled_at.strftime('%Y-%m-%d %H:%M:%S') if s.last_crawled_at else None
+        } for s in sources])
+        
+    if request.method == 'POST':
+        data = request.json
+        new_source = CrawlerSource(
+            name=data.get('name'), url=data.get('url'), method=data.get('method', 'GET')
+        )
+        db.session.add(new_source)
+        db.session.commit()
+        return jsonify({"status": "success", "id": new_source.id}), 201
 def api_health():
     """Health check endpoint for monitoring."""
     try:
@@ -128,6 +168,12 @@ def sitemap_xml():
 
 @app.route('/api/refresh', methods=['POST'])
 def api_refresh():
+    # Require an API key to prevent DoS via repeated background tasks
+    api_key = request.headers.get('X-Admin-Key') or request.args.get('api_key')
+    expected_key = os.environ.get('ADMIN_API_KEY', 'default-insecure-admin-key-change-me')
+    if api_key != expected_key:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+
     # Run the crawler in a background thread to prevent request timeout
     thread = threading.Thread(target=run_crawler_and_save)
     thread.start()

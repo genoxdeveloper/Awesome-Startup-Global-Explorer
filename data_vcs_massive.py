@@ -150,6 +150,18 @@ def get_massive_vcs():
         ("General Atlantic", "Leading global growth equity firm.", "USA", "VCs & Accelerators", "Tech,Healthcare", "Growth", "Yes"),
         ("TPG", "Leading global alternative asset firm.", "USA", "VCs & Accelerators", "All", "Buyout", "Yes"),
         ("Bain Capital", "One of the world's leading private multi-asset alternative investment firms.", "USA", "VCs & Accelerators", "All", "Buyout", "Yes"),
+        
+        # Angel Networks
+        ("AngelList", "Global platform connecting startups with angel investors.", "Global", "Angel Network", "All", "Seed - Series A", "Yes"),
+        ("Angel Investment Network", "Global network of angel investors.", "Global", "Angel Network", "All", "Seed", "Yes"),
+        ("Global Angel Groups", "Consortium of international angel investors.", "Global", "Angel Network", "All", "Seed", "Yes"),
+        
+        # Startup Directories & Platforms
+        ("Crunchbase", "Leading platform for finding business information about private and public companies.", "Global", "Directory", "All", "Visibility", "No"),
+        ("Wellfound (formerly AngelList Talent)", "Startup job board and directory for tech companies.", "Global", "Directory", "All", "Visibility/Talent", "No"),
+        ("StartupBlink", "Global startup ecosystem map and research center.", "Global", "Directory", "All", "Visibility", "No"),
+        ("F6S", "Network for founders, startups, and accelerator programs.", "Global", "Directory", "All", "Grants/Visibility", "No"),
+        ("Product Hunt", "Platform to discover the latest products and startups.", "Global", "Directory", "Tech", "Visibility", "No"),
     ]
 
 def get_real_accelerator_branches():

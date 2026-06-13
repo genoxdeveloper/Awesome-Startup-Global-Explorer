@@ -227,11 +227,18 @@ tr:hover td { background: var(--surface-hover); }
 
 <header class="header">
   <div class="header-left">
-    <h1>Global Startup Ecosystem Explorer</h1>
-    <div class="sub">190+ Countries · 32,500+ Opportunities · Real-Time Discovery</div>
+    <h1>{{ _('Global Startup Ecosystem Explorer') }}</h1>
+    <div class="sub">{{ _('190+ Countries · 32,500+ Opportunities · Real-Time Discovery') }}</div>
   </div>
   <div class="header-right">
-    <div class="sync-info" id="syncInfo">Loading...</div>
+    <select id="langSel" onchange="window.location.href='/?lang='+this.value" style="padding: 4px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 11px;">
+      <option value="en" {% if request.args.get('lang') == 'en' %}selected{% endif %}>English</option>
+      <option value="ko" {% if request.args.get('lang') == 'ko' %}selected{% endif %}>한국어</option>
+      <option value="ja" {% if request.args.get('lang') == 'ja' %}selected{% endif %}>日本語</option>
+      <option value="zh_Hans" {% if request.args.get('lang') == 'zh_Hans' %}selected{% endif %}>简体中文</option>
+      <option value="es" {% if request.args.get('lang') == 'es' %}selected{% endif %}>Español</option>
+    </select>
+    <div class="sync-info" id="syncInfo">{{ _('Loading...') }}</div>
     <button class="btn btn-primary" id="btnRecrawl">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-1.63"/></svg>
       Recrawl

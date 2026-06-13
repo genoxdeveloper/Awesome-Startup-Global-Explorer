@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crawler Admin Dashboard</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f5; color: #18181b; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        h1 { border-bottom: 1px solid #e4e4e7; padding-bottom: 10px; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #e4e4e7; }
+        th { background-color: #f8fafc; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; }
+        .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
+        .badge-active { background-color: #dcfce7; color: #166534; }
+        .btn { padding: 8px 16px; background-color: #000; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 500; }
+        .btn:hover { background-color: #27272a; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 8px; border: 1px solid #d4d4d8; border-radius: 4px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crawler API System - Admin Dashboard</h1>
+        
+        <h2>Registered Crawler Sources</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>Last Crawled</th>
+                </tr>
+            </thead>
+            <tbody id="sources-table-body">
+                <!-- Loaded via JS -->
+            </tbody>
+        </table>
+
+        <h2>Register New Source</h2>
+        <form id="add-source-form">
+            <div class="form-group">
+                <label for="name">Source Name</label>
+                <input type="text" id="name" required placeholder="e.g., YC Startup Directory">
+            </div>
+            <div class="form-group">
+                <label for="url">Endpoint URL</label>
+                <input type="url" id="url" required placeholder="https://api.example.com/v1/startups">
+            </div>
+            <div class="form-group">
+                <label for="method">HTTP Method</label>
+                <input type="text" id="method" value="GET" required>
+            </div>
+            <button type="submit" class="btn">Register Source</button>
+        </form>
+    </div>
+
+    <script>
+        const apiKey = prompt("Enter Admin API Key:");
+        
+        async function loadSources() {
+            try {
+                const res = await fetch('/api/admin/sources', {
+                    headers: { 'X-Admin-Key': apiKey }
+                });
+                if (!res.ok) throw new Error("Unauthorized");
+                const sources = await res.json();
+                const tbody = document.getElementById('sources-table-body');
+                tbody.innerHTML = '';
+                sources.forEach(s => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${s.id}</td>
+                            <td>${s.name}</td>
+                            <td>${s.url}</td>
+                            <td>${s.method}</td>
+                            <td><span class="badge badge-active">${s.status}</span></td>
+                            <td>${s.last_crawled_at || 'Never'}</td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                alert("Failed to load sources: " + err.message);
+            }
+        }
+
+        document.getElementById('add-source-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                name: document.getElementById('name').value,
+                url: document.getElementById('url').value,
+                method: document.getElementById('method').value
+            };
+            try {
+                const res = await fetch('/api/admin/sources', {
+                    method: 'POST',
+                    headers: { 
+                        'X-Admin-Key': apiKey,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error("Unauthorized or Bad Request");
+                alert("Source added successfully!");
+                document.getElementById('add-source-form').reset();
+                loadSources();
+            } catch (err) {
+                alert("Error adding source: " + err.message);
+            }
+        });
+
+        if (apiKey) {
+            loadSources();
+        }
+    </script>
+</body>
+</html>
