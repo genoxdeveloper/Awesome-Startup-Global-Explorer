@@ -22,9 +22,11 @@ Welcome to **Awesome Startup Global Explorer**, your ultimate gateway to navigat
 
 ![Demo Dashboard](demo_en.png)
 
-## 🏢 About Genox
+## 🏢 About Genox & Partners
 
 **Genox** is an innovative tech venture based in Seoul, South Korea. We architect data-driven solutions and platforms that empower global startups. We believe in democratizing access to opportunities, breaking down borders, and accelerating innovation.
+
+This open-source project is proudly supported and co-developed in partnership with **[Buygit.com](https://buygit.com)**, a premier platform dedicated to empowering developers and creators worldwide. Together, Genox and Buygit.com are committed to providing founders with the tools and data they need to build the next generation of unicorn startups.
 
 We spent countless hours scouring government portals, VC databases, and accelerator sites across dozens of countries. We built this tool internally first, and now we're open-sourcing it because **every founder deserves access to global opportunities**, not just those in Silicon Valley.
 
@@ -41,9 +43,11 @@ Explore a massive, continuously updated database of:
 - **Relocation & Growth** initiatives (Startup Visas, Tech Hub Residencies)
 
 ### 2. Native Multi-Language Support (Breaking Down Borders)
-We recognize that the next big unicorn could come from anywhere. However, the global startup ecosystem has historically been gatekept by a severe language barrier—with critical funding portals, grant details, and VC investment theses often buried in English or local dialects. To ensure absolutely no founder is left behind, our platform features an incredibly powerful, industry-leading **Native Multi-Language Support System**.
+We recognize that the next big unicorn could come from anywhere. However, the global startup ecosystem has historically been gatekept by a severe language barrier. Critical funding portals, complex grant compliance details, and intricate VC investment theses are often buried entirely in English or localized dialects. This creates an unfair advantage based solely on geography and native tongue.
 
-With a single click on our top navigation bar, you can seamlessly translate the entire platform—including all **35,000+ deeply nested program descriptions, criteria, and dynamic database entries**—into:
+To ensure absolutely no founder is left behind, our platform features an incredibly powerful, industry-leading **Native Multi-Language Support System**. This isn't just a simple UI translation—it is a comprehensive, deep-data localization pipeline.
+
+With a single click on our top navigation bar, you can seamlessly translate the entire platform. This means that all **35,000+ deeply nested program descriptions, evaluation criteria, industry focuses, and dynamic database entries** are instantly localized into:
 - 🇺🇸 **English** (Universal Default)
 - 🇰🇷 **한국어 (Korean)**
 - 🇨🇳 **中文 (Simplified Chinese)** & 🇹🇼 **繁體中文 (Traditional Chinese)**
