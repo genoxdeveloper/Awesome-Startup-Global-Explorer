@@ -120,6 +120,8 @@ def get_massive_vcs():
         ("RRE Ventures", "Early-stage venture capital firm headquartered in New York.", "USA", "VCs & Accelerators", "Enterprise,Fintech", "Early Stage", "Yes"),
         ("Canaan Partners", "Early stage venture capital firm.", "USA", "VCs & Accelerators", "Tech,Healthcare", "Early Stage", "Yes"),
         ("FirstMark Capital", "Early-stage venture capital firm based in New York City.", "USA", "VCs & Accelerators", "Enterprise,Consumer", "Early Stage", "Yes"),
+        ("Prithvi Ventures", "New York City pre-seed fund in energy, deeptech, hardware and supply chain; Groq backer. $500K-$1M checks.", "USA", "VCs & Accelerators", "Energy,DeepTech,Hardware,Climate", "$500K - $1M", "Yes"),
+        ("Ayuh Ventures", "New York City pre-seed fund in neuroscience, healthcare and medtech; backed Gilgamesh and Beckley Psytech. $500K-$1M checks.", "USA", "VCs & Accelerators", "Healthcare,Neuroscience,Biotech,MedTech", "$500K - $1M", "Yes"),
         ("Breyer Capital", "Premier global venture capital and private equity investor.", "USA", "VCs & Accelerators", "AI,Tech", "All Stages", "Yes"),
         ("Draper Fisher Jurvetson (DFJ)", "American venture capital firm focused on early-stage.", "USA", "VCs & Accelerators", "DeepTech,Enterprise", "Early Stage", "Yes"),
         ("DCVC (Data Collective)", "Venture capital fund that backs entrepreneurs applying deep tech.", "USA", "VCs & Accelerators", "DeepTech,AI", "Early Stage", "Yes"),
